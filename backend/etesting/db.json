@@ -1,5 +1,69 @@
 [
 {
+    "model": "contenttypes.contenttype",
+    "pk": 1,
+    "fields": {
+        "app_label": "admin",
+        "model": "logentry"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 2,
+    "fields": {
+        "app_label": "auth",
+        "model": "permission"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 3,
+    "fields": {
+        "app_label": "auth",
+        "model": "group"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 4,
+    "fields": {
+        "app_label": "auth",
+        "model": "user"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 5,
+    "fields": {
+        "app_label": "contenttypes",
+        "model": "contenttype"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 6,
+    "fields": {
+        "app_label": "sessions",
+        "model": "session"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 7,
+    "fields": {
+        "app_label": "etest",
+        "model": "quiz"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "30mmk29qkz1mf8zg5zy13ndpai2v1fqc",
+    "fields": {
+        "session_data": "NWZkMDFiMDdkZjAwMDVmMzFkMDNjZDA5NTA4ZGNjM2I0ZjA3NDlkYzp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiZDg4NzAzOGI0OGY3M2ExNDYxM2JmNTc5ZDFhYTY2ZWRkMDI3Yjc3NCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=",
+        "expire_date": "2020-12-10T20:25:52.616Z"
+    }
+},
+{
     "model": "auth.permission",
     "pk": 1,
     "fields": {
@@ -216,11 +280,47 @@
     }
 },
 {
+    "model": "auth.permission",
+    "pk": 25,
+    "fields": {
+        "name": "Can add quiz",
+        "content_type": 7,
+        "codename": "add_quiz"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 26,
+    "fields": {
+        "name": "Can change quiz",
+        "content_type": 7,
+        "codename": "change_quiz"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 27,
+    "fields": {
+        "name": "Can delete quiz",
+        "content_type": 7,
+        "codename": "delete_quiz"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 28,
+    "fields": {
+        "name": "Can view quiz",
+        "content_type": 7,
+        "codename": "view_quiz"
+    }
+},
+{
     "model": "auth.user",
     "pk": 1,
     "fields": {
-        "password": "pbkdf2_sha256$216000$MvmOvQ5MEUJY$009VNCx2E9/T1SQqu+PJHJZKriTl9lQYneqtKvNIyuM=",
-        "last_login": "2020-11-26T12:32:28.668Z",
+        "password": "pbkdf2_sha256$150000$rKUDyIu3woyT$CJXgiELDBUly4kR+cI2prrmVD9FtavZB372h5AvQ6z4=",
+        "last_login": "2020-11-26T20:25:52.489Z",
         "is_superuser": true,
         "username": "admin",
         "first_name": "",
@@ -234,51 +334,21 @@
     }
 },
 {
-    "model": "contenttypes.contenttype",
-    "pk": 1,
-    "fields": {
-        "app_label": "admin",
-        "model": "logentry"
-    }
-},
-{
-    "model": "contenttypes.contenttype",
+    "model": "auth.user",
     "pk": 2,
     "fields": {
-        "app_label": "auth",
-        "model": "permission"
-    }
-},
-{
-    "model": "contenttypes.contenttype",
-    "pk": 3,
-    "fields": {
-        "app_label": "auth",
-        "model": "group"
-    }
-},
-{
-    "model": "contenttypes.contenttype",
-    "pk": 4,
-    "fields": {
-        "app_label": "auth",
-        "model": "user"
-    }
-},
-{
-    "model": "contenttypes.contenttype",
-    "pk": 5,
-    "fields": {
-        "app_label": "contenttypes",
-        "model": "contenttype"
-    }
-},
-{
-    "model": "contenttypes.contenttype",
-    "pk": 6,
-    "fields": {
-        "app_label": "sessions",
-        "model": "session"
+        "password": "pbkdf2_sha256$150000$wx90EjMsntsz$j3v2rQSxlTPRHjGLb0Efk0FHRJiQ91S/GKF2OTE/hi4=",
+        "last_login": null,
+        "is_superuser": true,
+        "username": "mica",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2020-11-26T20:29:33.247Z",
+        "groups": [],
+        "user_permissions": []
     }
 }
 ]
