@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
 
 urlpatterns = [
     # admin UI
@@ -22,4 +23,8 @@ urlpatterns = [
 
     # accounts urls
     path('api/', include('accounts.urls')),
+
+        # JWT autentifikacija
+    path('api/token-auth/', obtain_jwt_token),
+    path('api/token-refresh/', refresh_jwt_token),
 ]

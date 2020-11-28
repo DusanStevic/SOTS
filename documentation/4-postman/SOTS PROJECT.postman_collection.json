@@ -6,10 +6,61 @@
 	},
 	"item": [
 		{
+			"name": "http://127.0.0.1:8000/api/token-auth/",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"username\":\"admin\",\r\n\t\"password\":\"admin123admin\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/token-auth/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"token-auth",
+						""
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "http://127.0.0.1:8000/api/users/",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "jwt {{jwt}}",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "http://127.0.0.1:8000/api/users/",
 					"protocol": "http",
@@ -25,8 +76,7 @@
 						"users",
 						""
 					]
-				},
-				"description": "Get all users from db"
+				}
 			},
 			"response": []
 		}
