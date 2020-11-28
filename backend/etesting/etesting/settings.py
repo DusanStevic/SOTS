@@ -130,7 +130,7 @@ STATIC_URL = '/static/'
 
 
 
-# Django REST Framework configuration (dule)
+# Django REST Framework configuration 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated'
@@ -142,7 +142,7 @@ REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
 
-# JWT configuration (dule)
+# JWT configuration 
 JWT_AUTH = {
     'JWT_ALLOW_REFRESH': True,
     'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=7200),
