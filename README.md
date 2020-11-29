@@ -1,2 +1,2 @@
 # SOTS
-Savremene obrazovne tehnologije i standardi
+Modern educational technologies and standards
