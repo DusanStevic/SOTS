@@ -1,0 +1,32 @@
+{
+  "/admin": {
+    "target": "http://localhost:8000",
+    "secure": false,
+    "logLevel": "debug"
+  },
+  "/static": {
+    "target": "http://localhost:8000",
+    "secure": false,
+    "logLevel": "debug"
+  },
+  "/api": {
+    "target": "http://localhost:8000",
+    "secure": false,
+    "logLevel": "debug"
+  },
+  "/swagger": {
+    "target": "http://localhost:8000",
+    "secure": false,
+    "logLevel": "debug"
+  },
+  "/redoc": {
+    "target": "http://localhost:8000",
+    "secure": false,
+    "logLevel": "debug"
+  },
+  "/activate": {
+    "target": "http://localhost:8000",
+    "secure": false,
+    "logLevel": "debug"
+  }
+}
