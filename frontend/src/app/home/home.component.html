@@ -1,1 +1,19 @@
 <p>home works!</p>
+<h2>Lista korisnika</h2>
+<table class="table" id = "table">
+    <thead>
+        <tr>
+            <th>username</th>
+            <th>email</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of users">
+            <td>{{user.username}}</td>
+            <td>{{user.email}}</td>
+            
+        </tr>
+    </tbody>
+
+</table>
+

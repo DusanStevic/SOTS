@@ -2,12 +2,13 @@
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Login } from 'src/app/shared/models/request/login';
+import { Login, User } from 'src/app/shared/models/request/login';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  user: User;
 
   constructor(private http: HttpClient) {
   }
@@ -21,6 +22,11 @@ export class AuthService {
 
   login(loginInfo: Login): Observable<any> {
     return this.http.post('http://127.0.0.1:8000/api/token-auth/', loginInfo);
+  }
+
+
+  getUsers(): Observable<User[]> {
+    return this.http.get<User[]>('http://127.0.0.1:8000/api/users/');
   }
 
   /* checkForAdmin(): boolean {
@@ -41,4 +47,7 @@ export class AuthService {
   activateAccount(confirmationToken: string): Observable<any> {
     return this.http.get(`${API_VERIFY_ACCOUNT}/${confirmationToken}`);
   } */
+  getToken(): string {
+    return localStorage.getItem('token');
+  }
 }
