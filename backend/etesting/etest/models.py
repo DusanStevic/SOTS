@@ -5,6 +5,8 @@ from django.conf import settings
 
 class Etest(models.Model):
     name = models.CharField(max_length=100)
+    # slika zbog onih pitanja koja zahtevaju da se nesto zakljuci na osnovu slike
+    # na tome su insistirali 
     image = models.ImageField(blank=True, default='')
     # potrebno je dodati listu profesora koji su kreirali taj test ili kurs
     # na predthodnom terminu su pricali kako vise prof moze da se doda na jedan test
@@ -12,6 +14,7 @@ class Etest(models.Model):
     # mozemo napraviti da prof vezemo za kurs, a onda test za kurs
     # tako da svaki novi test koji kreiramo i dodamo testu bice automatski dodat i prof koji drze taj kurs tako da 
     # ce ih oni videti
+
 
 class Question(models.Model):
     etest = models.ForeignKey(Etest, on_delete=models.CASCADE)
@@ -29,6 +32,7 @@ class TestTaker(models.Model):
     score = models.IntegerField(default=0)
     completed = models.BooleanField(default=False)
 
+
 class UsersAnswer(models.Model):
     test_taker = models.ForeignKey(TestTaker, on_delete=models.CASCADE)
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
@@ -36,3 +40,14 @@ class UsersAnswer(models.Model):
 
 class Course(models.Model):
     name = models.CharField(max_length=100)
+    # treba dodati listu studenata kao i listu profesora
+    # koliko sam shvatila vise prof moze biti na 1 predmetu posto i za 1 test moze biti vezano vise prof
+
+class KnowledgeSpaceDomain(models.Model):
+    course = models.OneToOneField(Course, on_delete=models.SET_NULL, null=True)
+    name = models.CharField(max_length=100, null=True)
+
+class Problem(models.Model):
+    etest = models.OneToOneField(Etest, on_delete=models.SET_NULL, null=True)
+    name = models.CharField(max_length=100, null=True)
+    ksdomain = models.ForeignKey(KnowledgeSpaceDomain, on_delete=models.CASCADE, null=True, blank=True)
