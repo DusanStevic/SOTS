@@ -1,16 +1,17 @@
-from django.contrib.auth.models import User, Group
-from rest_framework import viewsets
+from django.shortcuts import render
 from rest_framework import permissions
-from accounts.serializers import UserSerializer
-from rest_framework.authentication import TokenAuthentication
+from rest_framework import permissions, generics, status, viewsets
 
-class UserViewSet(viewsets.ModelViewSet):
-    permission_classes = [permissions.IsAuthenticated]
-    """
-    API endpoint that allows users to be viewed or edited.
-    """
+from accounts.models import User
+from accounts.serializers import UserSerializer,CreateNewUserSerializer
+from accounts.permissions import IsStudentUser,IsTeacherUser
+
+
+class SignUp(generics.CreateAPIView):
+    serializer_class = CreateNewUserSerializer
     queryset = User.objects.all()
+    permission_classes = [permissions.AllowAny]
+class UserViewSet(viewsets.ModelViewSet):
+    permission_classes = [permissions.IsAuthenticated, IsTeacherUser]
     serializer_class = UserSerializer
-    
-
-
+    queryset = User.objects.all()

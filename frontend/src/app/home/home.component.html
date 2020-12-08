@@ -5,12 +5,14 @@
         <tr>
             <th>username</th>
             <th>email</th>
+            <th>groups</th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let user of users">
             <td>{{user.username}}</td>
             <td>{{user.email}}</td>
+            <td>{{user.groups}}</td>
             
         </tr>
     </tbody>
