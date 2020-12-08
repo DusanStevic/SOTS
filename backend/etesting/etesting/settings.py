@@ -161,5 +161,9 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:4200",
     "http://127.0.0.1:4200"
 ]
+# Overriding default Django User model ( built-in Django User model ) and replacing it with a custom user model. 
+# Extending the default Django User model with extra fields.
+AUTH_USER_MODEL = 'accounts.User'
+
 
 
