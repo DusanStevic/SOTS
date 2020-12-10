@@ -20,6 +20,10 @@ class CreateNewUserSerializer(serializers.ModelSerializer):
             new_student = Student()
             new_student.user = user
             new_student.save()
+        if validated_data.get('is_teacher') == True:
+            new_teacher = Teacher()
+            new_teacher.user = user
+            new_teacher.save()
         return user
 
     class Meta:
