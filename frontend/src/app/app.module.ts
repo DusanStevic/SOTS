@@ -15,6 +15,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Jwt } from './core/interceptors/jwt.interceptor';
 import { KstModule } from './kst/kst.module';
 import { PagesModule } from './pages/pages.module';
+import { NgxGraphModule } from '@swimlane/ngx-graph';
+
 
 @NgModule({
   declarations: [
@@ -34,6 +36,7 @@ import { PagesModule } from './pages/pages.module';
     AuthenticationModule,
     KstModule,
     PagesModule,
+    NgxGraphModule,
     ToastrModule.forRoot({
       progressBar: true,
       timeOut: 4000,
