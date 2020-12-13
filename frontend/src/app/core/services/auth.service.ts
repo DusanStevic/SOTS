@@ -33,12 +33,7 @@ export class AuthService {
     return localStorage.getItem(USER_ROLE_KEY) === 'ROLE_ADMIN';
   }
 
-  logout(): void {
-    localStorage.removeItem(USER_ID_KEY);
-    localStorage.removeItem(USER_ROLE_KEY);
-    localStorage.removeItem(USERNAME_KEY);
-    localStorage.removeItem(USER_TOKEN_KEY);
-  }
+
 
   addNewUser(userInfo: UserRegistrationData): Observable<any> {
     return this.http.post(API_REGISTER_USER, userInfo);
@@ -49,5 +44,13 @@ export class AuthService {
   } */
   getToken(): string {
     return localStorage.getItem('token');
+  }
+  //PREBACI SE NA VELIKA SLOVA ZBOG KONSTANTI
+  logout(): void {
+    localStorage.removeItem('token');
+    localStorage.removeItem('email');
+    localStorage.removeItem('id');
+    localStorage.removeItem('role');
+
   }
 }

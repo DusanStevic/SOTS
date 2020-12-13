@@ -12,7 +12,9 @@ import { SharedModule } from './shared/shared.module';
 import { HomeComponent } from './home/home.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { JwtInterceptor } from './core/interceptors/jwt-interceptor.interceptor';
+import { Jwt } from './core/interceptors/jwt.interceptor';
+import { KstModule } from './kst/kst.module';
+import { PagesModule } from './pages/pages.module';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,8 @@ import { JwtInterceptor } from './core/interceptors/jwt-interceptor.interceptor'
     CoreModule,
     SharedModule,
     AuthenticationModule,
+    KstModule,
+    PagesModule,
     ToastrModule.forRoot({
       progressBar: true,
       timeOut: 4000,
@@ -38,7 +42,7 @@ import { JwtInterceptor } from './core/interceptors/jwt-interceptor.interceptor'
       preventDuplicates: true
     }),
   ],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: Jwt, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
