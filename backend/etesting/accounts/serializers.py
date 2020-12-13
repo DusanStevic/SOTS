@@ -5,7 +5,8 @@ from accounts.models import User,Student,Teacher
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('email', 'username', 'password', 'is_student', 'is_teacher')
+        #fields = ('id','email', 'username', 'is_student', 'is_teacher')
+        fields = ('id','email', 'username', 'role')
 class CreateNewUserSerializer(serializers.ModelSerializer):
     
 
@@ -16,11 +17,13 @@ class CreateNewUserSerializer(serializers.ModelSerializer):
         # Because during login hashed passwords are being compared one from login and another from the database.   
         user = User.objects.create_user(**validated_data)
         new_student = Student()
-        if validated_data.get('is_student') == True:
+        #if validated_data.get('is_student') == True:
+        if validated_data.get('role') == 'STUDENT':
             new_student = Student()
             new_student.user = user
             new_student.save()
-        if validated_data.get('is_teacher') == True:
+        #if validated_data.get('is_teacher') == True:
+        if validated_data.get('role') == 'TEACHER':
             new_teacher = Teacher()
             new_teacher.user = user
             new_teacher.save()
@@ -28,5 +31,6 @@ class CreateNewUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('email', 'username', 'password', 'is_student', 'is_teacher')
+        #fields = ('email', 'username', 'password', 'is_student', 'is_teacher')
+        fields = ('id','email', 'username', 'role')
         extra_kwargs = {'password': {'write_only': True}}

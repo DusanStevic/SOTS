@@ -5,16 +5,25 @@ class IsTeacherUser(permissions.BasePermission):
     """
     Permission to only allow teachers to execute an action.
     """
+    # def has_permission(self, request, view):
+    #     return request.user.is_teacher
     def has_permission(self, request, view):
-        return request.user.is_teacher
+        if request.user.role == 'ADMIN':
+            return True
+        return False
+    
 
 
 class IsStudentUser(permissions.BasePermission):
     """
     Permission to only allow students to execute an action.
     """
+    # def has_permission(self, request, view):
+    #     return request.user.is_student
     def has_permission(self, request, view):
-        return request.user.is_student
+        if request.user.role == 'STUDENT':
+            return True
+        return False
 
 
 class IsExpertUser(permissions.BasePermission):

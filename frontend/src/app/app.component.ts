@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,9 +7,24 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  constructor(private toastr: ToastrService) {}
-  title = 'frontend';
-  showSuccess() {
-    this.toastr.success('Hello world!', 'Toastr fun!');
+  title = 'SOTS';
+  public role: string;
+
+  constructor(
+    private router: Router) {}
+
+  checkRole() {
+    const item = localStorage.getItem('role');
+
+    if (!item) {
+      this.role = undefined;
+      return;
+    }
+
+    
+    this.role = item;
+    console.log(this.role);
   }
 }
+
+
