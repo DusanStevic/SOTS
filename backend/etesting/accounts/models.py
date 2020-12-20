@@ -4,11 +4,7 @@ from accounts.constants import ROLES
 
 
 class User(AbstractUser):
-    #is_student = models.BooleanField()
-    #is_teacher = models.BooleanField()
     role = models.CharField(max_length=255, choices=ROLES)
-    
-
     def __str__(self):
         return self.username
 

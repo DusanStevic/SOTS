@@ -8,10 +8,8 @@ import { Login, User } from 'src/app/shared/models/request/login';
   providedIn: 'root'
 })
 export class AuthService {
-  user: User;
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) {}
 
   isUserLoggedIn(): boolean {
     return localStorage.getItem('token') != null;
@@ -45,7 +43,7 @@ export class AuthService {
   getToken(): string {
     return localStorage.getItem('token');
   }
-  //PREBACI SE NA VELIKA SLOVA ZBOG KONSTANTI
+  // PREBACI SE NA VELIKA SLOVA ZBOG KONSTANTI
   logout(): void {
     localStorage.removeItem('token');
     localStorage.removeItem('email');
