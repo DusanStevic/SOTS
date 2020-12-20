@@ -6,6 +6,7 @@ import { MaterialModule } from '../material/material.module';
 import { Optional } from '@angular/core';
 import { NavbarTeacherComponent } from './navbars/navbar-teacher/navbar-teacher.component';
 import { NavbarStudentComponent } from './navbars/navbar-student/navbar-student.component';
+import { DagService } from './services/dag.service';
 
 
 
@@ -17,7 +18,7 @@ import { NavbarStudentComponent } from './navbars/navbar-student/navbar-student.
     AppRoutingModule
   ],
   providers: [
-    AuthService,
+    AuthService, DagService
   ],
   exports: [
     NavbarTeacherComponent, NavbarStudentComponent

@@ -23,6 +23,7 @@ urlpatterns = [
 
     # accounts urls
     path('api/', include('accounts.urls')),
+    path('dag/', include('etest.urls')),
 
     # JWT authentication 
     path('api/token-auth/', obtain_jwt_token),

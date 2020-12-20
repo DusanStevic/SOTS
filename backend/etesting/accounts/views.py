@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from rest_framework import permissions
 from rest_framework import permissions, generics, status, viewsets
 
 from accounts.models import User
