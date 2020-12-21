@@ -16,6 +16,7 @@ import { Jwt } from './core/interceptors/jwt.interceptor';
 import { KstModule } from './kst/kst.module';
 import { PagesModule } from './pages/pages.module';
 import { NgxGraphModule } from '@swimlane/ngx-graph';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { NgxGraphModule } from '@swimlane/ngx-graph';
     KstModule,
     PagesModule,
     NgxGraphModule,
+    NgxChartsModule,
     ToastrModule.forRoot({
       progressBar: true,
       timeOut: 4000,

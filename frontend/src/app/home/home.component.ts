@@ -15,10 +15,13 @@ import { Subject } from 'rxjs';
 })
 export class HomeComponent implements OnInit {
   update$: Subject<boolean> = new Subject();
-  view = [1500, 1200];
+  center$: Subject<boolean> = new Subject();
+  zoomToFit$: Subject<boolean> = new Subject();
+  view = [933, 400];
   nodes: Node[] = [];
   links: Link[] = [];
   users: User[];
+  deletedNode: Node;
   constructor(
     private authService: AuthService,
     private toastr: ToastrService,
@@ -71,5 +74,28 @@ export class HomeComponent implements OnInit {
   get ready(): boolean {
     return this.nodes.length !== 0;
   }
+
+  deleteNode() {
+    this.removeByAttr(this.nodes, 'id', this.deletedNode.id );
+    this.removeByAttr(this.links, 'source', this.deletedNode.id);
+    this.removeByAttr(this.links, 'target', this.deletedNode.id);
+    this.update$.next(true);
+    this.zoomToFit$.next(true);
+    this.center$.next(true);
+
+  }
+  removeByAttr = function(arr, attr, value) {
+    var i = arr.length;
+    while (i--) {
+      if (
+        arr[i] &&
+        arr[i].hasOwnProperty(attr) &&
+        arguments.length > 2 && arr[i][attr] === value
+      ) {
+        arr.splice(i, 1);
+      }
+    }
+    return arr;
+  };
 
 }
