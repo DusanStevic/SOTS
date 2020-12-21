@@ -88,11 +88,11 @@
     <br /><br />
   
     <mat-form-field>
-      <mat-label>Origin Node</mat-label>
+      <mat-label>Source Node</mat-label>
       <mat-select [(value)]="sourceNode">
         <mat-option>None</mat-option>
-        <mat-option *ngFor="let folder of nodeOptions" [value]="folder">
-          {{folder}}
+        <mat-option *ngFor="let node of nodes" [value]="node">
+          {{node.label}}
         </mat-option>
       </mat-select>
     </mat-form-field>
@@ -101,15 +101,15 @@
       <mat-label>Target Node</mat-label>
       <mat-select [(value)]="targetNode">
         <mat-option>None</mat-option>
-        <mat-option *ngFor="let folder of nodeOptions" [value]="folder">
-          {{folder}}
+        <mat-option *ngFor="let node of nodes" [value]="node">
+          {{node.label}}
         </mat-option>
       </mat-select>
     </mat-form-field>
   
     <button [disabled]="!sourceNode || !targetNode" mat-stroked-button color="primary" class="button" style="background-color: #ffd000; color: white; width:180px;"
-      (click)="connectNode()" (click)="update$.next(true)" (click)="zoomToFit$.next(true)" (click)="center$.next(true)">
-      Connect Nodes
+      (click)="addLink()">
+      Add Link
     </button>
     <br /><br />
   

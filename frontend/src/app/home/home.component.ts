@@ -22,6 +22,8 @@ export class HomeComponent implements OnInit {
   links: Link[] = [];
   users: User[];
   deletedNode: Node;
+  sourceNode: Node;
+  targetNode: Node;
   constructor(
     private authService: AuthService,
     private toastr: ToastrService,
@@ -55,7 +57,7 @@ export class HomeComponent implements OnInit {
       for (const link of data.links) {
         this.links.push({
           // Link id can't start with a digit it has to start with a character.
-          id: 'link' + link.knowledge_space.toString() + link.id.toString(),
+          id: 'link' + link.id.toString(),
           label: link.label,
           source: link.source.toString(),
           target: link.target.toString()
@@ -97,5 +99,20 @@ export class HomeComponent implements OnInit {
     }
     return arr;
   };
+  addLink() {
+    if (this.sourceNode.id === this.targetNode.id) {
+      this.toastr.error('Cycle detected in DAG.');
+    } else {
+      this.links.push({
+        id: 'link' + this.sourceNode.id.toString() + this.targetNode.id.toString(),
+        label: 'prerequisite',
+        source: this.sourceNode.id.toString(),
+        target: this.targetNode.id.toString()
+      });
+      this.update$.next(true);
+      this.zoomToFit$.next(true);
+      this.center$.next(true);
+    }
+  }
 
 }
