@@ -1,73 +1,37 @@
-<mat-toolbar color="primary" class="navbar">
-    <div>
-      <button mat-button [routerLink]="['/events']">
-        <span>SOTS</span>
-        <mat-icon class="example-icon" aria-hidden="false" aria-label="Example delete icon">school</mat-icon>
-        <span class="example-spacer"></span>
-      </button>
-  
-      <button id="myProfileNav" mat-button  [routerLink]="['/profile']">
-        <mat-icon class="example-icon" aria-hidden="false" aria-label="Example delete icon">supervised_user_circle</mat-icon>
-        <span>Profile</span>
-      </button>
-      <button mat-button >Add Event</button>
-      <button id="locationsNavBtn" mat-button [routerLink] = "['/location/all']">Locations</button>
-      <button id="addLocationsNavBtn" mat-button [routerLink] = "['/location/add']">Add Location</button>
-      <button id="chartNavBtn" mat-button [routerLink] = "['/charts']">Insights</button>
-    </div>
-  
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <mat-icon class="example-icon" aria-hidden="false" aria-label="Example delete icon">school</mat-icon>
+    <span>SOTS</span>
+    <span class="example-spacer"></span>
+    <mat-icon class="example-icon" aria-hidden="false" aria-label="Example heart icon">favorite</mat-icon>
+    <mat-icon class="example-icon" aria-hidden="false" aria-label="Example delete icon">delete</mat-icon>
+    <button id="myProfileNav" mat-button  [routerLink]="['/profile']">
+      <mat-icon class="example-icon" aria-hidden="false" aria-label="Example delete icon">supervised_user_circle</mat-icon>
+      <span>Profile</span>
+    </button>
+    <button id="myProfileNav" mat-button  [routerLink]="['/profile']">
+      <mat-icon class="example-icon" aria-hidden="false" aria-label="Example delete icon">sports</mat-icon>
+      <span>Profile</span>
+    </button>
+    <button id="myProfileNav" mat-button  [routerLink]="['/profile']">
+      <mat-icon class="example-icon" aria-hidden="false" aria-label="Example delete icon">star</mat-icon>
+      <span>Profile</span>
+    </button>
+    <button id="myProfileNav" mat-button  [routerLink]="['/profile']">
+      <mat-icon class="example-icon" aria-hidden="false" aria-label="Example delete icon">supervised_user_circle</mat-icon>
+      <span>Profile</span>
+    </button>
+
+
+    <button id="myProfileNav" mat-button  [routerLink]="['/profile']">
+      <mat-icon class="example-icon" aria-hidden="false" aria-label="Example delete icon">supervised_user_circle</mat-icon>
+      <span>Profile</span>
+    </button>
+
+
     <button mat-button (click)="onClickLogout()" id="logout-btn">
-        <mat-icon>highlight_off</mat-icon>
-        <span>Logout</span>
-    </button>
-  
-  </mat-toolbar>
-
-  <mat-toolbar color="primary">
-    <mat-toolbar-row>
-      <span>Third Line</span>
-      <span class="example-spacer"></span>
-      <mat-icon class="example-icon" aria-hidden="false" aria-label="Example heart icon">favorite</mat-icon>
-      <mat-icon class="example-icon" aria-hidden="false" aria-label="Example delete icon">delete</mat-icon>
-    </mat-toolbar-row>
-  </mat-toolbar>
-
-
-  <mat-toolbar color="primary">
-    <mat-toolbar-row>
-      <mat-icon class="example-icon" aria-hidden="false" aria-label="Example delete icon">school</mat-icon>
-      <span>SOTS</span>
-      <span class="example-spacer"></span>
-      <mat-icon class="example-icon" aria-hidden="false" aria-label="Example heart icon">favorite</mat-icon>
-      <mat-icon class="example-icon" aria-hidden="false" aria-label="Example delete icon">delete</mat-icon>
-      <button id="myProfileNav" mat-button  [routerLink]="['/profile']">
-        <mat-icon class="example-icon" aria-hidden="false" aria-label="Example delete icon">supervised_user_circle</mat-icon>
-        <span>Profile</span>
-      </button>
-      <button id="myProfileNav" mat-button  [routerLink]="['/profile']">
-        <mat-icon class="example-icon" aria-hidden="false" aria-label="Example delete icon">sports</mat-icon>
-        <span>Profile</span>
-      </button>
-      <button id="myProfileNav" mat-button  [routerLink]="['/profile']">
-        <mat-icon class="example-icon" aria-hidden="false" aria-label="Example delete icon">star</mat-icon>
-        <span>Profile</span>
-      </button>
-      <button id="myProfileNav" mat-button  [routerLink]="['/profile']">
-        <mat-icon class="example-icon" aria-hidden="false" aria-label="Example delete icon">supervised_user_circle</mat-icon>
-        <span>Profile</span>
-      </button>
-
-
-      <button id="myProfileNav" mat-button  [routerLink]="['/profile']">
-        <mat-icon class="example-icon" aria-hidden="false" aria-label="Example delete icon">supervised_user_circle</mat-icon>
-        <span>Profile</span>
-      </button>
-
-
-      <button mat-button (click)="onClickLogout()" id="logout-btn">
-        <mat-icon class="example-icon" aria-hidden="false" aria-label="Example delete icon">highlight_off</mat-icon>
-        <span>Logout</span>
-    </button>
-    </mat-toolbar-row>
-  </mat-toolbar>
-  
+      <mat-icon class="example-icon" aria-hidden="false" aria-label="Example delete icon">highlight_off</mat-icon>
+      <span>Logout</span>
+  </button>
+  </mat-toolbar-row>
+</mat-toolbar>

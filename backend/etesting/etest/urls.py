@@ -5,7 +5,10 @@ from etest.views import *
 app_name = 'etest'
 
 urlpatterns = [
-    path('<int:pk>/', Dag.as_view()),
-    path('create-node', CreateNode.as_view())
+    path('get-dag/<int:pk>', Dag.as_view()),
+    path('destroy-node/<int:pk>', DestroyNode.as_view()),
+    path('create-node', CreateNode.as_view()),
+    path('create-link', CreateLink.as_view()),
+    path('create-dag', CreateDag.as_view())
     
 ]
