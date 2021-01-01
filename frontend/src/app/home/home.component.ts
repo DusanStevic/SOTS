@@ -104,7 +104,7 @@ export class HomeComponent implements OnInit {
 
   }
   removeByAttr = function(arr, attr, value) {
-    var i = arr.length;
+    let i = arr.length;
     while (i--) {
       if (
         arr[i] &&
@@ -117,38 +117,43 @@ export class HomeComponent implements OnInit {
     return arr;
   };
   addLink() {
-    if (this.isCycleDetected(this.sourceNode, this.targetNode)) {
-      this.toastr.error('Cycle detected in DAG.');
+    if (!this.isLinkLabelUnique(this.links, this.linkName)) {
+      this.toastr.error('Link already exists with label ' + '\'' + this.linkName + '\'');
     } else {
-      // save new link to DB
-      const linkDB: LinkDB = {
-        knowledge_space: 1,
-        link_id: this.linkName,
-        link_label: this.linkName,
-        source: this.sourceNode.db_id,
-        target: this.targetNode.db_id
-      };
-      // new link is returned as response from endpoint create-link
-      this.dagService.addNewLink(linkDB).subscribe(data => {
-        // pushing new link to existing links
-        const sourceNode = this.getNodeByDbId(data.source);
-        const targetNode = this.getNodeByDbId(data.target);
-        this.links.push({
-          db_id: data.id,
-          id: data.link_id,
-          label: data.link_label,
-          source: sourceNode.label,
-          target: targetNode.label
+      console.log('sta sam dobio od provere ciklusa',this.isCycleDetected(this.sourceNode, this.targetNode))
+      if (this.isCycleDetected(this.sourceNode, this.targetNode)) {
+      this.toastr.error('Cycle detected in DAG.');
+      } else {
+        // save new link to DB
+        const linkDB: LinkDB = {
+          knowledge_space: 1,
+          link_id: this.linkName,
+          link_label: this.linkName,
+          source: this.sourceNode.db_id,
+          target: this.targetNode.db_id
+        };
+        // new link is returned as response from endpoint create-link
+        this.dagService.addNewLink(linkDB).subscribe(data => {
+          // pushing new link to existing links
+          const sourceNode = this.getNodeByDbId(data.source);
+          const targetNode = this.getNodeByDbId(data.target);
+          this.links.push({
+            db_id: data.id,
+            id: data.link_id,
+            label: data.link_label,
+            source: sourceNode.label,
+            target: targetNode.label
+          });
+          // rendering all links
+          this.update$.next(true);
+          // this.zoomToFit$.next(true);
+          // this.center$.next(true);
+          this.toastr.success('New link has been successfully added.');
+        }, error => {
+          this.toastr.warning(error.error.message, 'Warning');
         });
-        // rendering all links
-        this.update$.next(true);
-        // this.zoomToFit$.next(true);
-        // this.center$.next(true);
-        this.toastr.success('New link has been successfully added.');
-      }, error => {
-        this.toastr.warning(error.error.message, 'Warning');
-      });
 
+      }
     }
   }
   addNode(): void {
@@ -192,25 +197,82 @@ export class HomeComponent implements OnInit {
     }
     return uniqueFlag;
   }
+
+  isLinkLabelUnique(links: Link[], linkNam: string) {
+    let uniqueFlag = true;
+    for (const link of links) {
+      if (link.label === linkNam) {
+        uniqueFlag = false;
+      }
+    }
+    return uniqueFlag;
+  }
+
+
+
+
   isCycleDetected(sourceNode: Node, targetNode: Node) {
-
-
+    //let isCycle = false;
+    let parents = [];
     if (sourceNode.id === targetNode.id) {
       return true;
     } else {
-      console.log('obrada rekurzije')
-
+      console.log('roditelji cvora:',sourceNode);
+      parents = this.getNodeParents(sourceNode);
+      console.log(parents)
+      if(parents.length === 0){
+        console.log('provera za duzinu:');
+        return true;
+      } else{
+        if(this.isTargetNodeInParents(parents,targetNode)){
+          console.log('unutra')
+          return true;
+        } else{
+          this.isCycleDetected(parents.pop(),targetNode);
+        }
+      }
 
 
     }
-    return false;
+    console.log('pred vracanje')
   }
 
+
+  getNodeParents(node: Node) {
+    const parents = [];
+    for (const link of this.links) {
+      if (node.db_id === this.getNodeByLabel(link.target).db_id) {
+        parents.push(this.getNodeByLabel(link.source));
+      }
+    }
+
+    return parents;
+
+  }
+
+  isTargetNodeInParents(parents: Node[], targetNode: Node) {
+    let inFlag = false;
+    for (const parent of parents) {
+      if (parent.db_id === targetNode.db_id) {
+        inFlag = true;
+      }
+    }
+    return inFlag;
+  }
 
 
   getNodeByDbId(dbId: number) {
     for (const node of this.nodes) {
       if (node.db_id === dbId) {
+        return node;
+      }
+    }
+    return null;
+
+  }
+  getNodeByLabel(Id: string) {
+    for (const node of this.nodes) {
+      if (node.id === Id) {
         return node;
       }
     }
