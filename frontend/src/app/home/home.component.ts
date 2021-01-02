@@ -32,6 +32,8 @@ export class HomeComponent implements OnInit {
   nodeName: string;
   linkName: string;
   mySubscription: any;
+  // stack for nodes to visit
+  nodesToVisit: Node[] = [];
 
   constructor(
     private authService: AuthService,
@@ -120,7 +122,10 @@ export class HomeComponent implements OnInit {
     if (!this.isLinkLabelUnique(this.links, this.linkName)) {
       this.toastr.error('Link already exists with label ' + '\'' + this.linkName + '\'');
     } else {
-      console.log('sta sam dobio od provere ciklusa',this.isCycleDetected(this.sourceNode, this.targetNode))
+      console.log('sta sam dobio od provere ciklusa', this.isCycleDetected(this.sourceNode, this.targetNode));
+      // Just in case nodesToVisit stack reset.
+      // Preparing nodesToVisit stack for new add link operation. Poping all nodes from the stack.
+      this.nodesToVisit = [];
       if (this.isCycleDetected(this.sourceNode, this.targetNode)) {
       this.toastr.error('Cycle detected in DAG.');
       } else {
@@ -212,29 +217,39 @@ export class HomeComponent implements OnInit {
 
 
   isCycleDetected(sourceNode: Node, targetNode: Node) {
-    //let isCycle = false;
+    console.log('cvorove koje treba posetiti', this.nodesToVisit);
     let parents = [];
     if (sourceNode.id === targetNode.id) {
       return true;
-    } else {
-      console.log('roditelji cvora:',sourceNode);
-      parents = this.getNodeParents(sourceNode);
-      console.log(parents)
-      if(parents.length === 0){
-        console.log('provera za duzinu:');
-        return true;
-      } else{
-        if(this.isTargetNodeInParents(parents,targetNode)){
-          console.log('unutra')
-          return true;
-        } else{
-          this.isCycleDetected(parents.pop(),targetNode);
-        }
-      }
-
-
     }
-    console.log('pred vracanje')
+    console.log('roditelji cvora:', sourceNode);
+    parents = this.getNodeParents(sourceNode);
+    console.log(parents);
+    // If the number of nodes in parents is greater than 1 you must activate nodesToVisit stack.
+    if (parents.length > 1) {
+      // Why we use parents.length - 1 because the last node in parents becomes currently visited node
+      // so there is no need to push that node in nodesToVisit stack it is already prosecuted(visited).
+      for (let i = 0; i < parents.length - 1; i++) {
+        this.nodesToVisit.push(parents[i]);
+      }
+    }
+
+    if (parents.length !== 0) {
+      sourceNode = parents.pop();
+    } else {
+      if (this.nodesToVisit.length !== 0) {
+        sourceNode = this.nodesToVisit.pop();
+        // Remove currently visited node from nodesToVisit stack.
+        this.nodesToVisit.pop();
+      } else {
+        return false;
+      }
+    }
+    if (this.isTargetNodeInParents(parents, targetNode)) {
+      return true;
+    } else {
+      return this.isCycleDetected(sourceNode, targetNode);
+    }
   }
 
 
