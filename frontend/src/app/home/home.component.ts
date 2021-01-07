@@ -34,6 +34,9 @@ export class HomeComponent implements OnInit {
   mySubscription: any;
   // stack for nodes to visit
   nodesToVisit: Node[] = [];
+  // queue for question order
+  questionOrder: Node[] = [];
+  tempChildren: Node[] = [];
 
   constructor(
     private authService: AuthService,
@@ -260,9 +263,17 @@ export class HomeComponent implements OnInit {
         parents.push(this.getNodeByLabel(link.source));
       }
     }
-
     return parents;
+  }
 
+  getNodeChildren(node: Node) {
+    const children = [];
+    for (const link of this.links) {
+      if (node.db_id === this.getNodeByLabel(link.source).db_id) {
+        children.push(this.getNodeByLabel(link.target));
+      }
+    }
+    return children;
   }
 
   isTargetNodeInParents(parents: Node[], targetNode: Node) {
@@ -293,6 +304,63 @@ export class HomeComponent implements OnInit {
     }
     return null;
 
+  }
+
+  getRootNodes() {
+    const roots = [];
+    for (const node of this.nodes) {
+      if (this.getNodeParents(node).length === 0) {
+        roots.push(node);
+      }
+    }
+    return roots;
+
+  }
+
+  questionOrderByExpectedKnowledgeSpace(roots: Node[]): void {
+    // Resetting question order for a new session.
+    this.questionOrder = [];
+    console.log('pozdrav iz redosleda')
+    // get root nodes
+    this.questionOrder = this.getRootNodes();
+    console.log(this.questionOrder)
+    this.calculatingOrderByExpectedKnowledgeSpace(this.getRootNodes());
+    for (const question of this.questionOrder) {
+      console.log(question);
+    }
+
+  }
+
+  calculatingOrderByExpectedKnowledgeSpace(roots: Node[]): void {
+    let children = [];
+    for (const root of roots) {
+      for (const child of this.getNodeChildren(root)){
+        // Preventing duplicates
+        // If a list doesn't contain an element add it.
+        if (!(this.questionOrder.includes(child))){
+          children.push(child);
+          this.questionOrder.push(child);
+        }
+
+      }
+    }
+    this.tempChildren = children;
+    console.log('deca za sledeci krug')
+    console.log(this.tempChildren)
+    console.log('ukupno')
+    console.log(this.questionOrder)
+
+    if (this.tempChildren.length === 0) {
+      return;
+
+    } else {
+      return this.calculatingOrderByExpectedKnowledgeSpace(this.tempChildren);
+    }
+
+  }
+
+  questionOrderByRealKnowledgeSpace(): void {
+    console.log('Markovljevi lanci');
   }
 
 
