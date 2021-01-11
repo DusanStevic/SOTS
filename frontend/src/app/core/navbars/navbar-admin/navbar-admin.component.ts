@@ -10,9 +10,20 @@ import { AuthService } from '../../services/auth.service';
 })
 export class NavbarAdminComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private router: Router,
+    private toastr: ToastrService,
+    private authService: AuthService) {
+  }
 
   ngOnInit() {
+  }
+
+
+  onClickLogout(): void {
+    this.authService.logout();
+    this.toastr.success('Succesful logout!');
+    this.router.navigate(['']);
   }
 
 }
