@@ -1,5 +1,7 @@
 from django.db import models
 from accounts.models import Student, Teacher
+from django.utils.html import strip_tags
+
 
 class Domain(models.Model):
     title = models.CharField(max_length=255, null=True)
@@ -40,3 +42,38 @@ class Course(models.Model):
         verbose_name = 'course'
         verbose_name_plural = 'courses'
 
+class Answer(models.Model):
+    title = models.CharField(max_length=100)
+    is_correct = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f'{strip_tags(self.title)}'
+
+    class Meta:
+        verbose_name = 'answer'
+        verbose_name_plural = 'answers'
+
+
+class Question(models.Model):
+    title = models.TextField(blank=True, null=True)
+    answers = models.ManyToManyField(Answer)
+
+    def __str__(self):
+        return f'{strip_tags(self.title)}'
+
+    class Meta:
+        verbose_name = 'question'
+        verbose_name_plural = 'questions'
+
+class Test(models.Model):
+    title = models.CharField(max_length=255, null=True)
+    image = models.ImageField(blank=True, default='')
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, null=True, blank=True)
+    questions = models.ManyToManyField(Question)
+
+    def __str__(self):
+        return f'{strip_tags(self.title)}'
+
+    class Meta:
+        verbose_name = 'test'
+        verbose_name_plural = 'tests'
