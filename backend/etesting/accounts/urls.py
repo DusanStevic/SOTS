@@ -16,6 +16,6 @@ app_name = 'accounts'
 urlpatterns = [
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    path('register/', SignUp.as_view()),
+    path('register', SignUp.as_view()),
 
 ]

@@ -1,36 +1,26 @@
 from rest_framework import serializers
-from accounts.models import User,Student,Teacher
+from accounts.models import User
 
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        #fields = ('id','email', 'username', 'is_student', 'is_teacher')
         fields = ('id','email', 'username', 'role')
 class CreateNewUserSerializer(serializers.ModelSerializer):
     
-
     def create(self, validated_data):
         # Hashing passwords. If you don't use the create_user function on the user object, 
         # a password will be stored in plain text. Your password will be exposed in a database. 
         # If your passwords aren't hashed you will not be able to log in. 
         # Because during login hashed passwords are being compared one from login and another from the database.   
+        print(validated_data)
         user = User.objects.create_user(**validated_data)
-        new_student = Student()
-        #if validated_data.get('is_student') == True:
-        if validated_data.get('role') == 'STUDENT':
-            new_student = Student()
-            new_student.user = user
-            new_student.save()
-        #if validated_data.get('is_teacher') == True:
-        if validated_data.get('role') == 'TEACHER':
-            new_teacher = Teacher()
-            new_teacher.user = user
-            new_teacher.save()
+
         return user
 
     class Meta:
         model = User
         #fields = ('email', 'username', 'password', 'is_student', 'is_teacher')
-        fields = ('id','email', 'username', 'role')
+        fields = ('id','email', 'username', 'role','first_name', 'password','last_name')
+        # You can not read the password, you can only write the password.
         extra_kwargs = {'password': {'write_only': True}}

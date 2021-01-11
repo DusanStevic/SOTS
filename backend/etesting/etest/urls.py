@@ -9,6 +9,10 @@ urlpatterns = [
     path('destroy-node/<int:pk>', DestroyNode.as_view()),
     path('create-node', CreateNode.as_view()),
     path('create-link', CreateLink.as_view()),
-    path('create-dag', CreateDag.as_view())
+    path('create-dag', CreateDag.as_view()),
+    # courses
+    path('GetAllCoursesByUser', GetAllCoursesByUser.as_view()),
+    # tests
+    path('get-test/<int:pk>', Test.as_view()),
     
 ]

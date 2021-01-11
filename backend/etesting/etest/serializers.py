@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from etest.models import Course, Domain, KnowledgeSpace,Node,Link
+from etest.models import *
 
 class DomainSerializer(serializers.ModelSerializer):
     class Meta:
@@ -46,3 +46,27 @@ class CreateKnowledgeSpaceSerializer(serializers.ModelSerializer):
     class Meta:
         model = KnowledgeSpace
         fields = '__all__'
+
+class AnswerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Answer
+        fields = '__all__'
+
+class QuestionSerializer(serializers.ModelSerializer):
+    answers = AnswerSerializer(many=True)
+    class Meta:
+        model = Question
+        fields = '__all__'
+
+class TestSerializer(serializers.ModelSerializer):
+    questions = QuestionSerializer(many=True)
+    class Meta:
+        model = Test
+        fields = '__all__'
+
+class CourseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Course
+        fields = '__all__'
+
+
