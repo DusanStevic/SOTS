@@ -11,7 +11,8 @@ import { AuthService } from '../../services/auth.service';
 export class NavbarTeacherComponent implements OnInit {
 
 
-  constructor(private router: Router, 
+  constructor(
+    private router: Router,
     private toastr: ToastrService,
     private authService: AuthService) {
   }

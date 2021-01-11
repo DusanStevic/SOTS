@@ -7,11 +7,12 @@ import { Optional } from '@angular/core';
 import { NavbarTeacherComponent } from './navbars/navbar-teacher/navbar-teacher.component';
 import { NavbarStudentComponent } from './navbars/navbar-student/navbar-student.component';
 import { DagService } from './services/dag.service';
+import { NavbarAdminComponent } from './navbars/navbar-admin/navbar-admin.component';
 
 
 
 @NgModule({
-  declarations: [NavbarTeacherComponent, NavbarStudentComponent],
+  declarations: [NavbarTeacherComponent, NavbarStudentComponent, NavbarAdminComponent],
   imports: [
     CommonModule,
     MaterialModule,
@@ -21,7 +22,7 @@ import { DagService } from './services/dag.service';
     AuthService, DagService
   ],
   exports: [
-    NavbarTeacherComponent, NavbarStudentComponent
+    NavbarTeacherComponent, NavbarStudentComponent, NavbarAdminComponent
  ]
 })
 export class CoreModule {

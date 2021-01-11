@@ -14,7 +14,7 @@ const routes: Routes = [
     path: 'home',
     component: HomeComponent,
     canActivate: [RoleGuard],
-    data: {expectedRoles: 'TEACHER'}
+    data: {expectedRoles: 'TEACHER|STUDENT|ADMIN'}
   }
 ];
 
