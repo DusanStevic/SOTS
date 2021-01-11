@@ -13,14 +13,13 @@ class CreateNewUserSerializer(serializers.ModelSerializer):
         # a password will be stored in plain text. Your password will be exposed in a database. 
         # If your passwords aren't hashed you will not be able to log in. 
         # Because during login hashed passwords are being compared one from login and another from the database.   
-        print(validated_data)
         user = User.objects.create_user(**validated_data)
-
         return user
 
+    # something like DTO in java
     class Meta:
         model = User
-        #fields = ('email', 'username', 'password', 'is_student', 'is_teacher')
+        # fields in DTO
         fields = ('id','email', 'username', 'role','first_name', 'password','last_name')
         # You can not read the password, you can only write the password.
         extra_kwargs = {'password': {'write_only': True}}

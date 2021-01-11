@@ -37,25 +37,12 @@ class GetAllCoursesByUser(generics.ListAPIView):
     # Allowed for students and teachers.
     permission_classes = [permissions.IsAuthenticated]
     serializer_class = CourseSerializer
-    #queryset = Course.objects.all()
     def get_queryset(self):
         """
-        This view should return a list of all the purchases
+        This view should return a list of all the courses
         for the currently authenticated user.
         """
         user = self.request.user
-        print('TRENUTNO ULOGOVANI KORISNIK')
-        print(type(user))
-        print(user.role)
         return Course.objects.filter(students=user)
 
-# class PurchaseList(generics.ListAPIView):
-#     serializer_class = PurchaseSerializer
 
-#     def get_queryset(self):
-#         """
-#         This view should return a list of all the purchases
-#         for the currently authenticated user.
-#         """
-#         user = self.request.user
-#         return Purchase.objects.filter(purchaser=user)

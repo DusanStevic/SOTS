@@ -17,6 +17,9 @@ import { KstModule } from './kst/kst.module';
 import { PagesModule } from './pages/pages.module';
 import { NgxGraphModule } from '@swimlane/ngx-graph';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { DomainsModule } from './domains/domains.module';
+import { CoursesModule } from './courses/courses.module';
+import { TestsModule } from './tests/tests.module';
 
 
 @NgModule({
@@ -39,6 +42,9 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     PagesModule,
     NgxGraphModule,
     NgxChartsModule,
+    DomainsModule,
+    CoursesModule,
+    TestsModule,
     ToastrModule.forRoot({
       progressBar: true,
       timeOut: 4000,

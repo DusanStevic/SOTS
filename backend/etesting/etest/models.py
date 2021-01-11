@@ -8,7 +8,6 @@ class Domain(models.Model):
         return f'{self.title}'
 
 class KnowledgeSpace(models.Model):
-    #domain = models.OneToOneField(Domain, on_delete=models.SET_NULL, null=True)
     domain = models.OneToOneField(Domain, on_delete=models.SET_NULL, related_name='knowledge_space', null=True)
     def __str__(self):
         return 'Knowledge space'+f'{self.id}'
@@ -68,9 +67,7 @@ class CompletedTest(models.Model):
     student = models.ForeignKey(User, on_delete=models.SET_NULL, related_name='completed_test', null=True)
 
     def __str__(self):
-        if self.student and self.test:
-            return f'{self.student.username}|{self.test.title}|{self.score}'
-        return 'Exam Choice'
+        return 'Completed test'+f'{self.id}'
 
 class ChosenAnswer(models.Model):
     answer = models.OneToOneField(Answer, on_delete=models.SET_NULL, related_name='chosen_answer', null=True)
