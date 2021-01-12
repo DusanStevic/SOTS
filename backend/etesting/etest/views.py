@@ -36,13 +36,14 @@ class Test(generics.RetrieveAPIView):
 class GetAllCoursesByUser(generics.ListAPIView):
     # Allowed for students and teachers.
     permission_classes = [permissions.IsAuthenticated]
-    serializer_class = CourseSerializer
+    serializer_class = CourseSerializer 
+    # This view should return a list of all the courses for the currently authenticated user.
     def get_queryset(self):
-        """
-        This view should return a list of all the courses
-        for the currently authenticated user.
-        """
-        user = self.request.user
-        return Course.objects.filter(students=user)
+        if self.request.user.role == 'TEACHER':
+            return Course.objects.filter(teachers=self.request.user)
+        elif self.request.user.role == 'STUDENT':
+            return Course.objects.filter(students=self.request.user)
+        else:
+            return Course.objects.none()
 
 

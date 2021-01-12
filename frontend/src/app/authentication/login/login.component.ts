@@ -13,8 +13,6 @@ import { AuthService } from 'src/app/core/services/auth.service';
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
-  loginSuccess: boolean = false;
-  loginError: boolean = false;
 
   constructor(private fb: FormBuilder,
               private router: Router,
@@ -26,7 +24,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     if (this.authService.isUserLoggedIn()) {
-      this.router.navigate(['home']);
+      this.router.navigate(['courses']);
     }
   }
 
@@ -52,12 +50,8 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('email', data.email);
       localStorage.setItem('id', data.user_id);
       localStorage.setItem('role', data.role);
-      this.loginSuccess = true;
-      this.loginError = false;
-      this.router.navigate(['home']);
+      this.router.navigate(['courses']);
     }, error => {
-      this.loginSuccess = false;
-      this.loginError = true;
       this.toastr.warning(error.error.message, 'Warning');
     });
   }

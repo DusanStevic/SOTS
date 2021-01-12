@@ -11,32 +11,29 @@ import { NodeDB } from 'src/app/shared/models/node';
 export class DagService {
 
   constructor(private http: HttpClient) { }
-/*   getTest(id: number): Observable<Test> {
-    return this.http.get<Test>(`/api/testovi/${id}/`);
-  }
-  cancelTicket(id: number): Observable<any> {
-    return this.http.delete(`${API_CANCEL_TICKET}/${id}`);
-  } */
+
+
+
+
 
   readDag(id: number): Observable<any>{
-    return this.http.get<KnowledgeSpace>('http://127.0.0.1:8000/dag/get-dag/' + id);
-    //return this.http.get(`http://127.0.0.1:8000/dag/${id}`);
+    return this.http.get(`http://localhost:8000/api/get-dag/${id}`);
   }
 
 
 
   addNewNode(nodeDB: NodeDB): Observable<any> {
-    return this.http.post("http://localhost:8000/dag/create-node", nodeDB);
+    return this.http.post('http://localhost:8000/api/create-node', nodeDB);
   }
 
 
 
   deleteNode(id: number): Observable<any> {
-    return this.http.delete(`http://localhost:8000/dag/destroy-node/${id}`);
+    return this.http.delete(`http://localhost:8000/api/destroy-node/${id}`);
   }
 
   addNewLink(linkDB: LinkDB): Observable<any> {
-    return this.http.post("http://localhost:8000/dag/create-link", linkDB);
+    return this.http.post('http://localhost:8000/api/create-link', linkDB);
   }
 
 

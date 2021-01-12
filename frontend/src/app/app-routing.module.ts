@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './authentication/login/login.component';
 import { RoleGuard } from './core/guards/role.guard';
+import { CoursesComponent } from './courses/courses/courses.component';
 import { HomeComponent } from './home/home.component';
 import { ForbiddenPageComponent } from './pages/forbidden-page/forbidden-page.component';
 
@@ -15,6 +16,12 @@ const routes: Routes = [
     component: HomeComponent,
     canActivate: [RoleGuard],
     data: {expectedRoles: 'TEACHER|STUDENT|ADMIN'}
+  },
+  {
+    path: 'courses',
+    component: CoursesComponent,
+    canActivate: [RoleGuard],
+    data: {expectedRoles: 'TEACHER|STUDENT'}
   }
 ];
 

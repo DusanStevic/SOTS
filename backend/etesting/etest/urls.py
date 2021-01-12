@@ -11,7 +11,7 @@ urlpatterns = [
     path('create-link', CreateLink.as_view()),
     path('create-dag', CreateDag.as_view()),
     # courses
-    path('GetAllCoursesByUser', GetAllCoursesByUser.as_view()),
+    path('courses/GetAllCoursesByUser', GetAllCoursesByUser.as_view()),
     # tests
     path('get-test/<int:pk>', Test.as_view()),
     

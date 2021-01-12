@@ -18,12 +18,13 @@ from django.urls import path, include
 from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
 
 urlpatterns = [
-    # admin UI
+    # admin panel 
     path('admin/', admin.site.urls),
 
-    # accounts urls
+    # accounts urls (accounts REST API)
     path('api/', include('accounts.urls')),
-    path('dag/', include('etest.urls')),
+    # etest urls (etest REST API)
+    path('api/', include('etest.urls')),
 
     # JWT authentication 
     path('api/token-auth/', obtain_jwt_token),
