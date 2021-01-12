@@ -10,6 +10,10 @@ urlpatterns = [
     path('create-node', CreateNode.as_view()),
     path('create-link', CreateLink.as_view()),
     path('create-dag', CreateDag.as_view()),
+    path('create-answer', CreateAnswer.as_view()),
+    path('create-question', CreateQuestion.as_view()),
+    path('create-test', CreateTest.as_view()),
+    path('get-test/<int:pk>', Test.as_view()),
     path('question_xml/<int:pk>/', Questions),
     path('test_xml/<int:pk>/', Tests),
     

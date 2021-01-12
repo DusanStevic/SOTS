@@ -57,6 +57,7 @@ class Answer(models.Model):
 class Question(models.Model):
     title = models.TextField(blank=True, null=True)
     answers = models.ManyToManyField(Answer)
+    image = models.ImageField(blank=True, default='')
 
     def __str__(self):
         return f'{strip_tags(self.title)}'

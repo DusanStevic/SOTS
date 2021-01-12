@@ -87,3 +87,24 @@ def Tests(request, pk):
     result_list = serializers.serialize('xml', result_list)
 
     return HttpResponse(result_list, content_type="aplication/xml")
+
+
+class CreateAnswer(generics.CreateAPIView):
+    #permission_classes = [permissions.IsAuthenticated, IsTeacherUser]
+    serializer_class = AnswerSerializer
+    queryset = Answer.objects.all()
+
+class CreateQuestion(generics.CreateAPIView):
+    #permission_classes = [permissions.IsAuthenticated, IsTeacherUser]
+    serializer_class = QuestionSerializer
+    queryset = Question.objects.all()
+
+class CreateTest(generics.CreateAPIView):
+    #permission_classes = [permissions.IsAuthenticated, IsTeacherUser]
+    serializer_class = TestSerializer
+    queryset = Test.objects.all()
+
+class Test(generics.RetrieveAPIView):
+    #permission_classes = [permissions.IsAuthenticated, IsTeacherUser]
+    serializer_class = TestSerializer
+    queryset = Test.objects.all()
