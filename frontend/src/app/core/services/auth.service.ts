@@ -14,9 +14,7 @@ export class AuthService {
   isUserLoggedIn(): boolean {
     return localStorage.getItem('token') != null;
   }
-  public get loggedIn(): boolean {
-    return localStorage.getItem('token') !== null;
-  }
+
 
   login(loginInfo: Login): Observable<any> {
     return this.http.post('http://127.0.0.1:8000/api/token-auth/', loginInfo);
@@ -25,6 +23,18 @@ export class AuthService {
 
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>('http://127.0.0.1:8000/api/users/');
+  }
+
+  isTeacherLoggedIn() {
+    return localStorage.getItem('role') === 'TEACHER';
+  }
+
+  isStudentLoggedIn(): boolean {
+    return localStorage.getItem('role') === 'STUDENT';
+  }
+
+  isAdminLoggedIn(): boolean {
+    return localStorage.getItem('role') === 'ADMIN';
   }
 
   /* checkForAdmin(): boolean {
@@ -43,7 +53,7 @@ export class AuthService {
   getToken(): string {
     return localStorage.getItem('token');
   }
-  // PREBACI SE NA VELIKA SLOVA ZBOG KONSTANTI
+  
   logout(): void {
     localStorage.removeItem('token');
     localStorage.removeItem('email');
