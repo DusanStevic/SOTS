@@ -1,1 +1,33 @@
-<p>courses works! ovde ce biti izlistani svi kursevi za trenutno ulogovanog korisnika</p>
+<div class="container">
+    <h2>SOTS Courses</h2>
+
+
+
+
+    <mat-card class="card" *ngFor="let course of courses">
+        <mat-card-header>
+            <mat-card-title>{{course.title}}</mat-card-title>
+            <mat-card-subtitle>neki podnaslov</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="row">
+                <div>
+                    <p>
+                        <strong>Type:</strong> {{course.id}}
+                    </p>
+        
+                    <p>
+                        <strong>Description:</strong> opis kursa
+                    </p>
+                </div>
+            </div>
+        </mat-card-content>
+
+        <mat-card-actions class="card-actions">
+            <button mat-button>
+                <span>See more</span>
+                <mat-icon>more_horiz</mat-icon>
+            </button>
+        </mat-card-actions>
+    </mat-card>
+</div>

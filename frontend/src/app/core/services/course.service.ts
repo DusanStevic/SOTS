@@ -9,7 +9,7 @@ export class CourseService {
 
   constructor(private http: HttpClient) { }
 
-  GetAllCoursesByUser(): Observable<any> {
+  getAllCoursesByUser(): Observable<any> {
     return this.http.get(`http://localhost:8000/api/courses/GetAllCoursesByUser`);
   }
 }

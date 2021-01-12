@@ -8,7 +8,7 @@ class Domain(models.Model):
         return f'{self.title}'
 
 class KnowledgeSpace(models.Model):
-    domain = models.OneToOneField(Domain, on_delete=models.SET_NULL, related_name='knowledge_space', null=True)
+    domain = models.ForeignKey(Domain, on_delete=models.CASCADE, related_name='knowledge_spaces', null=True)
     def __str__(self):
         return 'Knowledge space'+f'{self.id}'
 
@@ -29,7 +29,7 @@ class Link(models.Model):
         return f'{self.link_label}'
 
 class Course(models.Model):
-    # dodaj referencu na domen
+    domain = models.OneToOneField(Domain, on_delete=models.SET_NULL, related_name='course', null=True)
     title = models.CharField(max_length=255, null=True)
     teachers = models.ManyToManyField(User, related_name='teacher_courses', blank=True)
     students = models.ManyToManyField(User, related_name='student_courses', blank=True)

@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReadDagComponent } from './read-dag/read-dag.component';
 
 
 
 @NgModule({
-  declarations: [ReadDagComponent],
+  declarations: [],
   imports: [
     CommonModule
   ]
