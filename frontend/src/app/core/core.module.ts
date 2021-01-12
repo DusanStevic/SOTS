@@ -11,6 +11,7 @@ import { NavbarAdminComponent } from './navbars/navbar-admin/navbar-admin.compon
 
 
 
+
 @NgModule({
   declarations: [NavbarTeacherComponent, NavbarStudentComponent, NavbarAdminComponent],
   imports: [

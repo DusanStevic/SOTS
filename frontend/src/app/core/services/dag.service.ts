@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { KnowledgeSpace} from 'src/app/shared/models/knowledge-space';
 import { LinkDB } from 'src/app/shared/models/link';
 import { NodeDB } from 'src/app/shared/models/node';
 
@@ -16,7 +15,7 @@ export class DagService {
 
 
 
-  readDag(id: number): Observable<any>{
+  readDag(id: number): Observable<any> {
     return this.http.get(`http://localhost:8000/api/get-dag/${id}`);
   }
 

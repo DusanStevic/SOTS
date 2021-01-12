@@ -8,7 +8,7 @@ import { CourseService } from 'src/app/core/services/course.service';
   styleUrls: ['./courses.component.scss']
 })
 export class CoursesComponent implements OnInit {
-  courses :Array<any> = []
+  courses: Array<any> = [];
   constructor(private toastr: ToastrService,
               private courseService: CourseService) { }
 
