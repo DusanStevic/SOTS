@@ -3,6 +3,7 @@ from rest_framework import permissions, generics, status, viewsets
 from accounts.permissions import IsStudentUser, IsTeacherUser
 from etest.models import *
 from etest.serializers import *
+from django_filters.rest_framework import DjangoFilterBackend
 # Create your views here.
 class Dag(generics.RetrieveAPIView):
     permission_classes = [permissions.IsAuthenticated, IsTeacherUser]
@@ -28,7 +29,7 @@ class CreateLink(generics.CreateAPIView):
     serializer_class = LinkSerializer
     queryset = Link.objects.all()
 
-class Test(generics.RetrieveAPIView):
+class GetTestById(generics.RetrieveAPIView):
     permission_classes = [permissions.IsAuthenticated, IsTeacherUser]
     serializer_class = TestSerializer
     queryset = Test.objects.all()
@@ -46,4 +47,12 @@ class GetAllCoursesByUser(generics.ListAPIView):
         else:
             return Course.objects.none()
 
+class GetAllTestsInCourseByCreator(generics.ListAPIView):
+    permission_classes = [permissions.IsAuthenticated, IsTeacherUser]
+    serializer_class = TestSerializer 
+    # This view should return a list of all the tests in a chosen course 
+    # that were created by the currently authenticated teacher.
+    def get_queryset(self):
+        return Test.objects.filter(course__id=self.kwargs['pk']).filter(creator=self.request.user)
+        
 

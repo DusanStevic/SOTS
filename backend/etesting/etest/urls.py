@@ -13,6 +13,7 @@ urlpatterns = [
     # courses
     path('courses/GetAllCoursesByUser', GetAllCoursesByUser.as_view()),
     # tests
-    path('get-test/<int:pk>', Test.as_view()),
+    path('tests/GetAllTestsInCourseByCreator/<int:pk>', GetAllTestsInCourseByCreator.as_view()),
+    path('tests/GetTestById/<int:pk>', GetTestById.as_view()),
     
 ]

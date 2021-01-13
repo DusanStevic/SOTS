@@ -6,9 +6,6 @@ class DomainSerializer(serializers.ModelSerializer):
         model = Domain
         fields = '__all__' 
 
-
-
-
 class NodeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Node
