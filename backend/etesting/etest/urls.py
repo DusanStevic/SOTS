@@ -15,5 +15,6 @@ urlpatterns = [
     # tests
     path('tests/GetAllTestsInCourseByCreator/<int:pk>', GetAllTestsInCourseByCreator.as_view()),
     path('tests/GetTestById/<int:pk>', GetTestById.as_view()),
-    
+    path('tests/GetTestXmlById/<int:pk>', GetTestXmlById.as_view()),
+
 ]
