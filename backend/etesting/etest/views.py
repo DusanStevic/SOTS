@@ -11,7 +11,7 @@ from django.contrib.admin.utils import flatten
 from itertools import chain
 
 
-# Dodaj view-e ovde.
+# You can create your views here.
 class Dag(generics.RetrieveAPIView):
     permission_classes = [permissions.IsAuthenticated, IsTeacherUser]
     serializer_class = KnowledgeSpaceSerializer
