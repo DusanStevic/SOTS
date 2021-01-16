@@ -62,6 +62,7 @@ class TestSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class CourseSerializer(serializers.ModelSerializer):
+    domain = DomainSerializer(many=False)
     class Meta:
         model = Course
         fields = '__all__'

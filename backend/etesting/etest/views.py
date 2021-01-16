@@ -4,6 +4,8 @@ from accounts.permissions import IsStudentUser, IsTeacherUser
 from etest.models import *
 from etest.serializers import *
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.pagination import PageNumberPagination
+
 # Create your views here.
 class Dag(generics.RetrieveAPIView):
     permission_classes = [permissions.IsAuthenticated, IsTeacherUser]
@@ -33,6 +35,7 @@ class GetTestById(generics.RetrieveAPIView):
     permission_classes = [permissions.IsAuthenticated, IsTeacherUser]
     serializer_class = TestSerializer
     queryset = Test.objects.all()
+
 
 class GetAllCoursesByUser(generics.ListAPIView):
     # Allowed for students and teachers.

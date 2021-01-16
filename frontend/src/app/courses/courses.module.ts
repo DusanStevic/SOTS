@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 import { CoursesComponent } from './courses/courses.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MaterialModule } from '../material/material.module';
+import { CourseDetailsComponent } from './course-details/course-details.component';
+
 
 
 
 @NgModule({
-  declarations: [CoursesComponent],
+  declarations: [CoursesComponent, CourseDetailsComponent],
   imports: [
     CommonModule,
     MaterialModule,
@@ -15,7 +17,7 @@ import { MaterialModule } from '../material/material.module';
     FormsModule
   ],
   exports: [
-    CoursesComponent,
+    CoursesComponent, CourseDetailsComponent
   ]
 })
 export class CoursesModule { }

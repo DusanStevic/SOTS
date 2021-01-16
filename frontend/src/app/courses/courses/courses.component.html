@@ -1,33 +1,80 @@
 <div class="container">
-    <h2>SOTS Courses</h2>
+    <div class="header">
+        <h1>Events</h1>
 
+        <button mat-raised-button color="primary" class="btnAdd" (click)="onClickAddEvent()">
+            <mat-icon class="icon">add_circle</mat-icon>
+            <span>Add new</span>
+        </button>
+    </div>
 
-
-
-    <mat-card class="card" *ngFor="let course of courses">
-        <mat-card-header>
-            <mat-card-title>{{course.title}}</mat-card-title>
-            <mat-card-subtitle>neki podnaslov</mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-            <div class="row">
-                <div>
-                    <p>
-                        <strong>Type:</strong> {{course.id}}
-                    </p>
-        
-                    <p>
-                        <strong>Description:</strong> opis kursa
-                    </p>
-                </div>
-            </div>
-        </mat-card-content>
-
-        <mat-card-actions class="card-actions">
-            <button mat-button>
-                <span>See more</span>
-                <mat-icon>more_horiz</mat-icon>
-            </button>
-        </mat-card-actions>
-    </mat-card>
+    <table class="table">
+        <thead>
+            <tr>
+                <!-- TODO: Po potrebi kad se sredi DTO na backendu dodati jos podataka u tabelu -->
+                <th>ID</th>
+                <th>Name</th>
+                <th>Start date</th>
+                <th>End date</th>
+                <th>Tickets/buyer</th>
+                <th>Type</th>
+                <th>Details</th>
+                <th>Edit</th>
+                <th>Statistics</th>
+                <th>Archive</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let course of courses">
+                <td>{{course.id}}</td>
+                <td>{{course.domain.title}}</td>
+                <td>{{course.domain.title}}</td>
+                <td>{{course.domain.title}}</td>
+                <td>{{course.domain.title}}</td>
+                <td>{{course.domain.title}}</td>
+                <td>
+                    <button mat-button (click)="onClickDetails(course.id)" class = "btnDetails">
+                        <mat-icon>more</mat-icon>             
+                    </button>
+                </td>
+                <td>
+                    <button mat-button (click)="onClickEdit(course.id)" class = "btnEdit" id="editBtn">
+                        <mat-icon>edit</mat-icon>                    
+                    </button>
+                </td>
+                <td>
+                    <button mat-button (click)="onClickStats(course.id)" class = "btnStats">
+                        <mat-icon>assessment</mat-icon>                    
+                    </button>
+                </td>
+                <td>
+                    <button mat-button (click)="onClickArchive(course.id)" class = "btnArchive">
+                        <mat-icon>archive</mat-icon>                    
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+            <td>
+                <mat-select class="page-size-select" [(ngModel)]="pageSize" id = "sizeBtn" (ngModelChange)="onPageSizeSelect()">
+                    <mat-option value="5">5</mat-option>
+                    <mat-option value="10">10</mat-option>
+                    <mat-option value="15">15</mat-option>
+                </mat-select>
+            </td>
+            <td>
+                <button mat-button *ngIf="pageNum !== 1" (click)="onClickPrevious()" id = "previousBtn">
+                    <mat-icon>navigate_before</mat-icon>
+                    <span>Previous</span>
+                </button>
+            </td>
+            <td>
+                <button mat-button *ngIf="pageNum * pageSize < totalNumOfCourses - pageSize" id = "nextBtn" (click)="onClickNext()">
+                    <span>Next</span>
+                    <mat-icon>navigate_next</mat-icon>
+                </button>
+            </td>
+        </tfoot>
+    </table>
 </div>
