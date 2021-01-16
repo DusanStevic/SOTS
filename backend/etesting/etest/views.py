@@ -5,6 +5,11 @@ from etest.models import *
 from etest.serializers import *
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.pagination import PageNumberPagination
+from django.http import HttpResponse
+from django.core import serializers
+from django.contrib.admin.utils import flatten
+from itertools import chain
+
 
 # Create your views here.
 class Dag(generics.RetrieveAPIView):
@@ -57,6 +62,42 @@ class GetAllTestsInCourseByCreator(generics.ListAPIView):
     # that were created by the currently authenticated teacher.
     def get_queryset(self):
         return Test.objects.filter(course__id=self.kwargs['pk']).filter(creator=self.request.user)
-        
 
-# ovde ce ici neke nove izmene 
+
+def GetAnswerForQuestion(pk):
+
+    return Answer.objects.filter(question=pk)
+
+def GetQuestionForTest(pk):
+
+    questions = Question.objects.filter(test=pk)
+
+    answers = []
+
+    for answer in questions.values('id'):
+        answers.append(GetAnswerForQuestion(answer['id']))
+
+    return questions, answers
+
+
+class GetTestXmlById(generics.ListAPIView):
+    permission_classes = [permissions.IsAuthenticated, IsTeacherUser]
+    serializer_class = TestSerializer
+
+    def get_queryset(self):
+        test = Test.objects.filter(id=self.kwargs['pk'])
+
+        XMLSerializer = serializers.get_serializer("xml")
+        xml_serializer = XMLSerializer()
+        questions, answers = GetQuestionForTest(self.kwargs['pk'])
+
+        answerss = []
+        for i in range(len(answers)):
+            answerss = [*answerss, *answers[i]]
+
+        result_list = chain(test, questions, answerss)
+
+        with open("xml/Test" + str(self.kwargs['pk']) + ".xml", "w") as out:
+            xml_serializer.serialize(result_list, stream=out)
+
+        return test
