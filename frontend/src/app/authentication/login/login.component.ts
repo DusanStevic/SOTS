@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     if (this.authService.isUserLoggedIn()) {
-      this.router.navigate(['courses']);
+      this.router.navigate(['tests']);
     }
   }
 
@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('email', data.email);
       localStorage.setItem('id', data.user_id);
       localStorage.setItem('role', data.role);
-      this.router.navigate(['courses']);
+      this.router.navigate(['tests']);
     }, error => {
       this.toastr.warning(error.error.message, 'Warning');
     });
