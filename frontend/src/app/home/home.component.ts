@@ -4,7 +4,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../core/services/auth.service';
-import { User } from 'src/app/shared/models/request/login';
+import { User } from 'src/app/shared/models/login';
 import { ToastrService } from 'ngx-toastr';
 import { DagService } from '../core/services/dag.service';
 import { Node, NodeDB} from '../shared/models/node';

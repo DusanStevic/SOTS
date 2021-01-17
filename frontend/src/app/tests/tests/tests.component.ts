@@ -4,7 +4,7 @@ import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { User } from 'src/app/shared/models/request/login';
+import { User } from 'src/app/shared/models/login';
 
 @Component({
   selector: 'app-tests',
