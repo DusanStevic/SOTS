@@ -26,11 +26,9 @@ export class CoursesComponent implements OnInit {
   }
 
   private getCourses(): void {
-    this.courseService.getAllCoursesByUserOnePage(this.pageNum).subscribe(data => {
+    this.courseService.getAllCoursesByUserOnePage(this.pageNum, +this.pageSize).subscribe(data => {
       this.totalNumOfCourses = data.count;
-      console.log(this.totalNumOfCourses)
       this.courses = data.results;
-      console.log(this.courses)
     }, error => {
       this.toastr.error('There was an error while getting the data about courses.');
     });
@@ -58,7 +56,7 @@ export class CoursesComponent implements OnInit {
   }
 
   onPageSizeSelect(): void {
-    this.pageNum = 0;
+    this.pageNum = 1;
     this.getCourses();
   }
 

@@ -5,6 +5,7 @@ import { RoleGuard } from './core/guards/role.guard';
 import { CoursesComponent } from './courses/courses/courses.component';
 import { HomeComponent } from './home/home.component';
 import { ForbiddenPageComponent } from './pages/forbidden-page/forbidden-page.component';
+import { TestsComponent } from './tests/tests/tests.component';
 
 
 const routes: Routes = [
@@ -22,7 +23,14 @@ const routes: Routes = [
     component: CoursesComponent,
     canActivate: [RoleGuard],
     data: {expectedRoles: 'TEACHER|STUDENT'}
+  },
+  {
+    path: 'tests',
+    component: TestsComponent,
+    canActivate: [RoleGuard],
+    data: {expectedRoles: 'TEACHER|STUDENT'}
   }
+
 ];
 
 @NgModule({

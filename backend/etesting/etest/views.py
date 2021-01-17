@@ -9,6 +9,7 @@ from django.http import HttpResponse
 from django.core import serializers
 from django.contrib.admin.utils import flatten
 from itertools import chain
+from etest.pagination import LargeResultsSetPagination
 
 
 # You can create your views here.
@@ -45,6 +46,7 @@ class GetTestById(generics.RetrieveAPIView):
 class GetAllCoursesByUser(generics.ListAPIView):
     # Allowed for students and teachers.
     permission_classes = [permissions.IsAuthenticated]
+    pagination_class = LargeResultsSetPagination
     serializer_class = CourseSerializer 
     # This view should return a list of all the courses for the currently authenticated user.
     def get_queryset(self):
