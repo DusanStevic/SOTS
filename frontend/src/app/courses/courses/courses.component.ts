@@ -1,7 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+
 import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
 import { CourseService } from 'src/app/core/services/course.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
+import { ToastrService } from 'ngx-toastr';
+import { User } from 'src/app/shared/models/login';
 
 @Component({
   selector: 'app-courses',
@@ -9,97 +14,35 @@ import { CourseService } from 'src/app/core/services/course.service';
   styleUrls: ['./courses.component.scss']
 })
 export class CoursesComponent implements OnInit {
-  courses: any[] = [];
-  pageSize: string = '5';
-  pageNum: number = 1;
-  totalNumOfCourses: number = 0;
+  displayedColumns: string[] = ['id', 'domain', 'course', 'details'];
+  dataSource: MatTableDataSource<any>;
+
+  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: false}) sort: MatSort;
 
   constructor(private courseService: CourseService,
-              private toastr: ToastrService,
-              private router: Router,
-              //public dialog: MatDialog
-              ) {
-  }
-
+              private toastr: ToastrService
+    ) {}
   ngOnInit() {
     this.getCourses();
   }
-
-  private getCourses(): void {
-    this.courseService.getAllCoursesByUserOnePage(this.pageNum, +this.pageSize).subscribe(data => {
-      this.totalNumOfCourses = data.count;
-      this.courses = data.results;
+  getCourses(): void {
+    this.courseService.getAllCoursesByUser().subscribe(data => {
+      this.dataSource = new MatTableDataSource(data);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     }, error => {
-      this.toastr.error('There was an error while getting the data about courses.');
+      this.toastr.error(error);
     });
   }
 
-  onClickAddEvent(): void {
-    //this.router.navigate([ADD_EVENT_PATH]);
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
-  onClickDetails(eventId: number): void {
-    //this.router.navigate([SHOW_EVENT_DETAILED, eventId]);
-  }
-
-  onClickEdit(eventId: number): void {
-    //this.router.navigate([EDIT_EVENT, eventId]);
-  }
-
-  onClickStats(eventId: number): void {
-    //this.openDialog(eventId);
-  }
-
-  onClickArchive(eventId: number): void {
-    // TODO: Implementirati
-    console.log('ARCHIVE', eventId);
-  }
-
-  onPageSizeSelect(): void {
-    this.pageNum = 1;
-    this.getCourses();
-  }
-
-  onClickNext(): void {
-    this.pageNum++;
-    this.getCourses();
-  }
-
-  onClickPrevious(): void {
-    this.pageNum--;
-    this.getCourses();
-  }
-
-/*   private openDialog(eventId: number) {
-    this.dialog.open(EventReportDialog, {
-      maxHeight: '500px',
-      data: eventId
-    });
-  } */
 }
-
-
-
-/* @Component({
-  selector: 'event-report-dialog',
-  template: `
-      <h3 id="title"> Report for event: {{this.data}}</h3>
-      <app-event-report [eventId]="this.data" ></app-event-report>
-      <button mat-button (click)="onClickExit()">
-        <mat-icon>close</mat-icon>
-        <span>Cancel</span>
-      </button>
-    `
-})
-export class EventReportDialog {
-
-  constructor(private toast: ToastrService,
-              public dialogRef: MatDialogRef<EventReportDialog>,
-              @Inject(MAT_DIALOG_DATA) public data: any) {
-  }
-
-  onClickExit(): void {
-    this.dialogRef.close();
-  }
-
-} */

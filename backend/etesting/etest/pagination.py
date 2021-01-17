@@ -10,5 +10,5 @@ class LargeResultsSetPagination(PageNumberPagination):
     page_size_query_param = 'page_size'
     # If set, this is a numeric value indicating the maximum allowable requested page size. 
     # This attribute is only valid if page_size_query_param is also set.
-    # Upper boundary for the number of items per one page.
+    # Upper boundary for the number of items per page.
     max_page_size = 100

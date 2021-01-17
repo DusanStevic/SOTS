@@ -2,7 +2,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { Login } from 'src/app/shared/models/request/login';
+import { Login } from 'src/app/shared/models/login';
 import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     if (this.authService.isUserLoggedIn()) {
-      this.router.navigate(['tests']);
+      this.router.navigate(['courses']);
     }
   }
 
@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('email', data.email);
       localStorage.setItem('id', data.user_id);
       localStorage.setItem('role', data.role);
-      this.router.navigate(['tests']);
+      this.router.navigate(['courses']);
     }, error => {
       this.toastr.warning(error.error.message, 'Warning');
     });

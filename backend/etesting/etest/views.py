@@ -46,7 +46,10 @@ class GetTestById(generics.RetrieveAPIView):
 class GetAllCoursesByUser(generics.ListAPIView):
     # Allowed for students and teachers.
     permission_classes = [permissions.IsAuthenticated]
-    pagination_class = LargeResultsSetPagination
+    # pagination_class allows backend pagination
+    # http://localhost:8000/api/courses/GetAllCoursesByUser?page=1&page_size=5
+    # For this project, an angular material table is taking care of pagination.
+    # pagination_class = LargeResultsSetPagination
     serializer_class = CourseSerializer 
     # This view should return a list of all the courses for the currently authenticated user.
     def get_queryset(self):
