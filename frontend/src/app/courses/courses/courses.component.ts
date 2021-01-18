@@ -6,7 +6,6 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { ToastrService } from 'ngx-toastr';
-import { User } from 'src/app/shared/models/login';
 
 @Component({
   selector: 'app-courses',
@@ -21,7 +20,8 @@ export class CoursesComponent implements OnInit {
   @ViewChild(MatSort, {static: false}) sort: MatSort;
 
   constructor(private courseService: CourseService,
-              private toastr: ToastrService
+              private toastr: ToastrService,
+              private router: Router,
     ) {}
   ngOnInit() {
     this.getCourses();
@@ -43,6 +43,10 @@ export class CoursesComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  onClickDetails(courseId: number): void {
+    this.router.navigate(['course-details', courseId]);
   }
 
 }
