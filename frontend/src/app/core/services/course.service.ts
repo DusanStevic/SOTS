@@ -11,7 +11,7 @@ export class CourseService {
 
   // Course service for backend pagination if you do not use angular material built-in table pagination.
   getAllCoursesByUserOnePage(pageNum: number, pageSize: number): Observable<any> {
-    return this.http.get(`http://localhost:8000/api/courses/GetAllCoursesByUser/`, {
+    return this.http.get(`http://localhost:8000/api/courses/GetAllCoursesByUser`, {
       params: new HttpParams()
               .set('page', pageNum.toString())
               .set('page_size', pageSize.toString())
