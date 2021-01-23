@@ -132,7 +132,7 @@ class CreateTestSerializer(serializers.ModelSerializer):
                 if i != len(answers) - 1:
                     data += '\t'
 
-            data += '</qti-choice-interaction>\n\t</qti-item-body>\n'
+            data += '</qti-choice-interaction>\n\t</qti-item-body>\n\n'
         data += '</qti-assessment-item>'
         file.write(data)
         data = ''
