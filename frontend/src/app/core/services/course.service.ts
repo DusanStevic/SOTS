@@ -21,4 +21,8 @@ export class CourseService {
   getAllCoursesByUser(): Observable<any> {
     return this.http.get(`http://localhost:8000/api/courses/GetAllCoursesByUser`);
   }
+
+  getCourseById(id: number): Observable<any> {
+    return this.http.get(`http://localhost:8000/api/courses/GetCourseById/${id}`);
+  }
 }

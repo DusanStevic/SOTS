@@ -60,6 +60,11 @@ class GetAllCoursesByUser(generics.ListAPIView):
         else:
             return Course.objects.none()
 
+class GetCourseById(generics.RetrieveAPIView):
+    permission_classes = [permissions.IsAuthenticated, IsTeacherUser]
+    serializer_class = CourseSerializer
+    queryset = Course.objects.all()
+
 class GetAllTestsInCourseByCreator(generics.ListAPIView):
     permission_classes = [permissions.IsAuthenticated, IsTeacherUser]
     serializer_class = TestSerializer 
