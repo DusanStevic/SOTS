@@ -10,6 +10,11 @@ from django.core import serializers
 from django.contrib.admin.utils import flatten
 from itertools import chain
 from etest.pagination import LargeResultsSetPagination
+from django.core.files import File
+from rest_framework.response import Response
+from rest_framework.decorators import action
+from rest_framework.decorators import api_view
+
 
 
 # You can create your views here.
@@ -69,6 +74,11 @@ class GetAllTestsInCourseByCreator(generics.ListAPIView):
         return Test.objects.filter(course__id=self.kwargs['pk']).filter(creator=self.request.user)
 
 
+class CreateTest(generics.CreateAPIView):
+    permission_classes = [permissions.IsAuthenticated, IsTeacherUser]
+    serializer_class = CreateTestSerializer
+    queryset = Test.objects.all()
+
 def GetAnswerForQuestion(pk):
 
     return Answer.objects.filter(question=pk)
@@ -106,3 +116,21 @@ class GetTestXmlById(generics.ListAPIView):
             xml_serializer.serialize(result_list, stream=out)
 
         return test
+
+@api_view(['GET'])
+def getXML(request, pk):
+
+    file = File(open(f'./xml/{pk}.xml', 'r'))
+    data = file.read()
+
+    return Response(data)
+
+class CreateAnswer(generics.CreateAPIView):
+    permission_classes = [permissions.IsAuthenticated, IsTeacherUser]
+    serializer_class = AnswerSerializer
+    queryset = Answer.objects.all()
+
+class CreateQuestion(generics.CreateAPIView):
+    permission_classes = [permissions.IsAuthenticated, IsTeacherUser]
+    serializer_class = CreateQuestionSerializer
+    queryset = Question.objects.all()
