@@ -6,13 +6,15 @@ import { CourseDetailsComponent } from './courses/course-details/course-details.
 import { CoursesComponent } from './courses/courses/courses.component';
 import { HomeComponent } from './home/home.component';
 import { ForbiddenPageComponent } from './pages/forbidden-page/forbidden-page.component';
+import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { TestsComponent } from './tests/tests/tests.component';
 
 
 const routes: Routes = [
   {path: '', component: LoginComponent },
   {path: 'login', component: LoginComponent},
-  {path: 'forbidden-page', component: ForbiddenPageComponent} ,
+  {path: 'forbidden-page', component: ForbiddenPageComponent},
+  {path: 'not-found-page', component: NotFoundPageComponent},
   {
     path: 'home',
     component: HomeComponent,

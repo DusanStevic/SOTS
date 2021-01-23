@@ -19,7 +19,7 @@ export class ForbiddenPageComponent implements OnInit {
   }
 
   backToHomePage(): void {
-    this.router.navigate(['login']);
+    this.router.navigate(['courses']);
   }
 
 }

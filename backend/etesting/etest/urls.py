@@ -12,6 +12,7 @@ urlpatterns = [
     path('create-dag', CreateDag.as_view()),
     # courses
     path('courses/GetAllCoursesByUser', GetAllCoursesByUser.as_view()),
+    path('courses/GetCourseById/<int:pk>', GetCourseById.as_view()),
     # tests
     path('tests/GetAllTestsInCourseByCreator/<int:pk>', GetAllTestsInCourseByCreator.as_view()),
     path('tests/GetTestById/<int:pk>', GetTestById.as_view()),
