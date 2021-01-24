@@ -1,0 +1,28 @@
+.card {
+    max-width: 600px;
+    min-width: 600px;
+    width: 400px;
+    margin: auto;
+    margin-top: 2%;
+}
+
+.card .card-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-actions button span {
+    margin-right: 5px;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+.row img {
+    width: 200px;
+    height: 200px;
+    margin-right: 20px;
+}

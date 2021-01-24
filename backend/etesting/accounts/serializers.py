@@ -5,7 +5,8 @@ from accounts.models import User
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id','email', 'username', 'role')
+        # fields in DTO
+        fields = ('id','email', 'username', 'role','first_name','last_name')
 class CreateNewUserSerializer(serializers.ModelSerializer):
     
     def create(self, validated_data):

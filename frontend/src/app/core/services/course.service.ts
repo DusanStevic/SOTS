@@ -1,6 +1,7 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,13 @@ export class CourseService {
   }
 
   getCourseById(id: number): Observable<any> {
-    return this.http.get(`http://localhost:8000/api/courses/GetCourseById/${id}`);
+    return this.http.get(`http://localhost:8000/api/courses/GetCourseById/${id}`).pipe(
+      tap(data => {}),
+      catchError(this.handleError)
+    );
+  }
+  private handleError(err: HttpErrorResponse) {
+    const errorMessage = `Server returned code ${err.status}, error message is: ${err.message}`;
+    return throwError(errorMessage);
   }
 }
