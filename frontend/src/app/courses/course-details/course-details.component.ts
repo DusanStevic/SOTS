@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/core/services/auth.service';
 import { CourseService } from 'src/app/core/services/course.service';
-import { Course } from 'src/app/shared/models/course';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-course-details',
@@ -10,17 +11,19 @@ import { Course } from 'src/app/shared/models/course';
   styleUrls: ['./course-details.component.scss']
 })
 export class CourseDetailsComponent implements OnInit {
-  private courseId: number;
-  private course: any = {};
+  private course;
+  routeSub: Subscription;
 
   constructor(private toastr: ToastrService,
               private router: Router,
               private route: ActivatedRoute,
-              private courseService: CourseService ) { }
+              private courseService: CourseService,
+              private authService: AuthService ) { }
 
   ngOnInit() {
-    this.route.params.subscribe((params: Params) => this.courseId = params.id);
-    this.getCourse(this.courseId);
+    this.routeSub = this.route.params.subscribe( params => {
+      this.getCourse(params.id as number);
+    });
   }
 
   private getCourse(id: number): void {
@@ -31,5 +34,19 @@ export class CourseDetailsComponent implements OnInit {
       this.router.navigate(['not-found-page']);
     });
   }
+
+  isAdminLoggedIn(): boolean {
+    return this.authService.isAdminLoggedIn();
+  }
+
+  isTeacherLoggedIn(): boolean {
+    return this.authService.isTeacherLoggedIn();
+  }
+
+  isStudentLoggedIn(): boolean {
+    return this.authService.isStudentLoggedIn();
+  }
+
+
 
 }

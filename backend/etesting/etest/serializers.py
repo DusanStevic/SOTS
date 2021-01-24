@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from etest.models import *
+from accounts.serializers import *
 
 class DomainSerializer(serializers.ModelSerializer):
     class Meta:
@@ -63,6 +64,7 @@ class TestSerializer(serializers.ModelSerializer):
 
 class CourseSerializer(serializers.ModelSerializer):
     domain = DomainSerializer(many=False)
+    teachers = UserSerializer(many=True)
     class Meta:
         model = Course
         fields = '__all__'

@@ -1,3 +1,52 @@
-<p>course-details works!</p>
-
-<h1 style="text-align: center;">{{course.title}}</h1>
+<mat-card class="card" *ngIf="this.course">
+    <mat-card-header>
+        <mat-card-title>{{course.title}}</mat-card-title>
+        <mat-card-subtitle>{{course.domain.title}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="row">
+            <!-- <img src="{{event.imagePath}}" /> -->
+            <img src="https://res.cloudinary.com/djxkexzcr/image/upload/v1611057773/DSL/Domain_u8syz7.jpg" />
+            <div>
+                <p>
+                    <strong>Domain:</strong> {{course.domain.title | titlecase}}
+                </p>
+    
+                <p>
+                    <strong>Description:</strong> {{course.title}}
+                </p>
+                <p>
+                    <strong>Teachers:</strong>
+                    <mat-list>
+                        <mat-list-item *ngFor="let teacher of course.teachers">
+                          <p matLine>
+                            <span> {{teacher.first_name | titlecase}} {{teacher.last_name | titlecase}} </span>
+                          </p>
+                        </mat-list-item>
+                      </mat-list>
+                </p>
+            </div>
+        </div>
+    </mat-card-content>
+    <!-- Conditional Display of Angular Material Buttons for TEACHER -->
+    <mat-card-actions class="card-actions">
+        <button *ngIf="isTeacherLoggedIn()" mat-raised-button (click)="onClickSeeMore(course.id)" color="primary">
+            <span>Tests</span>
+            <mat-icon>rule</mat-icon>
+        </button>
+    </mat-card-actions>
+    <mat-card-actions class="card-actions">
+        <button *ngIf="isTeacherLoggedIn()" mat-raised-button (click)="onClickSeeMore(course.id)" color="primary">
+            <span>Knowledge Space Theory (KST)</span>
+            <mat-icon>share</mat-icon>
+        </button>
+    </mat-card-actions>
+    <!-- Conditional Display of Angular Material Buttons for STUDENT -->
+    <mat-card-actions class="card-actions">
+        <button *ngIf="isStudentLoggedIn()" mat-raised-button (click)="onClickSeeMore(course.id)" color="primary">
+            <span>See more STudent</span>
+            <mat-icon>more_horiz</mat-icon>
+        </button>
+    </mat-card-actions>
+    <mat-card-footer>Informations about course details</mat-card-footer>
+</mat-card>
