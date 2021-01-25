@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { CourseService } from 'src/app/core/services/course.service';
@@ -30,6 +30,7 @@ export class CourseDetailsComponent implements OnInit {
     this.courseService.getCourseById(id).subscribe(data => {
       this.course = data;
     }, error => {
+      this.toastr.error(error);
       this.toastr.error('There was an error while getting the data about course details.');
       this.router.navigate(['not-found-page']);
     });
@@ -45,6 +46,10 @@ export class CourseDetailsComponent implements OnInit {
 
   isStudentLoggedIn(): boolean {
     return this.authService.isStudentLoggedIn();
+  }
+
+  myTests(id: number): void {
+    this.router.navigate(['tests', id]);
   }
 
 
