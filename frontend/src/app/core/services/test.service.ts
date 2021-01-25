@@ -16,6 +16,14 @@ export class TestService {
       catchError(this.handleError)
     );
   }
+
+  getTestByCreator(id: number): Observable<any> {
+    return this.http.get(`http://localhost:8000/api/tests/GetTestByCreator/${id}`).pipe(
+      tap(data => {}),
+      catchError(this.handleError)
+    );
+  }
+
   private handleError(err: HttpErrorResponse) {
     const errorMessage = `Server returned code ${err.status}, error message is: ${err.message}`;
     return throwError(errorMessage);
