@@ -56,12 +56,6 @@ class QuestionSerializer(serializers.ModelSerializer):
         model = Question
         fields = '__all__'
 
-class TestSerializer(serializers.ModelSerializer):
-    questions = QuestionSerializer(many=True)
-    class Meta:
-        model = Test
-        fields = '__all__'
-
 class CourseSerializer(serializers.ModelSerializer):
     domain = DomainSerializer(many=False)
     teachers = UserSerializer(many=True)
@@ -69,4 +63,10 @@ class CourseSerializer(serializers.ModelSerializer):
         model = Course
         fields = '__all__'
 
-
+class TestSerializer(serializers.ModelSerializer):
+    questions = QuestionSerializer(many=True)
+    creator = UserSerializer(many=False)
+    course = CourseSerializer(many=False)
+    class Meta:
+        model = Test
+        fields = '__all__'
