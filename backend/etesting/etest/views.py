@@ -37,12 +37,9 @@ class CreateLink(generics.CreateAPIView):
     serializer_class = LinkSerializer
     queryset = Link.objects.all()
 
-class GetTestById(generics.RetrieveAPIView):
-    permission_classes = [permissions.IsAuthenticated, IsTeacherUser]
-    serializer_class = TestSerializer
-    queryset = Test.objects.all()
 
 
+# courses
 class GetAllCoursesByUser(generics.ListAPIView):
     # Allowed for students and teachers.
     permission_classes = [permissions.IsAuthenticated]
@@ -65,6 +62,7 @@ class GetCourseById(generics.RetrieveAPIView):
     serializer_class = CourseSerializer
     queryset = Course.objects.all()
 
+# tests
 class GetAllTestsInCourseByCreator(generics.ListAPIView):
     permission_classes = [permissions.IsAuthenticated, IsTeacherUser]
     serializer_class = TestSerializer 
@@ -72,6 +70,17 @@ class GetAllTestsInCourseByCreator(generics.ListAPIView):
     # that were created by the currently authenticated teacher.
     def get_queryset(self):
         return Test.objects.filter(course__id=self.kwargs['pk']).filter(creator=self.request.user)
+
+class GetTestByCreator(generics.RetrieveAPIView):
+    permission_classes = [permissions.IsAuthenticated, IsTeacherUser]
+    serializer_class = TestSerializer
+    # This view should return a chosen test 
+    # that was created by the currently authenticated teacher.
+    # Of all teachers, only the creator can see a test.
+    def get_queryset(self):
+        return Test.objects.filter(id=self.kwargs['pk']).filter(creator=self.request.user)
+
+
 
 
 def GetAnswerForQuestion(pk):
