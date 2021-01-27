@@ -3,9 +3,11 @@
         <mat-card-title>{{course.title}}</mat-card-title>
         <mat-card-subtitle>{{course.domain.title}}</mat-card-subtitle>
     </mat-card-header>
+    <img mat-card-image src="https://res.cloudinary.com/djxkexzcr/image/upload/v1611057773/DSL/Domain_u8syz7.jpg" alt="{{course.title}}">
     <mat-card-content>
         <div class="row">
             <!-- <img src="{{event.imagePath}}" /> -->
+
             <img src="https://res.cloudinary.com/djxkexzcr/image/upload/v1611057773/DSL/Domain_u8syz7.jpg" />
             <div>
                 <p>
@@ -34,13 +36,12 @@
             <span>Tests</span>
             <mat-icon>rule</mat-icon>
         </button>
-    </mat-card-actions>
-    <mat-card-actions class="card-actions">
         <button *ngIf="isTeacherLoggedIn()" mat-raised-button (click)="onClickSeeMore(course.id)" color="primary">
             <span>Knowledge Space Theory (KST)</span>
             <mat-icon>share</mat-icon>
         </button>
     </mat-card-actions>
+
     <!-- Conditional Display of Angular Material Buttons for STUDENT -->
     <mat-card-actions class="card-actions">
         <button *ngIf="isStudentLoggedIn()" mat-raised-button (click)="onClickSeeMore(course.id)" color="primary">
