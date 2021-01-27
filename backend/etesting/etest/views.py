@@ -80,6 +80,14 @@ class GetTestByCreator(generics.RetrieveAPIView):
     def get_queryset(self):
         return Test.objects.filter(id=self.kwargs['pk']).filter(creator=self.request.user)
 
+class GetAllCompletedTestsInCourseByExecutor(generics.ListAPIView):
+    permission_classes = [permissions.IsAuthenticated, IsStudentUser]
+    serializer_class = CompletedTestSerializer 
+    # This view should return a list of all the completed tests in a chosen course 
+    # that were executed by the currently authenticated student.
+    def get_queryset(self):
+        return CompletedTest.objects.filter(test__course__id=self.kwargs['pk']).filter(student=self.request.user)
+
 
 
 

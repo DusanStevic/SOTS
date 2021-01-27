@@ -70,3 +70,10 @@ class TestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Test
         fields = '__all__'
+
+class CompletedTestSerializer(serializers.ModelSerializer):
+    student = UserSerializer(many=False)
+    test = TestSerializer(many=False)
+    class Meta:
+        model = CompletedTest
+        fields = '__all__'

@@ -1,7 +1,7 @@
 <mat-card class="card" *ngIf="this.course">
     <mat-card-header>
-        <mat-card-title>{{course.title}}</mat-card-title>
-        <mat-card-subtitle>{{course.domain.title}}</mat-card-subtitle>
+        <mat-card-title>{{course.title | titlecase}}</mat-card-title>
+        <mat-card-subtitle>{{course.domain.title | titlecase}}</mat-card-subtitle>
     </mat-card-header>
     <img mat-card-image src="https://res.cloudinary.com/djxkexzcr/image/upload/v1611057773/DSL/Domain_u8syz7.jpg" alt="{{course.title}}">
     <mat-card-content>
@@ -15,7 +15,7 @@
                 </p>
     
                 <p>
-                    <strong>Description:</strong> {{course.title}}
+                    <strong>Description:</strong> {{course.title | titlecase}}
                 </p>
                 <p>
                     <strong>Teachers:</strong>
@@ -45,8 +45,12 @@
     <!-- Conditional Display of Angular Material Buttons for STUDENT -->
     <mat-card-actions class="card-actions">
         <button *ngIf="isStudentLoggedIn()" mat-raised-button (click)="onClickSeeMore(course.id)" color="primary">
-            <span>See more STudent</span>
-            <mat-icon>more_horiz</mat-icon>
+            <span>Uncompleted tests</span>
+            <mat-icon>assignment</mat-icon>
+        </button>
+        <button *ngIf="isStudentLoggedIn()" mat-raised-button (click)="onClickSeeMore(course.id)" color="primary">
+            <span>Completed tests</span>
+            <mat-icon>assignment_turned_in</mat-icon>
         </button>
     </mat-card-actions>
     <mat-card-footer>Informations about course details</mat-card-footer>
