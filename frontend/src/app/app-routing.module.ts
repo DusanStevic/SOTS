@@ -7,6 +7,7 @@ import { CoursesComponent } from './courses/courses/courses.component';
 import { HomeComponent } from './home/home.component';
 import { ForbiddenPageComponent } from './pages/forbidden-page/forbidden-page.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
+import { TestDetailsTeacherComponent } from './tests/test-details-teacher/test-details-teacher.component';
 import { TestDetailsComponent } from './tests/test-details/test-details.component';
 import { TestsComponent } from './tests/tests/tests.component';
 
@@ -45,6 +46,12 @@ const routes: Routes = [
     component: TestDetailsComponent,
     canActivate: [RoleGuard],
     data: {expectedRoles: 'TEACHER|STUDENT'}
+  },
+  {
+    path: 'test-details-teacher/:id',
+    component: TestDetailsTeacherComponent,
+    canActivate: [RoleGuard],
+    data: {expectedRoles: 'TEACHER'}
   }
 
 ];

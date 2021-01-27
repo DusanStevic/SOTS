@@ -6,11 +6,11 @@ import { Subscription } from 'rxjs';
 import { TestService } from 'src/app/core/services/test.service';
 
 @Component({
-  selector: 'app-test-details',
-  templateUrl: './test-details.component.html',
-  styleUrls: ['./test-details.component.scss']
+  selector: 'app-test-details-teacher',
+  templateUrl: './test-details-teacher.component.html',
+  styleUrls: ['./test-details-teacher.component.scss']
 })
-export class TestDetailsComponent implements OnInit {
+export class TestDetailsTeacherComponent implements OnInit {
 
   private test;
   routeSub: Subscription;
@@ -33,7 +33,7 @@ export class TestDetailsComponent implements OnInit {
       this.test = data;
     }, error => {
       this.toastr.error(error);
-      this.toastr.error('There was an error while getting the data about test details.');
+      this.toastr.error('There was an error while getting the data about teacher test details.');
       this.router.navigate(['not-found-page']);
     });
   }
@@ -57,9 +57,5 @@ export class TestDetailsComponent implements OnInit {
   onClickPrevious(): void {
     this.questionNumber--;
   }
-
-
-
-
 
 }

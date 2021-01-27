@@ -4,11 +4,12 @@ import { TestsComponent } from './tests/tests.component';
 import { TestDetailsComponent } from './test-details/test-details.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MaterialModule } from '../material/material.module';
+import { TestDetailsTeacherComponent } from './test-details-teacher/test-details-teacher.component';
 
 
 
 @NgModule({
-  declarations: [TestsComponent, TestDetailsComponent],
+  declarations: [TestsComponent, TestDetailsComponent, TestDetailsTeacherComponent],
   imports: [
     CommonModule,
     MaterialModule,
@@ -16,7 +17,7 @@ import { MaterialModule } from '../material/material.module';
     FormsModule
   ],
   exports: [
-    TestsComponent, TestDetailsComponent
+    TestsComponent, TestDetailsComponent, TestDetailsTeacherComponent
   ]
 })
 export class TestsModule { }
