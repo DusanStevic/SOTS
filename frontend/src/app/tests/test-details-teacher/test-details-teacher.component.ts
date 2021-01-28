@@ -33,7 +33,7 @@ export class TestDetailsTeacherComponent implements OnInit {
       this.test = data;
     }, error => {
       this.toastr.error(error);
-      this.toastr.error('There was an error while getting the data about teacher test details.');
+      this.toastr.error('There was an error while getting the data about teacher\'s test details.');
       this.router.navigate(['not-found-page']);
     });
   }

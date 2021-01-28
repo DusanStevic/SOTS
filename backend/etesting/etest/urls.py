@@ -17,6 +17,7 @@ urlpatterns = [
     path('tests/GetAllTestsInCourseByCreator/<int:pk>', GetAllTestsInCourseByCreator.as_view()),
     path('tests/GetTestByCreator/<int:pk>', GetTestByCreator.as_view()),
     path('tests/GetAllCompletedTestsInCourseByExecutor/<int:pk>', GetAllCompletedTestsInCourseByExecutor.as_view()),
+    path('tests/GetCompletedTestByExecutor/<int:pk>', GetCompletedTestByExecutor.as_view()),
     path('tests/GetTestXmlById/<int:pk>', GetTestXmlById.as_view()),
 
 ]

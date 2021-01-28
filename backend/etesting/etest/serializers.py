@@ -71,9 +71,16 @@ class TestSerializer(serializers.ModelSerializer):
         model = Test
         fields = '__all__'
 
+class ChosenAnswerSerializer(serializers.ModelSerializer):
+    answer = AnswerSerializer(many=False)
+    class Meta:
+        model = ChosenAnswer
+        fields = '__all__'
+
 class CompletedTestSerializer(serializers.ModelSerializer):
     student = UserSerializer(many=False)
     test = TestSerializer(many=False)
+    chosen_answers = ChosenAnswerSerializer(many=True)
     class Meta:
         model = CompletedTest
         fields = '__all__'

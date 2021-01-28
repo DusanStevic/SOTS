@@ -1,7 +1,7 @@
 <mat-card class="card" *ngIf="this.test">
     <mat-card-header>
-        <mat-card-title>{{test.title}}</mat-card-title>
-        <mat-card-subtitle>{{test.course.title}}</mat-card-subtitle>
+        <mat-card-title>{{test.title | titlecase}}</mat-card-title>
+        <mat-card-subtitle>{{test.course.title | titlecase}}</mat-card-subtitle>
     </mat-card-header>
     <img mat-card-image src="https://res.cloudinary.com/djxkexzcr/image/upload/v1611055729/DSL/Web_Scraping_Frameworks_fm0ksp.png" alt="{{test.title}}">
     <mat-card-content>
@@ -15,7 +15,7 @@
                 </p>
     
                 <p>
-                    <strong>Description:</strong> {{test.course.title}}
+                    <strong>Description:</strong> {{test.course.title | titlecase}}
                 </p>
                 <p>
                     <strong>{{questionNumber+1}}. </strong>{{test.questions[questionNumber].question_text | titlecase}}
@@ -29,7 +29,7 @@
                                 class="example-margin"
                                 [disabled]="false"
                                 >
-                                {{answer.answer_text}}
+                                {{answer.answer_text | titlecase}}
                                 </mat-checkbox>
                             </p>
 
