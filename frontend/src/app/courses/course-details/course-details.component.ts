@@ -48,8 +48,12 @@ export class CourseDetailsComponent implements OnInit {
     return this.authService.isStudentLoggedIn();
   }
 
-  myTests(id: number): void {
-    this.router.navigate(['tests', id]);
+  onClickGetAllTestsInCourseByCreator(id: number): void {
+    this.router.navigate(['tests-teacher', id]);
+  }
+
+  onClickGetAllCompletedTestsInCourseByExecutor(id: number): void {
+    this.router.navigate(['tests-completed-student', id]);
   }
 
 

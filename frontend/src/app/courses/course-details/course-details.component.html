@@ -32,7 +32,7 @@
     </mat-card-content>
     <!-- Conditional Display of Angular Material Buttons for TEACHER -->
     <mat-card-actions class="card-actions">
-        <button *ngIf="isTeacherLoggedIn()" mat-raised-button (click)="myTests(course.id)" color="primary">
+        <button *ngIf="isTeacherLoggedIn()" mat-raised-button (click)="onClickGetAllTestsInCourseByCreator(course.id)" color="primary">
             <span>Tests</span>
             <mat-icon>rule</mat-icon>
         </button>
@@ -48,7 +48,7 @@
             <span>Uncompleted tests</span>
             <mat-icon>assignment</mat-icon>
         </button>
-        <button *ngIf="isStudentLoggedIn()" mat-raised-button (click)="onClickSeeMore(course.id)" color="primary">
+        <button *ngIf="isStudentLoggedIn()" mat-raised-button (click)="onClickGetAllCompletedTestsInCourseByExecutor(course.id)" color="primary">
             <span>Completed tests</span>
             <mat-icon>assignment_turned_in</mat-icon>
         </button>

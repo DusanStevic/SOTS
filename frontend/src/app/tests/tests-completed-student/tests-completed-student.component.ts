@@ -8,11 +8,11 @@ import { TestService } from 'src/app/core/services/test.service';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-tests',
-  templateUrl: './tests.component.html',
-  styleUrls: ['./tests.component.scss']
+  selector: 'app-tests-completed-student',
+  templateUrl: './tests-completed-student.component.html',
+  styleUrls: ['./tests-completed-student.component.scss']
 })
-export class TestsComponent implements OnInit {
+export class TestsCompletedStudentComponent implements OnInit {
   routeSub: Subscription;
 
   displayedColumns: string[] = ['id', 'course', 'test', 'createdBy', 'details'];
@@ -32,13 +32,13 @@ export class TestsComponent implements OnInit {
     });
   }
   getTests(id: number): void {
-    this.testService.getAllTestsInCourseByCreator(id).subscribe(data => {
+    this.testService.getAllCompletedTestsInCourseByExecutor(id).subscribe(data => {
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     }, error => {
       this.toastr.error(error);
-      this.toastr.error('There was an error while getting the data about tests in course.');
+      this.toastr.error('There was an error while getting the data about student\'s completed tests in course.');
       this.router.navigate(['not-found-page']);
     });
   }
@@ -53,8 +53,8 @@ export class TestsComponent implements OnInit {
     }
   }
 
-  onClickDetails(courseId: number): void {
-    this.router.navigate(['test-details', courseId]);
+  onClickDetails(testId: number): void {
+    this.router.navigate(['test-details-completed-student', testId]);
   }
 
 }
