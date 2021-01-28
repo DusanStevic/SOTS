@@ -7,8 +7,11 @@ import { CoursesComponent } from './courses/courses/courses.component';
 import { HomeComponent } from './home/home.component';
 import { ForbiddenPageComponent } from './pages/forbidden-page/forbidden-page.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
+import { TestDetailsCompletedStudentComponent } from './tests/test-details-completed-student/test-details-completed-student.component';
 import { TestDetailsTeacherComponent } from './tests/test-details-teacher/test-details-teacher.component';
 import { TestDetailsComponent } from './tests/test-details/test-details.component';
+import { TestsCompletedStudentComponent } from './tests/tests-completed-student/tests-completed-student.component';
+import { TestsTeacherComponent } from './tests/tests-teacher/tests-teacher.component';
 import { TestsComponent } from './tests/tests/tests.component';
 
 
@@ -36,6 +39,18 @@ const routes: Routes = [
     data: {expectedRoles: 'TEACHER|STUDENT'}
   },
   {
+    path: 'tests-teacher/:id',
+    component: TestsTeacherComponent,
+    canActivate: [RoleGuard],
+    data: {expectedRoles: 'TEACHER'}
+  },
+  {
+    path: 'tests-completed-student/:id',
+    component: TestsCompletedStudentComponent,
+    canActivate: [RoleGuard],
+    data: {expectedRoles: 'STUDENT'}
+  },
+  {
     path: 'tests/:id',
     component: TestsComponent,
     canActivate: [RoleGuard],
@@ -52,6 +67,12 @@ const routes: Routes = [
     component: TestDetailsTeacherComponent,
     canActivate: [RoleGuard],
     data: {expectedRoles: 'TEACHER'}
+  },
+  {
+    path: 'test-details-completed-student/:id',
+    component: TestDetailsCompletedStudentComponent,
+    canActivate: [RoleGuard],
+    data: {expectedRoles: 'STUDENT'}
   }
 
 ];
