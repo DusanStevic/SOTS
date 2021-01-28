@@ -1,9 +1,9 @@
-<mat-card class="card" *ngIf="this.test">
+<mat-card class="card" *ngIf="this.testTeacher">
     <mat-card-header>
-        <mat-card-title>{{test.title | titlecase}}</mat-card-title>
-        <mat-card-subtitle>{{test.course.title | titlecase}}</mat-card-subtitle>
+        <mat-card-title>{{testTeacher.title | titlecase}}</mat-card-title>
+        <mat-card-subtitle>{{testTeacher.course.title | titlecase}}</mat-card-subtitle>
     </mat-card-header>
-    <img mat-card-image src="https://res.cloudinary.com/djxkexzcr/image/upload/v1611055729/DSL/Web_Scraping_Frameworks_fm0ksp.png" alt="{{test.title}}">
+    <img mat-card-image src="https://res.cloudinary.com/djxkexzcr/image/upload/v1611055729/DSL/Web_Scraping_Frameworks_fm0ksp.png" alt="{{testTeacher.title}}">
     <mat-card-content>
         <div class="row">
             <!-- <img src="{{event.imagePath}}" /> -->
@@ -11,19 +11,19 @@
             <img src="https://res.cloudinary.com/djxkexzcr/image/upload/v1611055729/DSL/Web_Scraping_Frameworks_fm0ksp.png" />
             <div>
                 <p>
-                    <strong>Domain:</strong> {{test.course.title | titlecase}}
+                    <strong>Domain:</strong> {{testTeacher.course.title | titlecase}}
                 </p>
     
                 <p>
-                    <strong>Description:</strong> {{test.course.title | titlecase}}
+                    <strong>Description:</strong> {{testTeacher.course.title | titlecase}}
                 </p>
                 <p>
-                    <strong>{{questionNumber+1}}. </strong>{{test.questions[questionNumber].question_text | titlecase}}
+                    <strong>{{questionNumber+1}}. </strong>{{testTeacher.questions[questionNumber].question_text | titlecase}}
                 </p>
                 <section class="example-section">
                     <span class="example-list-section">
                       <ul>
-                        <li *ngFor="let answer of test.questions[questionNumber].answers">
+                        <li *ngFor="let answer of testTeacher.questions[questionNumber].answers">
                             <p [ngClass]="(answer.correct_answer==true)?'correct-answer-style':'incorrect-answer-style'">
                                 <mat-checkbox 
                                 class="example-margin"
@@ -49,7 +49,7 @@
             <span>Previous</span>
         </button>
         <!-- Next navigation button -->
-        <button *ngIf="questionNumber !== test.questions.length-1"  mat-raised-button (click)="onClickNext()" color="primary" id = "nextBtn">
+        <button *ngIf="questionNumber !== testTeacher.questions.length-1"  mat-raised-button (click)="onClickNext()" color="primary" id = "nextBtn">
             <span>Next</span>
             <mat-icon>navigate_next</mat-icon>
         </button>
@@ -74,5 +74,5 @@
             <mat-icon>more_horiz</mat-icon>
         </button>
     </mat-card-actions>
-    <mat-card-footer>Informations about test details</mat-card-footer>
+    <mat-card-footer>Informations about teacher's test details.</mat-card-footer>
 </mat-card>

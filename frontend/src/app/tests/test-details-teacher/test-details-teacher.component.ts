@@ -12,7 +12,7 @@ import { TestService } from 'src/app/core/services/test.service';
 })
 export class TestDetailsTeacherComponent implements OnInit {
 
-  private test;
+  private testTeacher;
   routeSub: Subscription;
   questionNumber = 0;
 
@@ -30,7 +30,7 @@ export class TestDetailsTeacherComponent implements OnInit {
 
   private getTest(id: number): void {
     this.testService.getTestByCreator(id).subscribe(data => {
-      this.test = data;
+      this.testTeacher = data;
     }, error => {
       this.toastr.error(error);
       this.toastr.error('There was an error while getting the data about teacher\'s test details.');
