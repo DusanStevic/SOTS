@@ -15,7 +15,7 @@ import { Subscription } from 'rxjs';
 export class TestsCompletedStudentComponent implements OnInit {
   routeSub: Subscription;
 
-  displayedColumns: string[] = ['id', 'course', 'test', 'createdBy', 'details'];
+  displayedColumns: string[] = ['id', 'course', 'test', 'teacher', 'score', 'details'];
   dataSource: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
