@@ -54,24 +54,11 @@
             <mat-icon>navigate_next</mat-icon>
         </button>
     </mat-card-actions>
-    <!-- Conditional Display of Angular Material Buttons for TEACHER -->
-    <mat-card-actions class="card-actions">
-        <button *ngIf="isTeacherLoggedIn()" mat-raised-button (click)="myTests(course.id)" color="primary">
-            <span>Tests</span>
-            <mat-icon>rule</mat-icon>
-        </button>
-    </mat-card-actions>
-    <mat-card-actions class="card-actions">
-        <button *ngIf="isTeacherLoggedIn()" mat-raised-button (click)="onClickSeeMore(course.id)" color="primary">
-            <span>Knowledge Space Theory (KST)</span>
-            <mat-icon>share</mat-icon>
-        </button>
-    </mat-card-actions>
     <!-- Conditional Display of Angular Material Buttons for STUDENT -->
     <mat-card-actions class="card-actions">
         <button *ngIf="isStudentLoggedIn()" mat-raised-button (click)="onClickSeeMore(course.id)" color="primary">
-            <span>See more STudent</span>
-            <mat-icon>more_horiz</mat-icon>
+            <span>Test score</span>
+            <mat-icon>calculate</mat-icon>
         </button>
     </mat-card-actions>
     <mat-card-footer>Informations about student's completed test details.</mat-card-footer>
