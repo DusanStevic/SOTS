@@ -24,7 +24,7 @@
                     <span class="example-list-section">
                       <ul>
                         <li *ngFor="let answer of testCompleted.test.questions[questionNumber].answers">
-                            <p [ngClass]="(answer.correct_answer==true)?'correct-answer-style':'incorrect-answer-style'">
+                            <p [ngClass]="{'correct-answer-style':(answer.id===testCompleted.completed_test_chosen_answers[questionNumber].answer.id && answer.correct_answer===true),'incorrect-answer-style':(answer.id===testCompleted.completed_test_chosen_answers[questionNumber].answer.id && answer.correct_answer===false)}">
                                 <mat-checkbox 
                                 class="example-margin"
                                 [disabled]="true"
