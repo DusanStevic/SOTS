@@ -80,7 +80,7 @@ class ChosenAnswerSerializer(serializers.ModelSerializer):
 class CompletedTestSerializer(serializers.ModelSerializer):
     student = UserSerializer(many=False)
     test = TestSerializer(many=False)
-    chosen_answers = ChosenAnswerSerializer(many=True)
+    completed_test_chosen_answers = ChosenAnswerSerializer(many=True)
     class Meta:
         model = CompletedTest
         fields = '__all__'

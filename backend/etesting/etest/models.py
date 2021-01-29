@@ -76,8 +76,8 @@ class CompletedTest(models.Model):
 
 
 class ChosenAnswer(models.Model):
-    answer = models.OneToOneField(Answer, on_delete=models.SET_NULL, related_name='chosen_answer', null=True)
-    completed_test = models.ForeignKey(CompletedTest, on_delete=models.CASCADE, related_name='chosen_answers', null=True)
+    answer = models.ForeignKey(Answer, on_delete=models.CASCADE, related_name='answer_chosen_answers', null=True)
+    completed_test = models.ForeignKey(CompletedTest, on_delete=models.CASCADE, related_name='completed_test_chosen_answers', null=True)
     
 
     def __str__(self):
