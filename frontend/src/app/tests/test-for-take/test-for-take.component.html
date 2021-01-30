@@ -20,14 +20,15 @@
                 <p>
                     <strong>{{questionNumber+1}}. </strong>{{test.questions[questionNumber].question_text | titlecase}}
                 </p>
+
                 <section class="example-section">
                     <span class="example-list-section">
                       <ul>
                         <li *ngFor="let answer of test.questions[questionNumber].answers">
-                            <p [ngClass]="(answer.correct_answer==true)?'correct-answer-style':'incorrect-answer-style'">
+                            <p>
                                 <mat-checkbox 
                                 class="example-margin"
-                                [disabled]="false"
+                                [disabled]="false"  [checked]="answer.checked" (change)="onChange($event, answer)"
                                 >
                                 {{answer.answer_text}}
                                 </mat-checkbox>
@@ -53,13 +54,12 @@
             <span>Next</span>
             <mat-icon>navigate_next</mat-icon>
         </button>
-    </mat-card-actions>
-
-    <mat-card-actions class="card-actions">
-        <button  mat-raised-button (click)="onClickSeeWithSameDomain(test.id)" color="primary">
-            <span>Views test with same domain</span>
-            <mat-icon>navigate_next</mat-icon>
+        <!-- Next navigation button -->
+        <button *ngIf="questionNumber !== test.questions.length"  mat-raised-button (click)="onClickSave()" color="primary" id = "saveBtn">
+            <span>Save</span>
+            <mat-icon>save</mat-icon>
         </button>
-    </mat-card-actions>    
+    </mat-card-actions>
+ 
     <mat-card-footer>Informations about test details</mat-card-footer>
 </mat-card>

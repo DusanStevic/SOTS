@@ -56,6 +56,9 @@ export class CourseDetailsComponent implements OnInit {
     this.router.navigate(['tests-completed-student', id]);
   }
 
+  onClickSeeMore(id: number): void {
+    this.router.navigate(['test-for-student', id]);
+  }
 
 
 }

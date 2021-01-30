@@ -10,6 +10,7 @@ from django.core import serializers
 from django.contrib.admin.utils import flatten
 from itertools import chain
 from etest.pagination import LargeResultsSetPagination
+from operator import itemgetter, attrgetter
 
 
 # You can create your views here.
@@ -128,3 +129,58 @@ class GetTestXmlById(generics.ListAPIView):
             xml_serializer.serialize(result_list, stream=out)
 
         return test
+
+class CreateChosenAnswer(generics.CreateAPIView):
+    permission_classes = [permissions.IsAuthenticated, IsStudentUser]
+    serializer_class = ChosenAnswerSerializer
+    queryset = ChosenAnswer.objects.all()
+
+
+class CreateCompletedTest(generics.CreateAPIView):
+    permission_classes = [permissions.IsAuthenticated, IsStudentUser]
+    serializer_class = CompletedTestSerializer
+    queryset = CompletedTest.objects.all()
+
+
+class GetAllNoCompletedTestsInCourseByExecutor(generics.ListAPIView):
+    permission_classes = [permissions.IsAuthenticated, IsStudentUser]
+    serializer_class = TestSerializer 
+    # This view should return a list of all the no completed tests in a chosen course 
+    # that were executed by the currently authenticated student.
+    def get_queryset(self):
+        completedTest = CompletedTest.objects.filter(test__course__id=self.kwargs['pk']).filter(student=self.request.user).values_list("test_id", flat="True")
+        return Test.objects.exclude(id=completedTest[0]).filter(course_id=self.kwargs['pk'])
+ 
+
+class GetTestById(generics.RetrieveAPIView):
+    permission_classes = [permissions.IsAuthenticated, IsTeacherUser|IsStudentUser]
+    serializer_class = TestSerializer
+    queryset = Test.objects.all() 
+
+class GetAllTestWithSameDomain(generics.ListAPIView):
+    permission_classes = [permissions.IsAuthenticated, IsStudentUser|IsTeacherUser]
+    serializer_class = TestSerializer 
+    # This view should return a list of all the no completed tests in a chosen course 
+    # that were executed by the currently authenticated student.
+    def get_queryset(self):
+
+        if self.request.user.role == 'TEACHER':
+            test = Test.objects.filter(id=self.kwargs['pk'])
+            return Test.objects.filter(course=test[0].course_id).filter(creator=test[0].creator).exclude(id=test[0].id)
+        elif self.request.user.role == 'STUDENT':
+            test = Test.objects.filter(id=self.kwargs['pk'])
+            return Test.objects.filter(course=test[0].course_id).exclude(id=test[0].id)
+
+class GetFirstQuestionForTest(generics.ListAPIView):
+    permission_classes = [permissions.IsAuthenticated, IsStudentUser]
+    serializer_class = QuestionSerializer
+    
+    def get_queryset(self):
+        questions = Question.objects.filter(test_id=self.kwargs['pk'])
+        min = questions.order_by('problem_id').first()
+        return questions.filter(problem_id = min.problem_id)
+
+class GetAnswerById(generics.RetrieveAPIView):
+    permission_classes = [permissions.IsAuthenticated, IsTeacherUser|IsStudentUser]
+    serializer_class = AnswerSerializer
+    queryset = Answer.objects.all()

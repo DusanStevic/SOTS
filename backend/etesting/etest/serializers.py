@@ -1,6 +1,8 @@
 from rest_framework import serializers
 from etest.models import *
 from accounts.serializers import *
+import getpass
+
 
 class DomainSerializer(serializers.ModelSerializer):
     class Meta:
@@ -77,3 +79,32 @@ class CompletedTestSerializer(serializers.ModelSerializer):
     class Meta:
         model = CompletedTest
         fields = '__all__'
+
+class ChosenAnswerSerializer(serializers.ModelSerializer):
+    def create(self, validated_data):
+        student = User.objects.get(id=self.context['request'].user.id)
+        test_id = Question.objects.filter(answers=validated_data['answer']).values_list('test_id', flat=True)
+        test = Test.objects.get(id=test_id[0])
+        completedTest = CompletedTest.objects.filter(test_id=test_id[0]).filter(student_id=student.id)
+        if(completedTest.exists()):
+            if (validated_data['answer'].correct_answer) == True:
+                score = completedTest[0].score
+                completedTest.update(score= score +1)
+        else:
+            if (validated_data['answer'].correct_answer) == True:
+                completedTest = CompletedTest.objects.create(score=1, test=test, student=student)
+            else:
+                completedTest = CompletedTest.objects.create(score=0, test=test, student=student)
+        chosenAnswer = ChosenAnswer.objects.create(answer_id=validated_data['answer'].id, completed_test=completedTest[0])
+        
+        question = self.QuestionBasedOnAnswers(validated_data['answer'])
+        
+        return chosenAnswer
+
+    def QuestionBasedOnAnswers(self,answer):
+        print(answer)
+
+    class Meta:
+        model = ChosenAnswer
+        fields = ['answer']
+ 

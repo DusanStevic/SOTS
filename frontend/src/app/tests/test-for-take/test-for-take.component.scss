@@ -41,23 +41,6 @@
     margin-left: auto;
   }
   
-  .correct-answer-style {
-    ::ng-deep .mat-checkbox .mat-checkbox-frame {
-      border-color: green;
-    }
-    ::ng-deep .mat-checkbox-checked .mat-checkbox-background {
-      background-color: green !important;
-    }
-  }
-  
-  .incorrect-answer-style {
-    ::ng-deep .mat-checkbox .mat-checkbox-frame {
-      border-color: red;
-    }
-    ::ng-deep .mat-checkbox-checked .mat-checkbox-background {
-      background-color: red !important;
-    }
-  
-  }
+ 
   
   
