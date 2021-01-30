@@ -19,5 +19,23 @@ urlpatterns = [
     path('tests/GetAllCompletedTestsInCourseByExecutor/<int:pk>', GetAllCompletedTestsInCourseByExecutor.as_view()),
     path('tests/GetCompletedTestByExecutor/<int:pk>', GetCompletedTestByExecutor.as_view()),
     path('tests/GetTestXmlById/<int:pk>', GetTestXmlById.as_view()),
+    path('tests/CreateTest', CreateTest.as_view()),
+    path('tests/GetTestXML/<int:pk>', GetXML),
+    path('tests/GetAllNoCompletedTestsInCourseByExecutor/<int:pk>', GetAllNoCompletedTestsInCourseByExecutor.as_view()),
+    path('tests/GetTestById/<int:pk>', GetTestById.as_view()),
+    path('tests/GetAllTestWithSameDomain/<int:pk>', GetAllTestWithSameDomain.as_view()),
+    path('tests/GetFirstQuestionForTest/<int:pk>', GetFirstQuestionForTest.as_view()),
+
+    #questions
+    path('questions/CreateQuestion', CreateQuestion.as_view()),
+    #answers
+    path('answers/CreateAnswer', CreateAnswer.as_view()),
+    path('answers/GetAnswerById/<int:pk>', GetAnswerById.as_view()),
+    #chose answer
+    path('choseAnswers/CreateChoseAnswer', CreateChosenAnswer.as_view()),
+    #completed test
+    path('completedTests/CreateCompletedTest', CreateCompletedTest.as_view()),
+
+
 
 ]

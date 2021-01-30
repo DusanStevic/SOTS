@@ -37,12 +37,19 @@ class Course(models.Model):
     def __str__(self):
         return f'{self.title}'
 
+EXPECTED_TYPE = 'expected'
+REAL_TYPE = 'real'
+TYPE_OF_TEST = (
+    (EXPECTED_TYPE, 'Expected'),
+    (REAL_TYPE, 'Real')
+)
 
 class Test(models.Model):
     title = models.CharField(max_length=255, null=True)
     creator = models.ForeignKey(User, on_delete=models.SET_NULL,related_name='creator', null=True)
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='tests', null=True)
-    
+    type_of_test = models.CharField(max_length=50, choices=TYPE_OF_TEST, default=EXPECTED_TYPE)
+
 
     def __str__(self):
         return f'{self.title}'
