@@ -4,6 +4,8 @@ import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Subscription } from 'rxjs';
 import { TestService } from 'src/app/core/services/test.service';
+import { TestScoreDialogComponent } from '../test-score-dialog/test-score-dialog.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-test-details-completed-student',
@@ -13,6 +15,7 @@ import { TestService } from 'src/app/core/services/test.service';
 export class TestDetailsCompletedStudentComponent implements OnInit {
 
   private testCompleted;
+  private testScore;
   routeSub: Subscription;
   questionNumber = 0;
 
@@ -20,7 +23,8 @@ export class TestDetailsCompletedStudentComponent implements OnInit {
               private router: Router,
               private route: ActivatedRoute,
               private testService: TestService,
-              private authService: AuthService ) { }
+              private authService: AuthService,
+              public dialog: MatDialog ) { }
 
   ngOnInit() {
     this.routeSub = this.route.params.subscribe( params => {
@@ -56,6 +60,22 @@ export class TestDetailsCompletedStudentComponent implements OnInit {
 
   onClickPrevious(): void {
     this.questionNumber--;
+  }
+
+  onClickOpenTestScoreDialog(id: number): void {
+    this.testService.getTestByExecutor(id).subscribe(data => {
+      this.testScore = data;
+      const dialogRef = this.dialog.open(TestScoreDialogComponent, {
+        width: '500px',
+        data: this.testScore
+      });
+      },
+      error => {
+        this.toastr.error(error);
+        this.toastr.error('There was an error while getting the data about student\'s test score.');
+        this.router.navigate(['not-found-page']);
+      }
+    );
   }
 
 }
