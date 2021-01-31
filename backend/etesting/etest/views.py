@@ -96,6 +96,22 @@ class GetCompletedTestByExecutor(generics.RetrieveAPIView):
     def get_queryset(self):
         return CompletedTest.objects.filter(id=self.kwargs['pk']).filter(student=self.request.user)
 
+class GetAllUncompletedTestsInCourseByExecutor(generics.ListAPIView):
+    permission_classes = [permissions.IsAuthenticated, IsStudentUser]
+    serializer_class = TestSerializer 
+    # This view should return a list of all the uncompleted tests in a chosen course 
+    # that are going to be executed by the currently authenticated student.
+    def get_queryset(self):
+        all_tests = Test.objects.filter(course__id=self.kwargs['pk'])
+        completed_tests = CompletedTest.objects.filter(test__course__id=self.kwargs['pk']).filter(student=self.request.user)
+        uncompleted_tests = []
+        for test in all_tests:
+            for completed_test in completed_tests:
+                if(test!=completed_test.test):
+                    uncompleted_tests.append(test)
+ 
+        return uncompleted_tests
+
 
 def GetAnswerForQuestion(pk):
 

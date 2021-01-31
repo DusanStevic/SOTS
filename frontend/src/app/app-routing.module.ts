@@ -9,9 +9,11 @@ import { ForbiddenPageComponent } from './pages/forbidden-page/forbidden-page.co
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { TestDetailsCompletedStudentComponent } from './tests/test-details-completed-student/test-details-completed-student.component';
 import { TestDetailsTeacherComponent } from './tests/test-details-teacher/test-details-teacher.component';
+import { TestDetailsUncompletedStudentComponent } from './tests/test-details-uncompleted-student/test-details-uncompleted-student.component';
 import { TestDetailsComponent } from './tests/test-details/test-details.component';
 import { TestsCompletedStudentComponent } from './tests/tests-completed-student/tests-completed-student.component';
 import { TestsTeacherComponent } from './tests/tests-teacher/tests-teacher.component';
+import { TestsUncompletedStudentComponent } from './tests/tests-uncompleted-student/tests-uncompleted-student.component';
 import { TestsComponent } from './tests/tests/tests.component';
 
 
@@ -39,18 +41,6 @@ const routes: Routes = [
     data: {expectedRoles: 'TEACHER|STUDENT'}
   },
   {
-    path: 'tests-teacher/:id',
-    component: TestsTeacherComponent,
-    canActivate: [RoleGuard],
-    data: {expectedRoles: 'TEACHER'}
-  },
-  {
-    path: 'tests-completed-student/:id',
-    component: TestsCompletedStudentComponent,
-    canActivate: [RoleGuard],
-    data: {expectedRoles: 'STUDENT'}
-  },
-  {
     path: 'tests/:id',
     component: TestsComponent,
     canActivate: [RoleGuard],
@@ -63,17 +53,41 @@ const routes: Routes = [
     data: {expectedRoles: 'TEACHER|STUDENT'}
   },
   {
+    path: 'tests-teacher/:id',
+    component: TestsTeacherComponent,
+    canActivate: [RoleGuard],
+    data: {expectedRoles: 'TEACHER'}
+  },
+  {
     path: 'test-details-teacher/:id',
     component: TestDetailsTeacherComponent,
     canActivate: [RoleGuard],
     data: {expectedRoles: 'TEACHER'}
   },
   {
+    path: 'tests-completed-student/:id',
+    component: TestsCompletedStudentComponent,
+    canActivate: [RoleGuard],
+    data: {expectedRoles: 'STUDENT'}
+  },
+  {
     path: 'test-details-completed-student/:id',
     component: TestDetailsCompletedStudentComponent,
     canActivate: [RoleGuard],
     data: {expectedRoles: 'STUDENT'}
-  }
+  },
+  {
+    path: 'tests-uncompleted-student/:id',
+    component: TestsUncompletedStudentComponent,
+    canActivate: [RoleGuard],
+    data: {expectedRoles: 'STUDENT'}
+  },
+  {
+    path: 'test-details-uncompleted-student/:id',
+    component: TestDetailsUncompletedStudentComponent,
+    canActivate: [RoleGuard],
+    data: {expectedRoles: 'STUDENT'}
+  },
 
 ];
 
