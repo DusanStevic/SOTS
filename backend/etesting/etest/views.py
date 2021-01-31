@@ -212,4 +212,4 @@ class GetFirstQuestionForTest(generics.ListAPIView):
 class GetAnswerById(generics.RetrieveAPIView):
     permission_classes = [permissions.IsAuthenticated, IsTeacherUser|IsStudentUser]
     serializer_class = AnswerSerializer
-    queryset = Answer.objects.all() 
+    queryset = Answer.objects.all()

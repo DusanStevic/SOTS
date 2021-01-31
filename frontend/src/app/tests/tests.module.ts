@@ -9,7 +9,8 @@ import { TestsTeacherComponent } from './tests-teacher/tests-teacher.component';
 import { TestsCompletedStudentComponent } from './tests-completed-student/tests-completed-student.component';
 import { TestDetailsCompletedStudentComponent } from './test-details-completed-student/test-details-completed-student.component';
 import { TestScoreDialogComponent } from './test-score-dialog/test-score-dialog.component';
-
+import { TestForStudentComponent} from './test-for-student/test-for-student.component';
+import { TestForTakeComponent} from './test-for-take/test-for-take.component';
 
 
 @NgModule({
@@ -19,7 +20,9 @@ import { TestScoreDialogComponent } from './test-score-dialog/test-score-dialog.
                 TestsTeacherComponent,
                 TestsCompletedStudentComponent,
                 TestDetailsCompletedStudentComponent,
-                TestScoreDialogComponent],
+                TestScoreDialogComponent,
+                TestForStudentComponent,
+                TestForTakeComponent],
   imports: [
     CommonModule,
     MaterialModule,

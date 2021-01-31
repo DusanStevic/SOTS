@@ -13,7 +13,8 @@ import { TestDetailsComponent } from './tests/test-details/test-details.componen
 import { TestsCompletedStudentComponent } from './tests/tests-completed-student/tests-completed-student.component';
 import { TestsTeacherComponent } from './tests/tests-teacher/tests-teacher.component';
 import { TestsComponent } from './tests/tests/tests.component';
-
+import { TestForStudentComponent} from './tests/test-for-student/test-for-student.component';
+import { TestForTakeComponent} from './tests/test-for-take/test-for-take.component';
 
 const routes: Routes = [
   {path: '', component: LoginComponent },
@@ -73,8 +74,19 @@ const routes: Routes = [
     component: TestDetailsCompletedStudentComponent,
     canActivate: [RoleGuard],
     data: {expectedRoles: 'STUDENT'}
+  },
+  {
+    path: 'test-for-student/:id',
+    component: TestForStudentComponent,
+    canActivate: [RoleGuard],
+    data: {expectedRoles: 'STUDENT'}
+  },
+  {
+    path: 'test-for-take/:id',
+    component: TestForTakeComponent,
+    canActivate: [RoleGuard],
+    data: {expectedRoles: 'STUDENT'}
   }
-
 ];
 
 @NgModule({

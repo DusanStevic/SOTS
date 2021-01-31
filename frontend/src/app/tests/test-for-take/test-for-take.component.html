@@ -1,0 +1,65 @@
+<mat-card class="card" *ngIf="this.test">
+    <mat-card-header>
+        <mat-card-title>{{test.title}}</mat-card-title>
+        <mat-card-subtitle>{{test.course.title}}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image src="https://res.cloudinary.com/djxkexzcr/image/upload/v1611055729/DSL/Web_Scraping_Frameworks_fm0ksp.png" alt="{{test.title}}">
+    <mat-card-content>
+        <div class="row">
+            <!-- <img src="{{event.imagePath}}" /> -->
+
+            <img src="https://res.cloudinary.com/djxkexzcr/image/upload/v1611055729/DSL/Web_Scraping_Frameworks_fm0ksp.png" />
+            <div>
+                <p>
+                    <strong>Domain:</strong> {{test.course.title | titlecase}}
+                </p>
+
+                <p>
+                    <strong>Description:</strong> {{test.course.title}}
+                </p>
+                <p>
+                    <strong>{{questionNumber+1}}. </strong>{{test.questions[questionNumber].question_text | titlecase}}
+                </p>
+
+                <section class="example-section">
+                    <span class="example-list-section">
+                      <ul>
+                        <li *ngFor="let answer of test.questions[questionNumber].answers">
+                            <p>
+                                <mat-checkbox 
+                                class="example-margin"
+                                [disabled]="false"  [checked]="answer.checked" (change)="onChange($event, answer)"
+                                >
+                                {{answer.answer_text}}
+                                </mat-checkbox>
+                            </p>
+
+                        </li>
+                      </ul>
+                    </span>
+                  </section>
+
+            </div>
+        </div>
+    </mat-card-content>
+    <!-- Navigation buttons -->
+    <mat-card-actions class="card-actions">
+        <!-- Previous navigation button -->
+        <button *ngIf="questionNumber !== 0" mat-raised-button (click)="onClickPrevious()" color="primary" id = "previousBtn">
+            <mat-icon>navigate_before</mat-icon>
+            <span>Previous</span>
+        </button>
+        <!-- Next navigation button -->
+        <button *ngIf="questionNumber !== test.questions.length-1"  mat-raised-button (click)="onClickNext()" color="primary" id = "nextBtn">
+            <span>Next</span>
+            <mat-icon>navigate_next</mat-icon>
+        </button>
+        <!-- Next navigation button -->
+        <button *ngIf="questionNumber !== test.questions.length"  mat-raised-button (click)="onClickSave()" color="primary" id = "saveBtn">
+            <span>Save</span>
+            <mat-icon>save</mat-icon>
+        </button>
+    </mat-card-actions>
+
+    <mat-card-footer>Informations about test details</mat-card-footer>
+</mat-card>
