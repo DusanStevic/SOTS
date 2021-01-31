@@ -1,1 +1,62 @@
-<p>test-details-uncompleted-student works!</p>
+<mat-card class="card" *ngIf="this.testUncompleted">
+    <mat-card-header>
+        <mat-card-title>{{testUncompleted.title | titlecase}}</mat-card-title>
+        <mat-card-subtitle>{{testUncompleted.course.title | titlecase}}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image src="https://res.cloudinary.com/djxkexzcr/image/upload/v1611055729/DSL/Web_Scraping_Frameworks_fm0ksp.png" alt="{{testUncompleted.title}}">
+    <mat-card-content>
+        <div class="row">
+            <!-- <img src="{{event.imagePath}}" /> -->
+
+            <img src="https://res.cloudinary.com/djxkexzcr/image/upload/v1611055729/DSL/Web_Scraping_Frameworks_fm0ksp.png" />
+            <div>
+                <p>
+                    <strong>Domain:</strong> {{testUncompleted.course.title | titlecase}}
+                </p>
+    
+                <p>
+                    <strong>Description:</strong> {{testUncompleted.course.title | titlecase}}
+                </p>
+                <p>
+                    <strong>{{questionNumber+1}}. </strong>{{testUncompleted.questions[questionNumber].question_text | titlecase}}
+                </p>
+                <section class="example-section">
+                    <span class="example-list-section">
+                      <ul>
+                        <li *ngFor="let answer of testUncompleted.questions[questionNumber].answers">
+                                <mat-checkbox 
+                                class="example-margin"
+                                [disabled]="false"
+                                >
+                                {{answer.answer_text | titlecase}}
+                                </mat-checkbox>
+                        </li>
+                      </ul>
+                    </span>
+                  </section>
+
+            </div>
+        </div>
+    </mat-card-content>
+    <!-- Navigation buttons -->
+    <mat-card-actions class="card-actions">
+        <!-- Previous navigation button -->
+        <button *ngIf="questionNumber !== 0" mat-raised-button (click)="onClickPrevious()" color="primary" id = "previousBtn">
+            <mat-icon>navigate_before</mat-icon>
+            <span>Previous</span>
+        </button>
+        <!-- Next navigation button -->
+        <button *ngIf="questionNumber !== testUncompleted.questions.length-1"  mat-raised-button (click)="onClickNext()" color="primary" id = "nextBtn">
+            <span>Next</span>
+            <mat-icon>navigate_next</mat-icon>
+        </button>
+    </mat-card-actions>
+    <!-- Conditional Display of Angular Material Buttons for STUDENT -->
+    <mat-card-actions class="card-actions">
+        <button *ngIf="isStudentLoggedIn()" mat-raised-button (click)="onClickOpenTestScoreDialog(testCompleted.id)" color="primary">
+            <span>Test score</span>
+            <mat-icon>calculate</mat-icon>
+        </button>
+    </mat-card-actions>
+    <mat-card-footer>Informations about student's uncompleted test details.</mat-card-footer>
+</mat-card>

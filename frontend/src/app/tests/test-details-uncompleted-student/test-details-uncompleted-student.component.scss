@@ -1,0 +1,63 @@
+.card {
+    max-width: 600px;
+    min-width: 600px;
+    width: 400px;
+    margin: auto;
+    margin-top: 2%;
+  }
+  
+  .card .card-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .card-actions button span {
+    margin-right: 5px;
+  }
+  
+  .row {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .row img {
+    width: 200px;
+    height: 200px;
+    margin-right: 20px;
+  }
+  
+  .example-section {
+    margin: 2px 0;
+  }
+  
+  .example-margin {
+    margin: 0 2px;
+  }
+  
+  ul {
+    list-style-type: none;
+    margin-top: 3px;
+    margin-left: auto;
+  }
+  
+  .correct-answer-style {
+    ::ng-deep .mat-checkbox .mat-checkbox-frame {
+      border-color: green;
+    }
+    ::ng-deep .mat-checkbox-checked .mat-checkbox-background {
+      background-color: green !important;
+    }
+  }
+  
+  .incorrect-answer-style {
+    ::ng-deep .mat-checkbox .mat-checkbox-frame {
+      border-color: red;
+    }
+    ::ng-deep .mat-checkbox-checked .mat-checkbox-background {
+      background-color: red !important;
+    }
+  
+  }
+  
+  
