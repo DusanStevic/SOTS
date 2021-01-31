@@ -56,6 +56,10 @@ export class CourseDetailsComponent implements OnInit {
     this.router.navigate(['tests-completed-student', id]);
   }
 
+  onClickGetAllUncompletedTestsInCourseByExecutor(id: number): void {
+    this.router.navigate(['tests-uncompleted-student', id]);
+  }
+
 
 
 }

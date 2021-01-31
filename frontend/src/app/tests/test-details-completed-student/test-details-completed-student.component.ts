@@ -33,7 +33,7 @@ export class TestDetailsCompletedStudentComponent implements OnInit {
   }
 
   private getTest(id: number): void {
-    this.testService.getTestByExecutor(id).subscribe(data => {
+    this.testService.getCompletedTestByExecutor(id).subscribe(data => {
       this.testCompleted = data;
     }, error => {
       this.toastr.error(error);
@@ -63,7 +63,7 @@ export class TestDetailsCompletedStudentComponent implements OnInit {
   }
 
   onClickOpenTestScoreDialog(id: number): void {
-    this.testService.getTestByExecutor(id).subscribe(data => {
+    this.testService.getCompletedTestByExecutor(id).subscribe(data => {
       this.testScore = data;
       const dialogRef = this.dialog.open(TestScoreDialogComponent, {
         width: '500px',

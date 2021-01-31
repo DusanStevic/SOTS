@@ -31,8 +31,15 @@ export class TestService {
     );
   }
 
-  getTestByExecutor(id: number): Observable<any> {
+  getCompletedTestByExecutor(id: number): Observable<any> {
     return this.http.get(`http://localhost:8000/api/tests/GetCompletedTestByExecutor/${id}`).pipe(
+      tap(data => {}),
+      catchError(this.handleError)
+    );
+  }
+
+  getAllUncompletedTestsInCourseByExecutor(id: number): Observable<any> {
+    return this.http.get(`http://localhost:8000/api/tests/GetAllUncompletedTestsInCourseByExecutor/${id}`).pipe(
       tap(data => {}),
       catchError(this.handleError)
     );
