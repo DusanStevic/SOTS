@@ -10,6 +10,7 @@ from django.core import serializers
 from django.contrib.admin.utils import flatten
 from itertools import chain
 from etest.pagination import LargeResultsSetPagination
+from django.shortcuts import get_object_or_404
 
 
 # You can create your views here.
@@ -114,11 +115,24 @@ class GetAllUncompletedTestsInCourseByExecutor(generics.ListAPIView):
 
 class GetUncompletedTestByExecutor(generics.RetrieveAPIView):
     permission_classes = [permissions.IsAuthenticated, IsStudentUser]
-    serializer_class = TestSerializer
+    serializer_class = UncompletedTestSerializer
     # This view should return a chosen test 
     # that is going to be executed by the currently authenticated student.
     def get_queryset(self):
         return Test.objects.filter(id=self.kwargs['pk'])
+
+class CreateCompletedTest(generics.CreateAPIView):
+    permission_classes = [permissions.IsAuthenticated, IsStudentUser]
+    serializer_class = CreateCompletedTestSerializer
+    queryset = CompletedTest.objects.all()
+    def perform_create(self, serializer):
+        serializer.save(student=self.request.user)
+        questions = self.request.data.get('questions')
+        test_id = questions[0]['test']
+        test = get_object_or_404(Test, id=test_id)
+        serializer.save(test=test)
+        
+
 
 def GetAnswerForQuestion(pk):
 

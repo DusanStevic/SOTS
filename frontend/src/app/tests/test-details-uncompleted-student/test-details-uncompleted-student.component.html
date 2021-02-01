@@ -25,6 +25,7 @@
                       <ul>
                         <li *ngFor="let answer of testUncompleted.questions[questionNumber].answers">
                                 <mat-checkbox 
+                                [(ngModel)]="answer.chosen"
                                 class="example-margin"
                                 [disabled]="false"
                                 >
@@ -53,9 +54,9 @@
     </mat-card-actions>
     <!-- Conditional Display of Angular Material Buttons for STUDENT -->
     <mat-card-actions class="card-actions">
-        <button *ngIf="isStudentLoggedIn()" mat-raised-button (click)="onClickOpenTestScoreDialog(testCompleted.id)" color="primary">
-            <span>Test score</span>
-            <mat-icon>calculate</mat-icon>
+        <button *ngIf="isStudentLoggedIn()" mat-raised-button (click)="onClickOpenTestScoreDialog()" color="primary">
+            <span>Complete test</span>
+            <mat-icon>check</mat-icon>
         </button>
     </mat-card-actions>
     <mat-card-footer>Informations about student's uncompleted test details.</mat-card-footer>
