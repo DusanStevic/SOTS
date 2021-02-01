@@ -84,3 +84,33 @@ class CompletedTestSerializer(serializers.ModelSerializer):
     class Meta:
         model = CompletedTest
         fields = '__all__'
+
+class UncompletedAnswerSerializer(serializers.ModelSerializer):
+    chosen = serializers.SerializerMethodField()
+    class Meta:
+        model = Answer
+        # Excluding correct answer from the response. 
+        # Preventing correct answer exposure in the browser console.
+        fields = ['id', 'answer_text', 'question', 'chosen']
+
+    def get_chosen(self, obj):
+        return False
+
+class UncompletedQuestionSerializer(serializers.ModelSerializer):
+    answers = UncompletedAnswerSerializer(many=True)
+    class Meta:
+        model = Question
+        fields = '__all__'
+
+class UncompletedTestSerializer(serializers.ModelSerializer):
+    questions = UncompletedQuestionSerializer(many=True)
+    creator = UserSerializer(many=False)
+    course = CourseSerializer(many=False)
+    class Meta:
+        model = Test
+        fields = '__all__'
+
+class CreateCompletedTestSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CompletedTest
+        fields = '__all__'

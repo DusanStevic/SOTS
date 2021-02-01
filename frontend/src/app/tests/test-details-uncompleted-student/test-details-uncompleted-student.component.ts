@@ -63,7 +63,8 @@ export class TestDetailsUncompletedStudentComponent implements OnInit {
   }
 
   onClickOpenTestScoreDialog(id: number): void {
-    this.testService.getUncompletedTestByExecutor(id).subscribe(data => {
+    console.log(this.testUncompleted)
+/*     this.testService.getUncompletedTestByExecutor(id).subscribe(data => {
       this.testScore = data;
       const dialogRef = this.dialog.open(TestScoreDialogComponent, {
         width: '500px',
@@ -75,7 +76,7 @@ export class TestDetailsUncompletedStudentComponent implements OnInit {
         this.toastr.error('There was an error while getting the data about student\'s test score.');
         this.router.navigate(['not-found-page']);
       }
-    );
+    ); */
   }
 
 }
