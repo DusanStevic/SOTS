@@ -126,11 +126,23 @@ class CreateCompletedTest(generics.CreateAPIView):
     serializer_class = CreateCompletedTestSerializer
     queryset = CompletedTest.objects.all()
     def perform_create(self, serializer):
+        # student field
         serializer.save(student=self.request.user)
+        # test field
         questions = self.request.data.get('questions')
         test_id = questions[0]['test']
         test = get_object_or_404(Test, id=test_id)
         serializer.save(test=test)
+        # score field
+        score = 0
+        for question in questions:
+            for  answer in question['answers']:
+                if answer['chosen'] == True:
+                    answer_id = answer['id']
+                    answer_db = get_object_or_404(Answer, id=answer_id)
+                    if answer_db.correct_answer == True:
+                        score = score + 1
+        serializer.save(score=score)            
         
 
 
