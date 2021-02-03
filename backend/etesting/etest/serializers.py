@@ -114,3 +114,9 @@ class CreateCompletedTestSerializer(serializers.ModelSerializer):
     class Meta:
         model = CompletedTest
         fields = '__all__'
+
+class CreateChosenAnswerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ChosenAnswer
+        fields = '__all__'
+
