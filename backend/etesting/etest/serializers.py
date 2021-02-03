@@ -86,6 +86,7 @@ class CompletedTestSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class UncompletedAnswerSerializer(serializers.ModelSerializer):
+    # Adding a non model field to a Serializer.
     chosen = serializers.SerializerMethodField()
     class Meta:
         model = Answer
