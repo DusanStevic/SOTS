@@ -140,6 +140,17 @@ class CreateCompletedTest(generics.CreateAPIView):
                 if answer['chosen'] == True:
                     answer_id = answer['id']
                     answer_db = get_object_or_404(Answer, id=answer_id)
+                    # creating chosen answer
+                    chosen_answer = ChosenAnswer()
+                    chosen_answer.answer = answer_db
+                    # serializer.save() returns the instance that is just being created or updated.
+                    # serializer.save() is equal to the currently generated completed test.
+                    # adding completed test to chosen answer
+                    chosen_answer.completed_test = serializer.save()
+                    chosen_answer.save()
+                    # completed_test_chosen_answers field
+                    # adding chosen answers to completed test
+                    serializer.save().completed_test_chosen_answers.add(chosen_answer)
                     if answer_db.correct_answer == True:
                         score = score + 1
         serializer.save(score=score)            
