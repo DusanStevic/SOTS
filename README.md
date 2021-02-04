@@ -1,4 +1,4 @@
-# SOTS
+# SOTS (napisati dokumentaciju na engleskom)
 Modern educational technologies and standards
 
 Predmetni projekat iz predmeta "Savremene obrazovane tehnologije i standardi"
