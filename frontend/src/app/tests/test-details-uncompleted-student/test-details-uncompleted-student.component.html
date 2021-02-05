@@ -54,7 +54,7 @@
     </mat-card-actions>
     <!-- Conditional Display of Angular Material Buttons for STUDENT -->
     <mat-card-actions class="card-actions">
-        <button *ngIf="isStudentLoggedIn()" mat-raised-button (click)="onClickOpenTestScoreDialog()" color="primary">
+        <button *ngIf="isStudentLoggedIn()" mat-raised-button (click)="onClickOpenTestCompletionDialog()" color="primary">
             <span>Complete test</span>
             <mat-icon>check</mat-icon>
         </button>

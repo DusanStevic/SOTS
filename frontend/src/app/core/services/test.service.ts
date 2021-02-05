@@ -53,6 +53,10 @@ export class TestService {
     );
   }
 
+  createCompletedTest(testCompletion: any) {
+		return this.http.post(environment.apiUrlPrefix + '/api/tests/CreateCompletedTest', testCompletion);
+  }
+
   private handleError(err: HttpErrorResponse) {
     const errorMessage = `Server returned code ${err.status}, error message is: ${err.message}`;
     return throwError(errorMessage);

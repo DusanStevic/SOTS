@@ -11,6 +11,7 @@ import { TestDetailsCompletedStudentComponent } from './test-details-completed-s
 import { TestScoreDialogComponent } from './test-score-dialog/test-score-dialog.component';
 import { TestsUncompletedStudentComponent } from './tests-uncompleted-student/tests-uncompleted-student.component';
 import { TestDetailsUncompletedStudentComponent } from './test-details-uncompleted-student/test-details-uncompleted-student.component';
+import { TestCompletionDialogComponent } from './test-completion-dialog/test-completion-dialog.component';
 
 
 
@@ -23,7 +24,8 @@ import { TestDetailsUncompletedStudentComponent } from './test-details-uncomplet
                 TestDetailsCompletedStudentComponent,
                 TestScoreDialogComponent,
                 TestsUncompletedStudentComponent,
-                TestDetailsUncompletedStudentComponent],
+                TestDetailsUncompletedStudentComponent,
+                TestCompletionDialogComponent],
   imports: [
     CommonModule,
     MaterialModule,
@@ -32,7 +34,7 @@ import { TestDetailsUncompletedStudentComponent } from './test-details-uncomplet
   ],
   // This is very important for angular material dialog
   entryComponents: [
-    TestScoreDialogComponent
+    TestScoreDialogComponent,TestCompletionDialogComponent
   ],
   exports: [
     TestsComponent,
@@ -43,7 +45,8 @@ import { TestDetailsUncompletedStudentComponent } from './test-details-uncomplet
     TestDetailsCompletedStudentComponent,
     TestScoreDialogComponent,
     TestsUncompletedStudentComponent,
-    TestDetailsUncompletedStudentComponent
+    TestDetailsUncompletedStudentComponent,
+    TestCompletionDialogComponent
   ]
 })
 export class TestsModule { }
