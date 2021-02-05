@@ -4,8 +4,8 @@ import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Subscription } from 'rxjs';
 import { TestService } from 'src/app/core/services/test.service';
-import { TestScoreDialogComponent } from '../test-score-dialog/test-score-dialog.component';
 import { MatDialog } from '@angular/material';
+import { TestCompletionDialogComponent } from '../test-completion-dialog/test-completion-dialog.component';
 
 @Component({
   selector: 'app-test-details-uncompleted-student',
@@ -15,7 +15,8 @@ import { MatDialog } from '@angular/material';
 export class TestDetailsUncompletedStudentComponent implements OnInit {
 
   private testUncompleted;
-  private testScore;
+  // Converting uncompleted test into the completed test with test completion.
+  private testCompleted;
   routeSub: Subscription;
   questionNumber = 0;
 
@@ -62,21 +63,23 @@ export class TestDetailsUncompletedStudentComponent implements OnInit {
     this.questionNumber--;
   }
 
-  onClickOpenTestScoreDialog(id: number): void {
+  onClickOpenTestCompletionDialog(): void {
     console.log(this.testUncompleted)
-/*     this.testService.getUncompletedTestByExecutor(id).subscribe(data => {
-      this.testScore = data;
-      const dialogRef = this.dialog.open(TestScoreDialogComponent, {
-        width: '500px',
-        data: this.testScore
+    this.testService.createCompletedTest(this.testUncompleted).subscribe(data => {
+      this.testCompleted = data;
+      this.questionNumber = 0;
+      this.toastr.success('Test completion.');
+      this.router.navigate(['test-details-completed-student', this.testCompleted.id]);
+      const dialogRef = this.dialog.open(TestCompletionDialogComponent, {
+        width: '500px'
       });
       },
       error => {
         this.toastr.error(error);
-        this.toastr.error('There was an error while getting the data about student\'s test score.');
+        this.toastr.error('There was an error while getting the data about student\'s test completion.');
         this.router.navigate(['not-found-page']);
       }
-    ); */
+    );
   }
 
 }
