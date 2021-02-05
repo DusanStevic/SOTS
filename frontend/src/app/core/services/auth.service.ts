@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Login, User } from 'src/app/shared/models/login';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -17,12 +18,12 @@ export class AuthService {
 
 
   login(loginInfo: Login): Observable<any> {
-    return this.http.post('http://127.0.0.1:8000/api/token-auth/', loginInfo);
+    return this.http.post(environment.apiUrlPrefix + '/api/token-auth/', loginInfo);
   }
 
 
   getUsers(): Observable<User[]> {
-    return this.http.get<User[]>('http://127.0.0.1:8000/api/users/');
+    return this.http.get<User[]>(environment.apiUrlPrefix + '/api/users/');
   }
 
   isTeacherLoggedIn() {

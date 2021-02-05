@@ -2,6 +2,7 @@ import { HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http'
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class CourseService {
 
   // Course service for backend pagination if you do not use angular material built-in table pagination.
   getAllCoursesByUserOnePage(pageNum: number, pageSize: number): Observable<any> {
-    return this.http.get(`http://localhost:8000/api/courses/GetAllCoursesByUser`, {
+    return this.http.get(environment.apiUrlPrefix + `/api/courses/GetAllCoursesByUser`, {
       params: new HttpParams()
               .set('page', pageNum.toString())
               .set('page_size', pageSize.toString())
@@ -20,11 +21,11 @@ export class CourseService {
   }
 
   getAllCoursesByUser(): Observable<any> {
-    return this.http.get(`http://localhost:8000/api/courses/GetAllCoursesByUser`);
+    return this.http.get(environment.apiUrlPrefix + `/api/courses/GetAllCoursesByUser`);
   }
 
   getCourseById(id: number): Observable<any> {
-    return this.http.get(`http://localhost:8000/api/courses/GetCourseById/${id}`).pipe(
+    return this.http.get(environment.apiUrlPrefix + `/api/courses/GetCourseById/${id}`).pipe(
       tap(data => {}),
       catchError(this.handleError)
     );
