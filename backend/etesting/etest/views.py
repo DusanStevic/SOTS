@@ -156,6 +156,44 @@ class CreateCompletedTest(generics.CreateAPIView):
         serializer.save(score=score)            
         
 
+class CreateTest(generics.CreateAPIView):
+    permission_classes = [permissions.IsAuthenticated, IsTeacherUser]
+    serializer_class = CreateTestSerializer
+    queryset = Test.objects.all()
+    def perform_create(self, serializer):
+        # creator field
+        serializer.save(creator=self.request.user)
+        # questions field
+        questions = self.request.data.get('questions')
+        for question in questions:
+            question_text = question['question_text']
+            problem_id = question['problem']
+            problem = get_object_or_404(Node, id=problem_id)
+            # creating question
+            question_db = Question()
+            question_db.question_text = question_text
+            question_db.problem = problem
+            # serializer.save() returns the instance that is just being created or updated.
+            # serializer.save() is equal to the currently generated test.
+            # adding test to question
+            question_db.test = serializer.save()
+            question_db.save()
+            for answer in question['answers']:
+                answer_text = answer['answer_text']
+                correct_answer = answer['correct_answer']
+                # creating answer
+                answer_db = Answer()
+                answer_db.answer_text = answer_text
+                answer_db.correct_answer = correct_answer
+                # adding question to answer
+                answer_db.question_db = question_db
+                answer_db.save()
+                # adding answers to question
+                question_db.answers.add(answer_db)
+            # adding questions to test
+            serializer.save().questions.add(question_db)
+            
+
 
 def GetAnswerForQuestion(pk):
 

@@ -117,4 +117,7 @@ class CreateCompletedTestSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-
+class CreateTestSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Test
+        fields = '__all__'
