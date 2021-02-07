@@ -40,6 +40,10 @@
             <span>Knowledge Space Theory (KST)</span>
             <mat-icon>share</mat-icon>
         </button>
+        <button *ngIf="isTeacherLoggedIn()" mat-raised-button (click)="onClickAddNewTest(course.id)" color="primary">
+            <span>Add new test</span>
+            <mat-icon>post_add</mat-icon>
+        </button>
     </mat-card-actions>
 
     <!-- Conditional Display of Angular Material Buttons for STUDENT -->

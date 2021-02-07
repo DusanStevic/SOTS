@@ -2,6 +2,7 @@ import { HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http'
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
+import { Test } from 'src/app/models/test';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -54,7 +55,11 @@ export class TestService {
   }
 
   createCompletedTest(testCompletion: any) {
-		return this.http.post(environment.apiUrlPrefix + '/api/tests/CreateCompletedTest', testCompletion);
+    return this.http.post(environment.apiUrlPrefix + '/api/tests/CreateCompletedTest', testCompletion);
+  }
+
+  createTest(test: Test) {
+    return this.http.post(environment.apiUrlPrefix + '/api/tests/CreateTest', test);
   }
 
   private handleError(err: HttpErrorResponse) {

@@ -6,7 +6,7 @@ export interface Link {
     source: string;
     target: string;
 }
-// ista polja kao u modelu na backu
+// You must have the same names for fields in models on the backend and frontend app.
 export interface LinkDB {
     knowledge_space: number;
     link_id: string;

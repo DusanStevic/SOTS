@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { LinkDB } from 'src/app/shared/models/link';
-import { NodeDB } from 'src/app/shared/models/node';
+import { LinkDB } from 'src/app/models/link';
+import { NodeDB } from 'src/app/models/node';
 import { environment } from 'src/environments/environment';
 
 @Injectable({

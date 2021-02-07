@@ -5,9 +5,8 @@ export interface Node {
     id: string;
     label: string;
 }
-
-// node for backend storing mora da ima ista polja kao na backend modelu
-// ista polja kao u modelu na backu
+// You must have the same names for fields in models on the backend and frontend app.
+// node for backend storing
 export interface NodeDB {
     knowledge_space: number;
     node_id: string;

@@ -10,11 +10,10 @@ import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.com
 import { TestDetailsCompletedStudentComponent } from './tests/test-details-completed-student/test-details-completed-student.component';
 import { TestDetailsTeacherComponent } from './tests/test-details-teacher/test-details-teacher.component';
 import { TestDetailsUncompletedStudentComponent } from './tests/test-details-uncompleted-student/test-details-uncompleted-student.component';
-import { TestDetailsComponent } from './tests/test-details/test-details.component';
+import { TestGenesisComponent } from './tests/test-genesis/test-genesis.component';
 import { TestsCompletedStudentComponent } from './tests/tests-completed-student/tests-completed-student.component';
 import { TestsTeacherComponent } from './tests/tests-teacher/tests-teacher.component';
 import { TestsUncompletedStudentComponent } from './tests/tests-uncompleted-student/tests-uncompleted-student.component';
-import { TestsComponent } from './tests/tests/tests.component';
 
 
 const routes: Routes = [
@@ -37,18 +36,6 @@ const routes: Routes = [
   {
     path: 'course-details/:id',
     component: CourseDetailsComponent,
-    canActivate: [RoleGuard],
-    data: {expectedRoles: 'TEACHER|STUDENT'}
-  },
-  {
-    path: 'tests/:id',
-    component: TestsComponent,
-    canActivate: [RoleGuard],
-    data: {expectedRoles: 'TEACHER|STUDENT'}
-  },
-  {
-    path: 'test-details/:id',
-    component: TestDetailsComponent,
     canActivate: [RoleGuard],
     data: {expectedRoles: 'TEACHER|STUDENT'}
   },
@@ -87,6 +74,12 @@ const routes: Routes = [
     component: TestDetailsUncompletedStudentComponent,
     canActivate: [RoleGuard],
     data: {expectedRoles: 'STUDENT'}
+  },
+  {
+    path: 'test-genesis/:id',
+    component: TestGenesisComponent,
+    canActivate: [RoleGuard],
+    data: {expectedRoles: 'TEACHER'}
   },
 
 ];

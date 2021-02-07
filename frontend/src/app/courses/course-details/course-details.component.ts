@@ -60,6 +60,10 @@ export class CourseDetailsComponent implements OnInit {
     this.router.navigate(['tests-uncompleted-student', id]);
   }
 
+  onClickAddNewTest(id: number): void {
+    this.router.navigate(['test-genesis', id]);
+  }
+
 
 
 }
