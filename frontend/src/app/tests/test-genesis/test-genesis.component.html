@@ -1,0 +1,36 @@
+<mat-card class="card" *ngIf="this.course">
+    <mat-card-header>
+        <mat-card-title>Add new test for course{{course.title | titlecase}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+
+    </mat-card-content>
+</mat-card>
+<div class = "container">
+    <form [formGroup]="addNewTestForm" (submit)="onAddNewTestSubmit()">
+        <div class="row">
+            <div class="input-field">
+                <mat-form-field appearance="outline">
+                    <!--<mat-icon matPrefix class="icon">event</mat-icon>-->
+                    <input id="title-input" matInput type="text" placeholder="Test title" formControlName="title"/>
+                </mat-form-field>
+
+                <small id="title-error-msg-req" class="text-danger"
+                *ngIf="addNewTestForm.controls.title.touched && addNewTestForm.controls.title.errors?.required">
+                Test title is required
+                </small>
+            </div>
+        </div>
+
+
+
+
+
+
+
+        <button class="submit-button" id="add-btn" type="submit" mat-raised-button color="primary" [disabled]="addNewTestForm.invalid">
+            Add new test
+        </button>
+    </form>
+
+</div>

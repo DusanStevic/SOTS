@@ -163,7 +163,14 @@ class CreateTest(generics.CreateAPIView):
     def perform_create(self, serializer):
         # creator field
         serializer.save(creator=self.request.user)
-        # questions field
+        # course field
+        print(self.request.data.get('courseId'))
+        course_id = self.request.data.get('courseId')
+        course = get_object_or_404(Course, id=course_id)
+        serializer.save(course=course)
+
+
+"""         # questions field
         questions = self.request.data.get('questions')
         for question in questions:
             question_text = question['question_text']
@@ -191,7 +198,7 @@ class CreateTest(generics.CreateAPIView):
                 # adding answers to question
                 question_db.answers.add(answer_db)
             # adding questions to test
-            serializer.save().questions.add(question_db)
+            serializer.save().questions.add(question_db) """
             
 
 

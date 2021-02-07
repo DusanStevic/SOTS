@@ -8,7 +8,6 @@ import { MaterialModule } from './material/material.module';
 import { ToastrModule } from 'ngx-toastr';
 import { AuthenticationModule } from './authentication/authentication.module';
 import { CoreModule } from './core/core.module';
-import { SharedModule } from './shared/shared.module';
 import { HomeComponent } from './home/home.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -36,7 +35,6 @@ import { TestsModule } from './tests/tests.module';
     HttpClientModule,
     MaterialModule,
     CoreModule,
-    SharedModule,
     AuthenticationModule,
     KstModule,
     PagesModule,

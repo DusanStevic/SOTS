@@ -1,5 +1,5 @@
-import { Link, LinkDB } from './link';
-import { Node, NodeDB } from './node';
+import { Link } from './link';
+import { Node } from './node';
 
 export interface KnowledgeSpace {
     id: number;

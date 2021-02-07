@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TestsComponent } from './tests/tests.component';
-import { TestDetailsComponent } from './test-details/test-details.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MaterialModule } from '../material/material.module';
 import { TestDetailsTeacherComponent } from './test-details-teacher/test-details-teacher.component';
@@ -12,12 +10,12 @@ import { TestScoreDialogComponent } from './test-score-dialog/test-score-dialog.
 import { TestsUncompletedStudentComponent } from './tests-uncompleted-student/tests-uncompleted-student.component';
 import { TestDetailsUncompletedStudentComponent } from './test-details-uncompleted-student/test-details-uncompleted-student.component';
 import { TestCompletionDialogComponent } from './test-completion-dialog/test-completion-dialog.component';
+import { TestGenesisComponent } from './test-genesis/test-genesis.component';
 
 
 
 @NgModule({
-  declarations: [TestsComponent,
-                TestDetailsComponent,
+  declarations: [
                 TestDetailsTeacherComponent,
                 TestsTeacherComponent,
                 TestsCompletedStudentComponent,
@@ -25,7 +23,8 @@ import { TestCompletionDialogComponent } from './test-completion-dialog/test-com
                 TestScoreDialogComponent,
                 TestsUncompletedStudentComponent,
                 TestDetailsUncompletedStudentComponent,
-                TestCompletionDialogComponent],
+                TestCompletionDialogComponent,
+                TestGenesisComponent],
   imports: [
     CommonModule,
     MaterialModule,
@@ -34,11 +33,9 @@ import { TestCompletionDialogComponent } from './test-completion-dialog/test-com
   ],
   // This is very important for angular material dialog
   entryComponents: [
-    TestScoreDialogComponent,TestCompletionDialogComponent
+    TestScoreDialogComponent, TestCompletionDialogComponent
   ],
   exports: [
-    TestsComponent,
-    TestDetailsComponent,
     TestDetailsTeacherComponent,
     TestsTeacherComponent,
     TestsCompletedStudentComponent,
@@ -46,7 +43,8 @@ import { TestCompletionDialogComponent } from './test-completion-dialog/test-com
     TestScoreDialogComponent,
     TestsUncompletedStudentComponent,
     TestDetailsUncompletedStudentComponent,
-    TestCompletionDialogComponent
+    TestCompletionDialogComponent,
+    TestGenesisComponent
   ]
 })
 export class TestsModule { }

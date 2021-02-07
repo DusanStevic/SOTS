@@ -4,12 +4,12 @@
 
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../core/services/auth.service';
-import { User } from 'src/app/shared/models/login';
 import { ToastrService } from 'ngx-toastr';
 import { DagService } from '../core/services/dag.service';
-import { Node, NodeDB} from '../shared/models/node';
-import { Link, LinkDB} from '../shared/models/link';
+import { Node, NodeDB} from '../models/node';
+import { Link, LinkDB} from '../models/link';
 import { Subject } from 'rxjs';
+import { User } from '../models/user';
 
 
 

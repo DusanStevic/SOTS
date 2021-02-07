@@ -3,7 +3,4 @@ export interface Login {
     password: string;
 }
 
-export interface User {
-    username: string;
-    email: string;
-  }
+
