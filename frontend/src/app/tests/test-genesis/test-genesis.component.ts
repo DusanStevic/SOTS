@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CourseService } from 'src/app/core/services/course.service';
 import { Subscription } from 'rxjs';
-import { FormGroup, FormBuilder, Validators, NgModel, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, NgModel, FormControl, FormArray } from '@angular/forms';
 import { Test } from 'src/app/models/test';
 import { TestService } from 'src/app/core/services/test.service';
 
@@ -44,10 +44,98 @@ export class TestGenesisComponent implements OnInit {
   private createForm(): void {
     this.addNewTestForm = this.fb.group({
       title : ['', Validators.required],
+      sections: new FormArray([
+        this.initSection(),
+      ]),
     });
   }
 
+  initSection() {
+    return new FormGroup({
+      sectionTitle: new FormControl(''),
+      sectionDescription: new FormControl(''),
+      questions: new FormArray([
+        this.initQuestion()
+        ])
+    });
+  }
+  initQuestion() {
+    return new FormGroup({
+      questionTitle: new FormControl(''),
+      questionType: new FormControl('', Validators.required),
+      options: new FormArray([
+        this.initOptions()
+      ])
+    });
+  }
+
+  initOptions() {
+    return new FormGroup({
+      optionTitle: new FormControl('')
+    });
+  }
+
+  addSection() {
+    const control = this.addNewTestForm.get('sections') as FormArray;
+    control.push(this.initSection());
+  }
+
+  addQuestion(j) {
+    console.log(j);
+    const control = this.addNewTestForm.get('sections')['controls'][j].get('questions') as FormArray;
+   // console.log(control);
+    control.push(this.initQuestion());
+
+  }
+
+  add(i, j) {
+    // console.log(k);
+    const control = this.addNewTestForm.get('sections')['controls'][i].get('questions').controls[j].get('options') as FormArray;
+
+  // const control = <FormArray>this.survey.get(['sections',0,'questions',k,'options']); // also try this new syntax
+    // console.log(control);
+    control.push(this.initOptions());
+  }
+
+  getSections(form) {
+    // console.log(form.get('sections').controls);
+    return form.controls.sections.controls;
+  }
+  getQuestions(form) {
+   // console.log(form.controls.questions.controls);
+    return form.controls.questions.controls;
+  }
+  getOptions(form) {
+    // console.log(form.get('options').controls);
+    return form.controls.options.controls;
+
+  }
+
+  removeQuestion(j) {
+     const control = this.addNewTestForm.get('sections')['controls'][j].get('questions') as FormArray;
+     control.removeAt(j);
+  }
+
+  removeSection(i){
+   const control = this.addNewTestForm.get('sections') as FormArray;
+   control.removeAt(i);
+
+  }
+
+  removeOption(i, j, k) {
+    console.log(i, j, k);
+    const control = this.addNewTestForm.get(['sections', i, 'questions', j, 'options']) as FormArray; // also try this new syntax
+    control.removeAt(k);
+  }
+
+  remove(i, j) {
+    const control =  this.addNewTestForm.get(['sections', i, 'questions', j, 'options']) as FormArray;
+    control.removeAt(0);
+    control.controls = [];
+  }
+
   onAddNewTestSubmit(): void {
+    console.log(this.addNewTestForm.value);
     const test: Test = {
       title: this.addNewTestForm.controls.title.value,
       course_id: this.course.id
