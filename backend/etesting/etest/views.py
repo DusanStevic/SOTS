@@ -164,8 +164,7 @@ class CreateTest(generics.CreateAPIView):
         # creator field
         serializer.save(creator=self.request.user)
         # course field
-        print(self.request.data.get('courseId'))
-        course_id = self.request.data.get('courseId')
+        course_id = self.request.data.get('course_id')
         course = get_object_or_404(Course, id=course_id)
         serializer.save(course=course)
 

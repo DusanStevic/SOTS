@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { AuthService } from 'src/app/core/services/auth.service';
 import { CourseService } from 'src/app/core/services/course.service';
 import { Subscription } from 'rxjs';
 import { FormGroup, FormBuilder, Validators, NgModel, FormControl } from '@angular/forms';
@@ -51,7 +50,7 @@ export class TestGenesisComponent implements OnInit {
   onAddNewTestSubmit(): void {
     const test: Test = {
       title: this.addNewTestForm.controls.title.value,
-      courseId: this.course.id
+      course_id: this.course.id
     };
 
     this.testService.createTest(test).subscribe(data => {
