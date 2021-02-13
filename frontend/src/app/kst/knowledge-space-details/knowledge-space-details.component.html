@@ -1,1 +1,117 @@
-<p>knowledge-space-details works!</p>
+<div class="graph-container">
+    <ngx-graph
+    class="chart-container"
+    *ngIf="ready"
+    [view]="view"
+    [nodes]="nodes"
+    [links]="links"
+    [update$]="update$"
+  
+  >
+  
+      <ng-template #nodeTemplate let-node>
+          <svg:g class="node" ngx-tooltip [tooltipPlacement]="'top'" [tooltipType]="'tooltip'" [tooltipTitle]="node.label">
+              <svg:rect [attr.width]="node.dimension.width" [attr.height]="node.dimension.height" [attr.fill]="node.data.color" />
+              <svg:text alignment-baseline="central" [attr.x]="10" [attr.y]="node.dimension.height / 2">
+                  {{node.label}}
+              </svg:text>
+          </svg:g>
+      </ng-template>
+  
+      <ng-template #defsTemplate>
+          <svg:marker id="arrow" viewBox="0 -5 10 10" refX="8" refY="0" markerWidth="4" markerHeight="4" orient="auto">
+            <svg:path d="M0,-5L10,0L0,5" class="arrow-head" />
+          </svg:marker>
+      </ng-template>
+  
+  
+  
+      <ng-template #linkTemplate let-link>
+          <svg:g class="edge" [ngStyle]="link.color">
+            <svg:path
+              class="line"
+              stroke-width="2"
+              marker-end="url(#arrow)"
+            ></svg:path>
+            <svg:text class="edge-label" text-anchor="middle">
+              <textPath
+                style="fill: #666;"
+                [attr.href]="'#' + link.id"
+                startOffset="50%"
+              >
+                {{ link.label }}
+              </textPath>
+            </svg:text>
+          </svg:g>
+      </ng-template>
+  
+  </ngx-graph>
+</div>
+
+
+
+<div class="btn-container">
+
+    <mat-form-field>
+      <input matInput type="text" [(ngModel)]="nodeName" name="nodeName" placeholder="Node Name">
+    </mat-form-field>
+  
+    <button [disabled]="!nodeName" mat-stroked-button color="primary" class="button" (click)="addNode()"
+      style="background-color: #00B200;color: white; width:180px;">
+      Add Node
+    </button>
+    <br /><br />
+
+    <mat-form-field>
+      <input matInput type="text" [(ngModel)]="linkName" name="linkName" placeholder="Link Name">
+    </mat-form-field>
+  
+    <mat-form-field>
+      <mat-label>Source Node</mat-label>
+      <mat-select [(value)]="sourceNode">
+        <mat-option>None</mat-option>
+        <mat-option *ngFor="let node of nodes" [value]="node">
+          {{node.label}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  
+    <mat-form-field>
+      <mat-label>Target Node</mat-label>
+      <mat-select [(value)]="targetNode">
+        <mat-option>None</mat-option>
+        <mat-option *ngFor="let node of nodes" [value]="node">
+          {{node.label}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  
+    <button [disabled]="!linkName || !sourceNode || !targetNode" mat-stroked-button color="primary" class="button" style="background-color: #ffd000; color: white; width:180px;"
+      (click)="addLink()">
+      Add Link
+    </button>
+    <br /><br />
+  
+    <mat-form-field>
+      <mat-label>Delete Node</mat-label>
+      <mat-select [(value)]="deletedNode">
+        <mat-option>None</mat-option>
+        <mat-option *ngFor="let node of nodes" [value]="node">
+          {{node.label}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  
+    <button [disabled]="!deletedNode" mat-stroked-button color="primary" class="button" (click)="deleteNode()"
+      style="background-color: #C40233;color: white; width:180px;">
+      Delete Node
+    </button>
+    <br /><br />
+    <button  (click)="questionOrderByExpectedKnowledgeSpace()"
+    style="background-color: #C40273;color: white; width:180px;">
+    Redosled
+    </button>
+  </div>
+
+
+

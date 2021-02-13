@@ -9,7 +9,6 @@ import { DagService } from '../core/services/dag.service';
 import { Node, NodeDB} from '../models/node';
 import { Link, LinkDB} from '../models/link';
 import { Subject } from 'rxjs';
-import { User } from '../models/user';
 
 
 
@@ -25,7 +24,6 @@ export class HomeComponent implements OnInit {
   view = [933, 400];
   nodes: Node[] = [];
   links: Link[] = [];
-  users: User[];
   deletedNode: Node;
   sourceNode: Node;
   targetNode: Node;
@@ -46,13 +44,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.loadDag();
   }
-  loadUsers(): void {
-    this.authService.getUsers().subscribe(data => {
-      this.users = data;
-    }, error => {
-      this.toastr.error(error);
-    });
-  }
+
 
   loadDag() {
     this.dagService.readDag(1).subscribe(data => {
