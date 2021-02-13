@@ -47,30 +47,30 @@
           {{ addNewTestForm.errors }}
         </div>
 						<hr>
-						<a (click)="add(i,j)">Add Option</a>
-						<a (click)="remove(i,j)">Remove whole options</a>
+                        <input type="button" (click)="add(i,j)" value="Add Answer"/>
+                        <input type="button" (click)="remove(i,j)" value="Remove all answers"/>
 						<!-- Option Addation -->
 						<div formArrayName="options">
 							<div [formGroupName]="k" *ngFor="let option of getOptions(question); let k=index">
 								<input type="radio" disabled="disabled">
 								<input type="text" placeholder="Option 1" formControlName="optionTitle">
 
-								<a (click)="remove(i,j)">R Option</a>
-								<span *ngIf="getOptions(question).length > 1" (click)="removeOption(i,j,k)">Remove Option</span>
+                                <input *ngIf="getOptions(question).length < 2" type="button" (click)="remove(i,j)" value="Remove Answer"/>
+                                <input *ngIf="getOptions(question).length > 1" type="button" (click)="removeOption(i,j,k)" value="Remove Answer"/>
 							</div>
 							<!-- End Option Addition -->
 							<!-- Option Addtion -->
 							<!-- End Option Addition -->
 
 						</div><br>
-						<a (click)="addQuestion(i)">Add Question...</a>
-						<span *ngIf="getQuestions(section).length > 1" (click)="removeQuestion(i)">Remove Question</span>
+                        <input type="button" (click)="addQuestion(i)" value="Add Question"/>
+                        <input *ngIf="getQuestions(section).length > 1"  type="button" (click)="removeQuestion(i)" value="Remove Question"/>
 					</div><br>
 				</div>
 				<!-- End Question -->
 
 			</div><br>
-            <a (click)="addSection()">Add Section</a>
+            <input type="button" (click)="addSection()" value="Add Section"/>
 			<span *ngIf="getSections(addNewTestForm).length > 1" (click)="removeSection(i)">Remove Section</span>
 		</div>
 	</div>

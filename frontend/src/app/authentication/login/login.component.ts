@@ -42,10 +42,6 @@ export class LoginComponent implements OnInit {
     };
 
     this.authService.login(loginInfo).subscribe(data => {
-/*       localStorage.setItem(USER_ID_KEY, data.id);
-      localStorage.setItem(USER_ROLE_KEY, data.authorities[0]);
-      localStorage.setItem(USERNAME_KEY, data.username);
-      localStorage.setItem(USER_TOKEN_KEY, data.token.accessToken); */
       localStorage.setItem('token', data.token);
       localStorage.setItem('email', data.email);
       localStorage.setItem('id', data.user_id);
