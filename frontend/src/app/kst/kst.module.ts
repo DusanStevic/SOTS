@@ -4,6 +4,8 @@ import { KnowledgeSpacesComponent } from './knowledge-spaces/knowledge-spaces.co
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MaterialModule } from '../material/material.module';
 import { KnowledgeSpaceDetailsComponent } from './knowledge-space-details/knowledge-space-details.component';
+import { NgxGraphModule } from '@swimlane/ngx-graph';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 
 
@@ -13,7 +15,9 @@ import { KnowledgeSpaceDetailsComponent } from './knowledge-space-details/knowle
     CommonModule,
     MaterialModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    NgxGraphModule,
+    NgxChartsModule,
   ],
   exports: [
     KnowledgeSpacesComponent,
