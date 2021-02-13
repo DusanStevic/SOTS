@@ -26,14 +26,14 @@
 		<div class="section-container" *ngFor="let section of getSections(addNewTestForm); let i = index">
 			<div class="ui raised segments" [formGroupName]="i">
 				<h4 class="ui header">Section Details</h4>
-				<input type="text" placeholder="Untitled form" formControlName="sectionTitle">
-				<input type="text" placeholder="Form Description" formControlName="sectionDescription">
+				<input type="text" placeholder="Section title" formControlName="sectionTitle">
+				<input type="text" placeholder="Section description" formControlName="sectionDescription">
 				<!-- Question segment -->
 				<!---Survey Section -->
 				<hr>
 				<div class="question-container" formArrayName="questions">
 					<div [formGroupName]="j" *ngFor="let question of getQuestions(section); let j = index">
-						<input type="text" placeholder="Untitled Question" formControlName="questionTitle">
+						<input type="text" placeholder="Question text" formControlName="questionTitle">
 						<select formControlName="questionType">  
                         <option></option>
                           <option>Check Boxes</option>
@@ -53,7 +53,7 @@
 						<div formArrayName="options">
 							<div [formGroupName]="k" *ngFor="let option of getOptions(question); let k=index">
 								<input type="radio" disabled="disabled">
-								<input type="text" placeholder="Option 1" formControlName="optionTitle">
+								<input type="text" placeholder="Answer text" formControlName="optionTitle">
 
                                 <input *ngIf="getOptions(question).length < 2" type="button" (click)="remove(i,j)" value="Remove Answer"/>
                                 <input *ngIf="getOptions(question).length > 1" type="button" (click)="removeOption(i,j,k)" value="Remove Answer"/>

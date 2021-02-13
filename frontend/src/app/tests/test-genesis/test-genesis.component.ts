@@ -44,6 +44,7 @@ export class TestGenesisComponent implements OnInit {
   private createForm(): void {
     this.addNewTestForm = this.fb.group({
       title : ['', Validators.required],
+      course_id: [],
       sections: new FormArray([
         this.initSection(),
       ]),
@@ -136,12 +137,10 @@ export class TestGenesisComponent implements OnInit {
 
   onAddNewTestSubmit(): void {
     console.log(this.addNewTestForm.value);
-    const test: Test = {
-      title: this.addNewTestForm.controls.title.value,
-      course_id: this.course.id
-    };
-
-    this.testService.createTest(test).subscribe(data => {
+    // Manually Set Value for FormBuilder Control (course_id field, because course is already chosen for which you make test)
+    this.addNewTestForm.controls['course_id'].setValue(this.course.id);
+    console.log(this.addNewTestForm.value);
+    this.testService.createTest(this.addNewTestForm.value).subscribe(data => {
       this.toastr.success('New test has been successfully added.');
       this.router.navigate(['tests-teacher', this.course.id]);
     }, error => {

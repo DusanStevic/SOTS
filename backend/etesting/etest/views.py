@@ -167,37 +167,39 @@ class CreateTest(generics.CreateAPIView):
         course_id = self.request.data.get('course_id')
         course = get_object_or_404(Course, id=course_id)
         serializer.save(course=course)
-
-
-"""         # questions field
-        questions = self.request.data.get('questions')
-        for question in questions:
-            question_text = question['question_text']
-            problem_id = question['problem']
-            problem = get_object_or_404(Node, id=problem_id)
-            # creating question
-            question_db = Question()
-            question_db.question_text = question_text
-            question_db.problem = problem
-            # serializer.save() returns the instance that is just being created or updated.
-            # serializer.save() is equal to the currently generated test.
-            # adding test to question
-            question_db.test = serializer.save()
-            question_db.save()
-            for answer in question['answers']:
-                answer_text = answer['answer_text']
-                correct_answer = answer['correct_answer']
-                # creating answer
-                answer_db = Answer()
-                answer_db.answer_text = answer_text
-                answer_db.correct_answer = correct_answer
-                # adding question to answer
-                answer_db.question_db = question_db
-                answer_db.save()
-                # adding answers to question
-                question_db.answers.add(answer_db)
-            # adding questions to test
-            serializer.save().questions.add(question_db) """
+        sections = self.request.data.get('sections')
+        for section in sections:
+            # questions field
+            questions = section['questions']
+            for question in questions:
+                print(question)
+                print(question['questionTitle'])
+"""                 question_text = question['question_text']
+                problem_id = question['problem']
+                problem = get_object_or_404(Node, id=problem_id)
+                # creating question
+                question_db = Question()
+                question_db.question_text = question_text
+                question_db.problem = problem
+                # serializer.save() returns the instance that is just being created or updated.
+                # serializer.save() is equal to the currently generated test.
+                # adding test to question
+                question_db.test = serializer.save()
+                question_db.save()
+                for answer in question['answers']:
+                    answer_text = answer['answer_text']
+                    correct_answer = answer['correct_answer']
+                    # creating answer
+                    answer_db = Answer()
+                    answer_db.answer_text = answer_text
+                    answer_db.correct_answer = correct_answer
+                    # adding question to answer
+                    answer_db.question_db = question_db
+                    answer_db.save()
+                    # adding answers to question
+                    question_db.answers.add(answer_db)
+                # adding questions to test
+                serializer.save().questions.add(question_db) """
             
 
 

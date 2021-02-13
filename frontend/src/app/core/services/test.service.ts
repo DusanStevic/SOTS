@@ -58,7 +58,7 @@ export class TestService {
     return this.http.post(environment.apiUrlPrefix + '/api/tests/CreateCompletedTest', testCompletion);
   }
 
-  createTest(test: Test) {
+  createTest(test: any) {
     return this.http.post(environment.apiUrlPrefix + '/api/tests/CreateTest', test);
   }
 
