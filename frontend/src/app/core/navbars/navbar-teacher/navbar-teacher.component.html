@@ -1,7 +1,9 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <mat-icon class="example-icon" aria-hidden="false" aria-label="Example delete icon">school</mat-icon>
-    <span>SOTS</span>
+    <button mat-button (click)="onTitleClick()">
+      <mat-icon class="example-icon" aria-hidden="false" aria-label="Example SOTS icon">school</mat-icon>
+      <span>SOTS</span>
+    </button>
     <span class="example-spacer"></span>
     <mat-icon class="example-icon" aria-hidden="false" aria-label="Example heart icon">favorite</mat-icon>
     <mat-icon class="example-icon" aria-hidden="false" aria-label="Example delete icon">delete</mat-icon>

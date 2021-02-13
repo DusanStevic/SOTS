@@ -22,7 +22,11 @@ export class NavbarAdminComponent implements OnInit {
 
   onClickLogout(): void {
     this.authService.logout();
-    this.toastr.success('Succesful logout!');
+    this.toastr.success('Logout successful!');
+    this.router.navigate(['']);
+  }
+
+  onTitleClick(): void {
     this.router.navigate(['']);
   }
 
