@@ -64,6 +64,11 @@ export class CourseDetailsComponent implements OnInit {
     this.router.navigate(['test-genesis', id]);
   }
 
+  onClickGetAllKnowledgeSpacesForCourse(id: number): void {
+    this.router.navigate(['knowledge-spaces', id]);
+  }
+
+
 
 
 }

@@ -18,6 +18,7 @@ class LinkSerializer(serializers.ModelSerializer):
         model = Link
         fields = '__all__'
 class KnowledgeSpaceSerializer(serializers.ModelSerializer):
+    domain = DomainSerializer(many=False)
     nodes = NodeSerializer(many=True)
     links = LinkSerializer(many=True)
     class Meta:

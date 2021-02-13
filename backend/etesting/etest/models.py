@@ -8,9 +8,10 @@ class Domain(models.Model):
         return f'{self.title}'
 
 class KnowledgeSpace(models.Model):
+    title = models.CharField(max_length=255, null=True)
     domain = models.ForeignKey(Domain, on_delete=models.CASCADE, related_name='knowledge_spaces', null=True)
     def __str__(self):
-        return 'Knowledge space'+f'{self.id}'
+        return f'{self.title}'
 
 class Node(models.Model):
     knowledge_space = models.ForeignKey(KnowledgeSpace, on_delete=models.CASCADE, related_name='nodes', null=True, blank=True)
