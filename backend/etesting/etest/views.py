@@ -12,34 +12,6 @@ from itertools import chain
 from etest.pagination import LargeResultsSetPagination
 from django.shortcuts import get_object_or_404
 
-
-# You can create your views here.
-class Dag(generics.RetrieveAPIView):
-    permission_classes = [permissions.IsAuthenticated, IsTeacherUser]
-    serializer_class = KnowledgeSpaceSerializer
-    queryset = KnowledgeSpace.objects.all()
-class CreateDag(generics.CreateAPIView):
-    permission_classes = [permissions.IsAuthenticated, IsTeacherUser]
-    serializer_class = CreateKnowledgeSpaceSerializer
-    queryset = KnowledgeSpace.objects.all()
-
-class CreateNode(generics.CreateAPIView):
-    permission_classes = [permissions.IsAuthenticated, IsTeacherUser]
-    serializer_class = NodeSerializer
-    queryset = Node.objects.all()
-    
-class DestroyNode(generics.DestroyAPIView):
-    permission_classes = [permissions.IsAuthenticated, IsTeacherUser]
-    serializer_class = NodeSerializer
-    queryset = Node.objects.all()
-
-class CreateLink(generics.CreateAPIView):
-    permission_classes = [permissions.IsAuthenticated, IsTeacherUser]
-    serializer_class = LinkSerializer
-    queryset = Link.objects.all()
-
-
-
 # courses
 class GetAllCoursesByUser(generics.ListAPIView):
     # Allowed for students and teachers.
@@ -240,3 +212,36 @@ class GetTestXmlById(generics.ListAPIView):
             xml_serializer.serialize(result_list, stream=out)
 
         return test
+
+# kst
+class Dag(generics.RetrieveAPIView):
+    permission_classes = [permissions.IsAuthenticated, IsTeacherUser]
+    serializer_class = KnowledgeSpaceSerializer
+    queryset = KnowledgeSpace.objects.all()
+class CreateDag(generics.CreateAPIView):
+    permission_classes = [permissions.IsAuthenticated, IsTeacherUser]
+    serializer_class = CreateKnowledgeSpaceSerializer
+    queryset = KnowledgeSpace.objects.all()
+
+class CreateNode(generics.CreateAPIView):
+    permission_classes = [permissions.IsAuthenticated, IsTeacherUser]
+    serializer_class = NodeSerializer
+    queryset = Node.objects.all()
+    
+class DestroyNode(generics.DestroyAPIView):
+    permission_classes = [permissions.IsAuthenticated, IsTeacherUser]
+    serializer_class = NodeSerializer
+    queryset = Node.objects.all()
+
+class CreateLink(generics.CreateAPIView):
+    permission_classes = [permissions.IsAuthenticated, IsTeacherUser]
+    serializer_class = LinkSerializer
+    queryset = Link.objects.all()
+
+class GetAllKnowledgeSpacesForCourse(generics.ListAPIView):
+    permission_classes = [permissions.IsAuthenticated, IsTeacherUser]
+    serializer_class = KnowledgeSpaceSerializer 
+    # This view should return a list of all the knowledge spaces for a chosen course 
+    def get_queryset(self):
+        domain = Domain.objects.get(course__id=self.kwargs['pk'])
+        return KnowledgeSpace.objects.filter(domain__id=domain.id)

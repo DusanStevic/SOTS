@@ -5,6 +5,8 @@ import { RoleGuard } from './core/guards/role.guard';
 import { CourseDetailsComponent } from './courses/course-details/course-details.component';
 import { CoursesComponent } from './courses/courses/courses.component';
 import { HomeComponent } from './home/home.component';
+import { KnowledgeSpaceDetailsComponent } from './kst/knowledge-space-details/knowledge-space-details.component';
+import { KnowledgeSpacesComponent } from './kst/knowledge-spaces/knowledge-spaces.component';
 import { ForbiddenPageComponent } from './pages/forbidden-page/forbidden-page.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { TestDetailsCompletedStudentComponent } from './tests/test-details-completed-student/test-details-completed-student.component';
@@ -78,6 +80,18 @@ const routes: Routes = [
   {
     path: 'test-genesis/:id',
     component: TestGenesisComponent,
+    canActivate: [RoleGuard],
+    data: {expectedRoles: 'TEACHER'}
+  },
+  {
+    path: 'knowledge-spaces/:id',
+    component: KnowledgeSpacesComponent,
+    canActivate: [RoleGuard],
+    data: {expectedRoles: 'TEACHER'}
+  },
+  {
+    path: 'knowledge-space-details/:id',
+    component: KnowledgeSpaceDetailsComponent,
     canActivate: [RoleGuard],
     data: {expectedRoles: 'TEACHER'}
   },

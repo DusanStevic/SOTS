@@ -8,6 +8,7 @@ import { NavbarTeacherComponent } from './navbars/navbar-teacher/navbar-teacher.
 import { NavbarStudentComponent } from './navbars/navbar-student/navbar-student.component';
 import { DagService } from './services/dag.service';
 import { NavbarAdminComponent } from './navbars/navbar-admin/navbar-admin.component';
+import { KstService } from './services/kst.service';
 
 
 
@@ -20,7 +21,7 @@ import { NavbarAdminComponent } from './navbars/navbar-admin/navbar-admin.compon
     AppRoutingModule
   ],
   providers: [
-    AuthService, DagService
+    AuthService, DagService, KstService
   ],
   exports: [
     NavbarTeacherComponent, NavbarStudentComponent, NavbarAdminComponent
