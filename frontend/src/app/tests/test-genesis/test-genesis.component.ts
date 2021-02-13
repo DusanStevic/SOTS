@@ -53,8 +53,8 @@ export class TestGenesisComponent implements OnInit {
 
   initSection() {
     return new FormGroup({
-      sectionTitle: new FormControl(''),
-      sectionDescription: new FormControl(''),
+      sectionTitle: new FormControl('', Validators.required),
+      sectionDescription: new FormControl('', Validators.required),
       questions: new FormArray([
         this.initQuestion()
         ])
@@ -62,7 +62,7 @@ export class TestGenesisComponent implements OnInit {
   }
   initQuestion() {
     return new FormGroup({
-      questionTitle: new FormControl(''),
+      questionTitle: new FormControl('', Validators.required),
       questionType: new FormControl('', Validators.required),
       options: new FormArray([
         this.initOptions()
@@ -72,7 +72,8 @@ export class TestGenesisComponent implements OnInit {
 
   initOptions() {
     return new FormGroup({
-      optionTitle: new FormControl('')
+      optionTitle: new FormControl(''),
+      correct_answer : new FormControl(false, Validators.required),
     });
   }
 

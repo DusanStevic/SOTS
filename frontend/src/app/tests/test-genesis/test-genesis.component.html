@@ -54,7 +54,7 @@
 							<div [formGroupName]="k" *ngFor="let option of getOptions(question); let k=index">
 								<input type="radio" disabled="disabled">
 								<input type="text" placeholder="Answer text" formControlName="optionTitle">
-
+                                <input type="checkbox" formControlName="correct_answer"><label for="materialUnchecked">Correct</label>
                                 <input *ngIf="getOptions(question).length < 2" type="button" (click)="remove(i,j)" value="Remove Answer"/>
                                 <input *ngIf="getOptions(question).length > 1" type="button" (click)="removeOption(i,j,k)" value="Remove Answer"/>
 							</div>
