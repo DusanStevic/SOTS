@@ -186,6 +186,7 @@ export class TestGenesisComponent implements OnInit {
     });
   }
 
-  
+  onKnowledgeSpaceChange(event) {
+  }
 
 }

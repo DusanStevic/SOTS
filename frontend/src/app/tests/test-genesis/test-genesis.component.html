@@ -56,7 +56,8 @@
                         <div class="row">   
                             <mat-form-field appearance="fill">
                                 <mat-label>Choose a problem</mat-label>
-                                <mat-select formControlName="questionType">
+                                <!---Update problems on knowledge space change -->
+                                <mat-select formControlName="questionType" (ngModelChange)="onKnowledgeSpaceChange($event)">
                                     <mat-option *ngFor="let node of chosenKnowledgeSpace.nodes" [value]="node.id">
                                         {{node.node_label}}
                                     </mat-option>
