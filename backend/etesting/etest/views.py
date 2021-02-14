@@ -146,8 +146,8 @@ class CreateTest(generics.CreateAPIView):
             for question in questions:
                 print(question)
                 print(question['questionTitle'])
-"""                 question_text = question['question_text']
-                problem_id = question['problem']
+                question_text = question['questionTitle']
+                problem_id = question['questionType']
                 problem = get_object_or_404(Node, id=problem_id)
                 # creating question
                 question_db = Question()
@@ -158,8 +158,8 @@ class CreateTest(generics.CreateAPIView):
                 # adding test to question
                 question_db.test = serializer.save()
                 question_db.save()
-                for answer in question['answers']:
-                    answer_text = answer['answer_text']
+                for answer in question['options']:
+                    answer_text = answer['optionTitle']
                     correct_answer = answer['correct_answer']
                     # creating answer
                     answer_db = Answer()
@@ -171,7 +171,7 @@ class CreateTest(generics.CreateAPIView):
                     # adding answers to question
                     question_db.answers.add(answer_db)
                 # adding questions to test
-                serializer.save().questions.add(question_db) """
+                serializer.save().questions.add(question_db)
             
 
 
