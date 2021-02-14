@@ -3,6 +3,24 @@
         <mat-card-title>Add new test for course{{course.title | titlecase}}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
+          <div class = "container">
+            <form [formGroup]="showKnowledgeSpacesForm" (submit)="onShowKnowledgeSpaceSubmit()">
+                <div class="row">   
+                    <mat-form-field appearance="fill">
+                        <mat-label>Choose a knowledge space</mat-label>
+                        <mat-select formControlName="knowledge_space_id">
+                            <mat-option *ngFor="let knowledgeSpace of knowledgeSpaces" [value]="knowledgeSpace.id">
+                                {{knowledgeSpace.title}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <button class="submit-button" id="show-btn" type="submit" mat-raised-button color="primary" [disabled]="showKnowledgeSpacesForm.invalid">
+                    Show knowledge space
+                </button>
+            </form>
+        
+        </div>
 
     </mat-card-content>
 </mat-card>

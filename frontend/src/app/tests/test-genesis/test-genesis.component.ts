@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { FormGroup, FormBuilder, Validators, NgModel, FormControl, FormArray } from '@angular/forms';
 import { Test } from 'src/app/models/test';
 import { TestService } from 'src/app/core/services/test.service';
+import { KstService } from 'src/app/core/services/kst.service';
 
 @Component({
   selector: 'app-test-genesis',
@@ -14,21 +15,28 @@ import { TestService } from 'src/app/core/services/test.service';
 })
 export class TestGenesisComponent implements OnInit {
   addNewTestForm: FormGroup;
-  private course;
+  showKnowledgeSpacesForm: FormGroup;
+  private course: any;
   routeSub: Subscription;
+  knowledgeSpaces: any[] = [];
+  private chosenKnowledgeSpace: any;
+  selectedValue: string;
 
   constructor(private fb: FormBuilder,
               private toastr: ToastrService,
               private router: Router,
               private route: ActivatedRoute,
               private courseService: CourseService,
-              private testService: TestService) { }
+              private testService: TestService,
+              private kstService: KstService, ) { }
 
   ngOnInit() {
     this.routeSub = this.route.params.subscribe( params => {
+      this.getKnowledgeSpaces(params.id as number);
       this.getCourse(params.id as number);
     });
-    this.createForm();
+    this.createKnowledgeSpacesForm();
+    this.createTestForm();
   }
 
   private getCourse(id: number): void {
@@ -41,13 +49,29 @@ export class TestGenesisComponent implements OnInit {
     });
   }
 
-  private createForm(): void {
+  private getKnowledgeSpaces(id: number): void {
+    this.kstService.getAllKnowledgeSpacesForCourse(id).subscribe(data => {
+      this.knowledgeSpaces = data;
+    }, error => {
+      this.toastr.error(error);
+      this.toastr.error('There was an error while getting the data about knowledge spaces for course.');
+      this.router.navigate(['not-found-page']);
+    });
+  }
+
+  private createTestForm(): void {
     this.addNewTestForm = this.fb.group({
       title : ['', Validators.required],
       course_id: [],
       sections: new FormArray([
         this.initSection(),
       ]),
+    });
+  }
+
+  private createKnowledgeSpacesForm(): void {
+    this.showKnowledgeSpacesForm = this.fb.group({
+      knowledge_space_id : ['', Validators.required]
     });
   }
 
@@ -134,6 +158,19 @@ export class TestGenesisComponent implements OnInit {
     const control =  this.addNewTestForm.get(['sections', i, 'questions', j, 'options']) as FormArray;
     control.removeAt(0);
     control.controls = [];
+  }
+
+  onShowKnowledgeSpaceSubmit(): void {
+    console.log(this.showKnowledgeSpacesForm.value);
+    this.kstService.getKnowledgeSpaceById(this.showKnowledgeSpacesForm.value.knowledge_space_id).subscribe(data => {
+      this.chosenKnowledgeSpace = data;
+      console.log(this.chosenKnowledgeSpace)
+      //this.router.navigate(['tests-teacher', this.course.id]);
+    }, error => {
+      this.toastr.error(error.message);
+      this.toastr.error('There was an error while getting the data about chosen knowledge space.');
+      this.router.navigate(['not-found-page']);
+    });
   }
 
   onAddNewTestSubmit(): void {

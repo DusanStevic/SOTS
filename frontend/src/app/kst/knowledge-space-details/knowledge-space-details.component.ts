@@ -10,6 +10,7 @@ import { TestService } from 'src/app/core/services/test.service';
 import { Link, LinkDB } from 'src/app/models/link';
 import { Node, NodeDB } from 'src/app/models/node';
 import { DagService } from 'src/app/core/services/dag.service';
+import { KstService } from 'src/app/core/services/kst.service';
 
 
 @Component({
@@ -42,17 +43,17 @@ export class KnowledgeSpaceDetailsComponent implements OnInit {
   constructor(private toastr: ToastrService,
               private router: Router,
               private route: ActivatedRoute,
-              private testService: TestService,
-              private dagService: DagService ) { }
+              private dagService: DagService,
+              private kstService: KstService, ) { }
 
   ngOnInit() {
     this.routeSub = this.route.params.subscribe( params => {
-      this.loadDag(params.id as number);
+      this.getKnowledgeSpace(params.id as number);
     });
   }
 
-  loadDag(id: number) {
-    this.dagService.readDag(id).subscribe(data => {
+  getKnowledgeSpace(id: number) {
+    this.kstService.getKnowledgeSpaceById(id).subscribe(data => {
       for (const node of data.nodes) {
         this.nodes.push({
           db_id: node.id,
