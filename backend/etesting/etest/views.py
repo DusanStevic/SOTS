@@ -214,10 +214,11 @@ class GetTestXmlById(generics.ListAPIView):
         return test
 
 # kst
-class Dag(generics.RetrieveAPIView):
+class GetKnowledgeSpaceById(generics.RetrieveAPIView):
     permission_classes = [permissions.IsAuthenticated, IsTeacherUser]
     serializer_class = KnowledgeSpaceSerializer
     queryset = KnowledgeSpace.objects.all()
+
 class CreateDag(generics.CreateAPIView):
     permission_classes = [permissions.IsAuthenticated, IsTeacherUser]
     serializer_class = CreateKnowledgeSpaceSerializer
