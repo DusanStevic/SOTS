@@ -24,7 +24,8 @@
 
     </mat-card-content>
 </mat-card>
-<div class = "container">
+<!---Suspend rendering with *ngIf until you get data -->
+<div class = "container" *ngIf="this.course && this.chosenKnowledgeSpace">
     <form [formGroup]="addNewTestForm" (submit)="onAddNewTestSubmit()">
         <div class="row">
             <div class="input-field">
@@ -52,14 +53,17 @@
 				<div class="question-container" formArrayName="questions">
 					<div [formGroupName]="j" *ngFor="let question of getQuestions(section); let j = index">
 						<input type="text" placeholder="Question text" formControlName="questionTitle">
-						<select formControlName="questionType">  
-                        <option></option>
-                          <option>Check Boxes</option>
-                          <option>Free Text</option>
-                          <option>Rating</option>
-                          <option>Date</option>
-                          <option>Time</option>
-                      </select>
+                        <div class="row">   
+                            <mat-form-field appearance="fill">
+                                <mat-label>Choose a problem</mat-label>
+                                <mat-select formControlName="questionType">
+                                    <mat-option *ngFor="let node of chosenKnowledgeSpace.nodes" [value]="node.id">
+                                        {{node.node_label}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
 
   <div *ngIf="addNewTestForm.errors" class="alert alert-danger">
           {{ addNewTestForm.errors }}

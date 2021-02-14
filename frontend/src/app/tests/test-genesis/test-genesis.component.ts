@@ -164,8 +164,6 @@ export class TestGenesisComponent implements OnInit {
     console.log(this.showKnowledgeSpacesForm.value);
     this.kstService.getKnowledgeSpaceById(this.showKnowledgeSpacesForm.value.knowledge_space_id).subscribe(data => {
       this.chosenKnowledgeSpace = data;
-      console.log(this.chosenKnowledgeSpace)
-      //this.router.navigate(['tests-teacher', this.course.id]);
     }, error => {
       this.toastr.error(error.message);
       this.toastr.error('There was an error while getting the data about chosen knowledge space.');
@@ -187,5 +185,7 @@ export class TestGenesisComponent implements OnInit {
       this.router.navigate(['not-found-page']);
     });
   }
+
+  
 
 }
