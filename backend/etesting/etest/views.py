@@ -12,6 +12,12 @@ from itertools import chain
 from etest.pagination import LargeResultsSetPagination
 from django.shortcuts import get_object_or_404
 
+import pandas as pd
+import numpy as np
+import sys
+sys.path.append('kst_lib/learning_spaces/')
+from kst_lib.learning_spaces.kst import iita
+
 # courses
 class GetAllCoursesByUser(generics.ListAPIView):
     # Allowed for students and teachers.
@@ -246,3 +252,11 @@ class GetAllKnowledgeSpacesForCourse(generics.ListAPIView):
     def get_queryset(self):
         domain = Domain.objects.get(course__id=self.kwargs['pk'])
         return KnowledgeSpace.objects.filter(domain__id=domain.id)
+
+class GetRealKnowledgeSpaceById(generics.RetrieveAPIView):
+    permission_classes = [permissions.IsAuthenticated, IsTeacherUser]
+    data_frame = pd.DataFrame({'a': [1, 0, 1], 'b': [0, 1, 0], 'c': [0, 1, 1]})
+    response = iita(data_frame, v=1)
+    print(response)
+    serializer_class = KnowledgeSpaceSerializer
+    queryset = KnowledgeSpace.objects.all()

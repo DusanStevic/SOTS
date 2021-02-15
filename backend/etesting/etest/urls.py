@@ -26,5 +26,6 @@ urlpatterns = [
     path('create-dag', CreateDag.as_view()),
     path('kst/GetAllKnowledgeSpacesForCourse/<int:pk>', GetAllKnowledgeSpacesForCourse.as_view()),
     path('kst/GetKnowledgeSpaceById/<int:pk>', GetKnowledgeSpaceById.as_view()),
+    path('kst/GetRealKnowledgeSpaceById/<int:pk>', GetRealKnowledgeSpaceById.as_view()),
 
 ]
