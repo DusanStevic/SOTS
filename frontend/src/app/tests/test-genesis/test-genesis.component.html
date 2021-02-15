@@ -24,6 +24,10 @@
 
     </mat-card-content>
 </mat-card>
+<div class = "container" *ngIf="this.course && this.chosenKnowledgeSpace">
+    <app-test-genesis-knowledge-space-view [knowledgeSpaceId] = this.chosenKnowledgeSpace.id></app-test-genesis-knowledge-space-view>
+</div>
+
 <!---Suspend rendering with *ngIf until you get data -->
 <div class = "container" *ngIf="this.course && this.chosenKnowledgeSpace">
     <form [formGroup]="addNewTestForm" (submit)="onAddNewTestSubmit()">

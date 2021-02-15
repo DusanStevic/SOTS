@@ -2,7 +2,7 @@
 // https://github.com/rat17sri/ngx-graph-angular
 // https://github.com/hdoan002/graph-template
 
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, Subscription } from 'rxjs';
@@ -11,15 +11,14 @@ import { Node, NodeDB } from 'src/app/models/node';
 import { DagService } from 'src/app/core/services/dag.service';
 import { KstService } from 'src/app/core/services/kst.service';
 
-
 @Component({
-  selector: 'app-knowledge-space-details',
-  templateUrl: './knowledge-space-details.component.html',
-  styleUrls: ['./knowledge-space-details.component.scss']
+  selector: 'app-test-genesis-knowledge-space-view',
+  templateUrl: './test-genesis-knowledge-space-view.component.html',
+  styleUrls: ['./test-genesis-knowledge-space-view.component.scss']
 })
-export class KnowledgeSpaceDetailsComponent implements OnInit {
+export class TestGenesisKnowledgeSpaceViewComponent implements OnInit {
 
-  routeSub: Subscription;
+  @Input() knowledgeSpaceId: number;
   update$: Subject<boolean> = new Subject();
   center$: Subject<boolean> = new Subject();
   zoomToFit$: Subject<boolean> = new Subject();
@@ -39,14 +38,11 @@ export class KnowledgeSpaceDetailsComponent implements OnInit {
 
   constructor(private toastr: ToastrService,
               private router: Router,
-              private route: ActivatedRoute,
               private dagService: DagService,
               private kstService: KstService, ) { }
 
   ngOnInit() {
-    this.routeSub = this.route.params.subscribe( params => {
-      this.getKnowledgeSpace(params.id as number);
-    });
+    this.getKnowledgeSpace(this.knowledgeSpaceId);
   }
 
   getKnowledgeSpace(id: number) {
