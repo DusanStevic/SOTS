@@ -11,7 +11,9 @@ import { TestsUncompletedStudentComponent } from './tests-uncompleted-student/te
 import { TestDetailsUncompletedStudentComponent } from './test-details-uncompleted-student/test-details-uncompleted-student.component';
 import { TestCompletionDialogComponent } from './test-completion-dialog/test-completion-dialog.component';
 import { TestGenesisComponent } from './test-genesis/test-genesis.component';
-
+import { NgxGraphModule } from '@swimlane/ngx-graph';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { TestGenesisKnowledgeSpaceViewComponent } from './test-genesis-knowledge-space-view/test-genesis-knowledge-space-view.component';
 
 
 @NgModule({
@@ -24,12 +26,15 @@ import { TestGenesisComponent } from './test-genesis/test-genesis.component';
                 TestsUncompletedStudentComponent,
                 TestDetailsUncompletedStudentComponent,
                 TestCompletionDialogComponent,
-                TestGenesisComponent],
+                TestGenesisComponent,
+                TestGenesisKnowledgeSpaceViewComponent],
   imports: [
     CommonModule,
     MaterialModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    NgxGraphModule,
+    NgxChartsModule,
   ],
   // This is very important for angular material dialog
   entryComponents: [
@@ -44,7 +49,9 @@ import { TestGenesisComponent } from './test-genesis/test-genesis.component';
     TestsUncompletedStudentComponent,
     TestDetailsUncompletedStudentComponent,
     TestCompletionDialogComponent,
-    TestGenesisComponent
+    TestGenesisComponent,
+    TestGenesisKnowledgeSpaceViewComponent
+
   ]
 })
 export class TestsModule { }
