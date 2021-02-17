@@ -54,7 +54,7 @@ export class KnowledgeSpacesComponent implements OnInit {
   }
 
   onClickDetails(knowledgeSpacesId: number): void {
-    this.router.navigate(['knowledge-space-details', knowledgeSpacesId]);
+    this.router.navigate(['knowledge-spaces-comparison', knowledgeSpacesId]);
   }
 
 }
