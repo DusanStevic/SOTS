@@ -27,5 +27,6 @@ urlpatterns = [
     path('kst/GetAllKnowledgeSpacesForCourse/<int:pk>', GetAllKnowledgeSpacesForCourse.as_view()),
     path('kst/GetKnowledgeSpaceById/<int:pk>', GetKnowledgeSpaceById.as_view()),
     path('kst/GetRealKnowledgeSpaceById/<int:pk>', GetRealKnowledgeSpaceById.as_view()),
+    path('kst/GetGraphEditDistanceById/<int:pk>', GetGraphEditDistanceById.as_view()),
 
 ]

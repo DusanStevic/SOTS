@@ -12,6 +12,8 @@ from itertools import chain
 from etest.pagination import LargeResultsSetPagination
 from django.shortcuts import get_object_or_404
 
+import networkx as nx
+
 import pandas as pd
 import numpy as np
 import sys
@@ -342,4 +344,52 @@ class GetRealKnowledgeSpaceById(generics.RetrieveAPIView):
             knowledge_space_db.save()
 
         return knowledge_space
+
+class GetGraphEditDistanceById(generics.RetrieveAPIView):
+    permission_classes = [permissions.IsAuthenticated, IsTeacherUser]
+    serializer_class = KnowledgeSpaceSerializer
+    
+    # This view should return graph edit distance metric (GED) for chosen knowledge space
+    def get_queryset(self):
+        knowledge_space = KnowledgeSpace.objects.filter(id=self.kwargs['pk'])
+        # expected and real knowledge space have same nodes
+        # nodes = simple list
+        nodes = []
+        for node in knowledge_space[0].nodes.all():
+            nodes.append(node.id)
+        # remove duplicates
+        nodes_expected = list(dict.fromkeys(nodes))
+        nodes_real = list(dict.fromkeys(nodes))
+        # links = list of tuples
+        links_expected = []
+        links_real = []
+        # expected knowledge space has expected links, while real knowledge space has real links
+        for link in knowledge_space[0].links.all():
+            if link.real == True:
+                links_real.append((link.source.id,link.target.id))
+            else:
+                links_expected.append((link.source.id,link.target.id))
+        
+        # remove duplicates
+        links_expected = list(dict.fromkeys(links_expected))      
+        links_real = list(dict.fromkeys(links_real))
+        # calculate ged using networkx lib
+        expected_ks = nx.Graph()
+        expected_ks.add_nodes_from(nodes_expected)
+        expected_ks.add_edges_from(links_expected)
+
+        real_ks = nx.Graph()
+        real_ks.add_nodes_from(nodes_real)
+        real_ks.add_edges_from(links_real)
+        ged = nx.algorithms.similarity.graph_edit_distance(expected_ks, real_ks)
+        # Graph Edit Distance (GED) metric for graph comparison:
+        # "The graph edit distance is the number of edge/node changes needed
+        # to make two graphs isomorphic."-NetworkX — NetworkX documentation
+        # GED is defined as the minimum number of edits needed to transform one graph into the other,
+        # with the allowable edit operations being insertion, deletion, or substitution of a single node." - Wikipedia.com
+        print(f"Graph edit distance = {ged}")
+        
+        
+            
+        return knowledge_space 
         
