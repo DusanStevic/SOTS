@@ -255,8 +255,108 @@ class GetAllKnowledgeSpacesForCourse(generics.ListAPIView):
 
 class GetRealKnowledgeSpaceById(generics.RetrieveAPIView):
     permission_classes = [permissions.IsAuthenticated, IsTeacherUser]
-    data_frame = pd.DataFrame({'a': [1, 0, 1], 'b': [0, 1, 0], 'c': [0, 1, 1]})
-    response = iita(data_frame, v=1)
-    print(response)
     serializer_class = KnowledgeSpaceSerializer
-    queryset = KnowledgeSpace.objects.all()
+    
+    # NAPISI BOLJI KOMENTAR STA SE STVARNO DOGADJA
+    # This view should return a chosen test 
+    # that is going to be executed by the currently authenticated student.
+    def get_queryset(self):
+        matrix_iita = {}
+        chosen_answer_counter = 0
+        knowledge_space = KnowledgeSpace.objects.filter(id=self.kwargs['pk'])
+        # initializing matrix iita
+        for node in knowledge_space[0].nodes.all():
+            matrix_iita[node.id] = []
+
+        print(matrix_iita)
+        # one problem one question (one question one problem)
+        # problem (node) -> question -> test -> completed tests -> chosen answers
+        # from lazy fetch to eager fetch
+        print(knowledge_space[0].nodes.all()[0].id)
+        # node = problem
+        
+        for node in knowledge_space[0].nodes.all():
+            print(node)
+            node_id = node.id
+            problem = get_object_or_404(Node, id=node_id)
+            print(problem.id)
+            question = Question.objects.get(problem__id=problem.id)
+            print(question.test_id)
+            test_id = question.test_id
+            completed_tests = CompletedTest.objects.filter(test_id=test_id)
+            print(completed_tests)
+            for completed_test in completed_tests: 
+                print(completed_test)
+                chosen_answers = ChosenAnswer.objects.filter(completed_test_id=completed_test.id)
+                print(chosen_answers)
+        
+                while chosen_answer_counter < len(chosen_answers):
+                #for chosen_answer in chosen_answers:
+                    if chosen_answers[chosen_answer_counter].answer.correct_answer == True:
+                        matrix_iita[node_id].append(1)
+                        break
+                    else:
+                        matrix_iita[node_id].append(0)
+                        break
+            chosen_answer_counter = chosen_answer_counter + 1        
+                    
+
+
+        print(matrix_iita)
+        # activate iita algorithm from kst-lib
+        # db data
+        db_data_frame = pd.DataFrame(matrix_iita)
+        # pisa data
+        #pisa_data_frame = pd.read_csv("kst_lib/pisa.txt", sep='\s+')
+        #print(pisa_data_frame)
+        #pisa_data_frame.columns = db_data_frame.columns
+        #print(pisa_data_frame.columns)
+        #print(db_data_frame.columns)
+        
+        #db_data_frame = db_data_frame.append(pisa_data_frame)
+        #print(db_data_frame)
+        response = iita(db_data_frame, v=1)
+        print(response)
+
+        # mapping iita implications nodes to existing nodes
+        existing_nodes_ids = list(dict.fromkeys(matrix_iita))
+        print(existing_nodes_ids)
+        # initializing mapped matrix
+        matrix_mapped = {}
+        for implication in range(len(response["implications"])):
+            matrix_mapped[implication] = (0,0)
+        
+        
+
+
+        # implications = links between nodes
+        implications_nodes_ids = []
+        for source,target  in response["implications"]:
+            implications_nodes_ids.append(source)
+            implications_nodes_ids.append(target)
+        implications_nodes_ids = list(dict.fromkeys(implications_nodes_ids))
+        implications_nodes_ids.sort()
+        print(implications_nodes_ids)
+
+        for implication_node_id in range(len(implications_nodes_ids)):
+            for implication in range(len(response["implications"])):
+                if response["implications"][implication][0]==implication_node_id:
+                    matrix_mapped[implication] = (existing_nodes_ids[implication_node_id], matrix_mapped[implication][1])
+                elif response["implications"][implication][1]==implication_node_id:
+                    matrix_mapped[implication] = (matrix_mapped[implication][0],existing_nodes_ids[implication_node_id])
+        
+        # add implications from mapped matrix to knowledge space
+         
+       
+				
+			
+		
+
+        
+
+
+        
+          
+        print(matrix_mapped) 
+        return knowledge_space
+        
