@@ -10,6 +10,8 @@ import { Link, LinkDB } from 'src/app/models/link';
 import { Node, NodeDB } from 'src/app/models/node';
 import { DagService } from 'src/app/core/services/dag.service';
 import { KstService } from 'src/app/core/services/kst.service';
+import { MatDialog } from '@angular/material';
+import { GedDialogComponent } from '../ged-dialog/ged-dialog.component';
 
 
 @Component({
@@ -18,6 +20,7 @@ import { KstService } from 'src/app/core/services/kst.service';
   styleUrls: ['./knowledge-space-details.component.scss']
 })
 export class KnowledgeSpaceDetailsComponent implements OnInit {
+  ged: any;
   @Input() knowledgeSpaceId: number;
   routeSub: Subscription;
   update$: Subject<boolean> = new Subject();
@@ -42,7 +45,8 @@ export class KnowledgeSpaceDetailsComponent implements OnInit {
               private router: Router,
               private route: ActivatedRoute,
               private dagService: DagService,
-              private kstService: KstService, ) { }
+              private kstService: KstService,
+              public dialog: MatDialog ) { }
 
   ngOnInit() {
     this.getKnowledgeSpace(this.knowledgeSpaceId);
@@ -360,6 +364,22 @@ export class KnowledgeSpaceDetailsComponent implements OnInit {
 
   questionOrderByRealKnowledgeSpace(): void {
     console.log('Markovljevi lanci');
+  }
+
+  onClickOpenGedDialog(id: number): void {
+    this.kstService.getGraphEditDistanceById(id).subscribe(data => {
+      this.ged = data;
+      const dialogRef = this.dialog.open(GedDialogComponent, {
+        width: '500px',
+        data: this.ged
+      });
+      },
+      error => {
+        this.toastr.error(error);
+        this.toastr.error('There was an error while getting the data about knowledge spaces\'s ged metric.');
+        this.router.navigate(['not-found-page']);
+      }
+    );
   }
 
 }

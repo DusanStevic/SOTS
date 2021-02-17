@@ -388,8 +388,9 @@ class GetGraphEditDistanceById(generics.RetrieveAPIView):
         # GED is defined as the minimum number of edits needed to transform one graph into the other,
         # with the allowable edit operations being insertion, deletion, or substitution of a single node." - Wikipedia.com
         print(f"Graph edit distance = {ged}")
-        
-        
-            
+        # adding ged to knowledge space 
+        knowledge_space_db = get_object_or_404(KnowledgeSpace, id=knowledge_space[0].id)
+        knowledge_space_db.ged = ged
+        knowledge_space_db.save()
         return knowledge_space 
         
