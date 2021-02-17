@@ -6,11 +6,13 @@ import { MaterialModule } from '../material/material.module';
 import { KnowledgeSpaceDetailsComponent } from './knowledge-space-details/knowledge-space-details.component';
 import { NgxGraphModule } from '@swimlane/ngx-graph';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { KnowledgeSpacesComparisonComponent } from './knowledge-spaces-comparison/knowledge-spaces-comparison.component';
+import { KnowledgeSpaceDetailsRealComponent } from './knowledge-space-details-real/knowledge-space-details-real.component';
 
 
 
 @NgModule({
-  declarations: [KnowledgeSpacesComponent, KnowledgeSpaceDetailsComponent],
+  declarations: [KnowledgeSpacesComponent, KnowledgeSpaceDetailsComponent, KnowledgeSpacesComparisonComponent, KnowledgeSpaceDetailsRealComponent],
   imports: [
     CommonModule,
     MaterialModule,
@@ -21,7 +23,9 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
   ],
   exports: [
     KnowledgeSpacesComponent,
-    KnowledgeSpaceDetailsComponent
+    KnowledgeSpaceDetailsComponent,
+    KnowledgeSpacesComparisonComponent,
+    KnowledgeSpaceDetailsRealComponent
   ]
 })
 export class KstModule { }

@@ -6,6 +6,7 @@ import { CourseDetailsComponent } from './courses/course-details/course-details.
 import { CoursesComponent } from './courses/courses/courses.component';
 import { HomeComponent } from './home/home.component';
 import { KnowledgeSpaceDetailsComponent } from './kst/knowledge-space-details/knowledge-space-details.component';
+import { KnowledgeSpacesComparisonComponent } from './kst/knowledge-spaces-comparison/knowledge-spaces-comparison.component';
 import { KnowledgeSpacesComponent } from './kst/knowledge-spaces/knowledge-spaces.component';
 import { ForbiddenPageComponent } from './pages/forbidden-page/forbidden-page.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
@@ -92,6 +93,12 @@ const routes: Routes = [
   {
     path: 'knowledge-space-details/:id',
     component: KnowledgeSpaceDetailsComponent,
+    canActivate: [RoleGuard],
+    data: {expectedRoles: 'TEACHER'}
+  },
+  {
+    path: 'knowledge-spaces-comparison/:id',
+    component: KnowledgeSpacesComparisonComponent,
     canActivate: [RoleGuard],
     data: {expectedRoles: 'TEACHER'}
   },

@@ -11,13 +11,12 @@ import { Node, NodeDB } from 'src/app/models/node';
 import { DagService } from 'src/app/core/services/dag.service';
 import { KstService } from 'src/app/core/services/kst.service';
 
-
 @Component({
-  selector: 'app-knowledge-space-details',
-  templateUrl: './knowledge-space-details.component.html',
-  styleUrls: ['./knowledge-space-details.component.scss']
+  selector: 'app-knowledge-space-details-real',
+  templateUrl: './knowledge-space-details-real.component.html',
+  styleUrls: ['./knowledge-space-details-real.component.scss']
 })
-export class KnowledgeSpaceDetailsComponent implements OnInit {
+export class KnowledgeSpaceDetailsRealComponent implements OnInit {
   @Input() knowledgeSpaceId: number;
   routeSub: Subscription;
   update$: Subject<boolean> = new Subject();
@@ -26,7 +25,6 @@ export class KnowledgeSpaceDetailsComponent implements OnInit {
   view = [933, 400];
   nodes: Node[] = [];
   links: Link[] = [];
-  linksReal: Link[] = [];
   deletedNode: Node;
   sourceNode: Node;
   targetNode: Node;
@@ -65,7 +63,7 @@ export class KnowledgeSpaceDetailsComponent implements OnInit {
       for (const link of data.links) {
         const sourceNode = this.getNodeByDbId(link.source);
         const targetNode = this.getNodeByDbId(link.target);
-        if (link.real === false) {
+        if (link.real === true) {
           this.links.push({
             // Link id can't start with a digit it has to start with a character.
             db_id: link.id,
