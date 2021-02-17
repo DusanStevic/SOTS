@@ -257,9 +257,7 @@ class GetRealKnowledgeSpaceById(generics.RetrieveAPIView):
     permission_classes = [permissions.IsAuthenticated, IsTeacherUser]
     serializer_class = KnowledgeSpaceSerializer
     
-    # NAPISI BOLJI KOMENTAR STA SE STVARNO DOGADJA
-    # This view should return a chosen test 
-    # that is going to be executed by the currently authenticated student.
+    # This view should return a chosen knowledge space details (nodes, links and real links)
     def get_queryset(self):
         matrix_iita = {}
         chosen_answer_counter = 0
@@ -267,31 +265,26 @@ class GetRealKnowledgeSpaceById(generics.RetrieveAPIView):
         # initializing matrix iita
         for node in knowledge_space[0].nodes.all():
             matrix_iita[node.id] = []
-
-        print(matrix_iita)
         # one problem one question (one question one problem)
         # problem (node) -> question -> test -> completed tests -> chosen answers
-        # from lazy fetch to eager fetch
-        print(knowledge_space[0].nodes.all()[0].id)
-        # node = problem
-        
+
+        # get out of QuerySet object and operate with knowledge space object knowledge_space[0]
+        # from lazy fetch to eager fetch nodes.all()        
         for node in knowledge_space[0].nodes.all():
-            print(node)
+            # get node = problem
             node_id = node.id
             problem = get_object_or_404(Node, id=node_id)
-            print(problem.id)
+            # get question that is connected to node(problem)
             question = Question.objects.get(problem__id=problem.id)
-            print(question.test_id)
+            # get test which contains question
             test_id = question.test_id
+            # get all completed tests for that test
             completed_tests = CompletedTest.objects.filter(test_id=test_id)
-            print(completed_tests)
             for completed_test in completed_tests: 
-                print(completed_test)
-                chosen_answers = ChosenAnswer.objects.filter(completed_test_id=completed_test.id)
-                print(chosen_answers)
-        
+                # for each completed test get chosen answers 
+                chosen_answers = ChosenAnswer.objects.filter(completed_test_id=completed_test.id)        
                 while chosen_answer_counter < len(chosen_answers):
-                #for chosen_answer in chosen_answers:
+                # for chosen_answer in chosen_answers:
                     if chosen_answers[chosen_answer_counter].answer.correct_answer == True:
                         matrix_iita[node_id].append(1)
                         break
@@ -300,35 +293,21 @@ class GetRealKnowledgeSpaceById(generics.RetrieveAPIView):
                         break
             chosen_answer_counter = chosen_answer_counter + 1        
                     
-
-
-        print(matrix_iita)
-        # activate iita algorithm from kst-lib
+        # activate iita algorithm from kst-lib on matrix_iita
         # db data
         db_data_frame = pd.DataFrame(matrix_iita)
         # pisa data
         #pisa_data_frame = pd.read_csv("kst_lib/pisa.txt", sep='\s+')
-        #print(pisa_data_frame)
         #pisa_data_frame.columns = db_data_frame.columns
-        #print(pisa_data_frame.columns)
-        #print(db_data_frame.columns)
-        
         #db_data_frame = db_data_frame.append(pisa_data_frame)
-        #print(db_data_frame)
+        # response from iita algorithm
         response = iita(db_data_frame, v=1)
-        print(response)
-
         # mapping iita implications nodes to existing nodes
         existing_nodes_ids = list(dict.fromkeys(matrix_iita))
-        print(existing_nodes_ids)
         # initializing mapped matrix
         matrix_mapped = {}
         for implication in range(len(response["implications"])):
             matrix_mapped[implication] = (0,0)
-        
-        
-
-
         # implications = links between nodes
         implications_nodes_ids = []
         for source,target  in response["implications"]:
@@ -336,8 +315,7 @@ class GetRealKnowledgeSpaceById(generics.RetrieveAPIView):
             implications_nodes_ids.append(target)
         implications_nodes_ids = list(dict.fromkeys(implications_nodes_ids))
         implications_nodes_ids.sort()
-        print(implications_nodes_ids)
-
+        # mapping
         for implication_node_id in range(len(implications_nodes_ids)):
             for implication in range(len(response["implications"])):
                 if response["implications"][implication][0]==implication_node_id:
@@ -346,17 +324,22 @@ class GetRealKnowledgeSpaceById(generics.RetrieveAPIView):
                     matrix_mapped[implication] = (matrix_mapped[implication][0],existing_nodes_ids[implication_node_id])
         
         # add implications from mapped matrix to knowledge space
-         
-       
-				
-			
-		
+        for item in matrix_mapped:
+            source_node = get_object_or_404(Node, id=matrix_mapped[item][0])
+            target_node = get_object_or_404(Node, id=matrix_mapped[item][1])
+            real_link = Link()
+            real_link.source = source_node
+            real_link.target = target_node
+            real_link.real = True
+            real_link.link_id = 'real'+str(knowledge_space[0].id)+str(matrix_mapped[item][0])+str(matrix_mapped[item][1])
+            real_link.link_label = 'real'+str(knowledge_space[0].id)+str(matrix_mapped[item][0])+str(matrix_mapped[item][1])
+            # adding knowledge space to real link
+            knowledge_space_db = get_object_or_404(KnowledgeSpace, id=knowledge_space[0].id)
+            real_link.knowledge_space = knowledge_space_db
+            real_link.save()
+            # adding real links to knowledge space
+            knowledge_space_db.links.add(real_link)
+            knowledge_space_db.save()
 
-        
-
-
-        
-          
-        print(matrix_mapped) 
         return knowledge_space
         

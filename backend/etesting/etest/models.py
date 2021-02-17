@@ -21,6 +21,7 @@ class Node(models.Model):
         return f'{self.node_label}'
         
 class Link(models.Model):
+    real = models.BooleanField(default=False)
     knowledge_space = models.ForeignKey(KnowledgeSpace, on_delete=models.CASCADE, related_name='links', null=True, blank=True)
     link_id = models.CharField(max_length=255, null=True)
     link_label = models.CharField(max_length=255, null=True)
