@@ -8,11 +8,17 @@ import { NgxGraphModule } from '@swimlane/ngx-graph';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { KnowledgeSpacesComparisonComponent } from './knowledge-spaces-comparison/knowledge-spaces-comparison.component';
 import { KnowledgeSpaceDetailsRealComponent } from './knowledge-space-details-real/knowledge-space-details-real.component';
+import { GedDialogComponent } from './ged-dialog/ged-dialog.component';
 
 
 
 @NgModule({
-  declarations: [KnowledgeSpacesComponent, KnowledgeSpaceDetailsComponent, KnowledgeSpacesComparisonComponent, KnowledgeSpaceDetailsRealComponent],
+  declarations: [
+    KnowledgeSpacesComponent,
+    KnowledgeSpaceDetailsComponent,
+    KnowledgeSpacesComparisonComponent,
+    KnowledgeSpaceDetailsRealComponent,
+    GedDialogComponent],
   imports: [
     CommonModule,
     MaterialModule,
@@ -21,11 +27,16 @@ import { KnowledgeSpaceDetailsRealComponent } from './knowledge-space-details-re
     NgxGraphModule,
     NgxChartsModule,
   ],
+  // This is very important for angular material dialog
+  entryComponents: [
+    GedDialogComponent
+  ],
   exports: [
     KnowledgeSpacesComponent,
     KnowledgeSpaceDetailsComponent,
     KnowledgeSpacesComparisonComponent,
-    KnowledgeSpaceDetailsRealComponent
+    KnowledgeSpaceDetailsRealComponent,
+    GedDialogComponent
   ]
 })
 export class KstModule { }

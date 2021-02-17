@@ -8,6 +8,8 @@ class Domain(models.Model):
         return f'{self.title}'
 
 class KnowledgeSpace(models.Model):
+    # Graph Edit Distance (GED) metric for graph comparison
+    ged = models.IntegerField(default=0)
     title = models.CharField(max_length=255, null=True)
     domain = models.ForeignKey(Domain, on_delete=models.CASCADE, related_name='knowledge_spaces', null=True)
     def __str__(self):
@@ -21,6 +23,7 @@ class Node(models.Model):
         return f'{self.node_label}'
         
 class Link(models.Model):
+    # flag for real knowledge space
     real = models.BooleanField(default=False)
     knowledge_space = models.ForeignKey(KnowledgeSpace, on_delete=models.CASCADE, related_name='links', null=True, blank=True)
     link_id = models.CharField(max_length=255, null=True)
