@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<django-objects version="1.0">
+    <object model="etest.test" pk="2">
+        <field name="title" type="CharField">Oduzimanje</field>
+        <field name="creator" rel="ManyToOneRel" to="accounts.user">2</field>
+        <field name="course" rel="ManyToOneRel" to="etest.course">1</field>
+    </object>
+    <object model="etest.question" pk="6">
+        <field name="question_text" type="TextField">Koliko je 5-2?</field>
+        <field name="test" rel="ManyToOneRel" to="etest.test">2</field>
+        <field name="problem" rel="OneToOneRel" to="etest.node">6</field>
+    </object>
+    <object model="etest.question" pk="7">
+        <field name="question_text" type="TextField">Koliko je 55-22?</field>
+        <field name="test" rel="ManyToOneRel" to="etest.test">2</field>
+        <field name="problem" rel="OneToOneRel" to="etest.node">7</field>
+    </object>
+    <object model="etest.question" pk="8">
+        <field name="question_text" type="TextField">Koliko je 555-222?</field>
+        <field name="test" rel="ManyToOneRel" to="etest.test">2</field>
+        <field name="problem" rel="OneToOneRel" to="etest.node">8</field>
+    </object>
+    <object model="etest.question" pk="9">
+        <field name="question_text" type="TextField">Koliko je 5555-2222?</field>
+        <field name="test" rel="ManyToOneRel" to="etest.test">2</field>
+        <field name="problem" rel="OneToOneRel" to="etest.node">9</field>
+    </object>
+    <object model="etest.question" pk="10">
+        <field name="question_text" type="TextField">Koliko je 55555-22222?</field>
+        <field name="test" rel="ManyToOneRel" to="etest.test">2</field>
+        <field name="problem" rel="OneToOneRel" to="etest.node">10</field>
+    </object>
+    <object model="etest.answer" pk="22">
+        <field name="answer_text" type="CharField">1</field>
+        <field name="question" rel="ManyToOneRel" to="etest.question">6</field>
+        <field name="correct_answer" type="BooleanField">False</field>
+    </object>
+    <object model="etest.answer" pk="23">
+        <field name="answer_text" type="CharField">2</field>
+        <field name="question" rel="ManyToOneRel" to="etest.question">6</field>
+        <field name="correct_answer" type="BooleanField">False</field>
+    </object>
+    <object model="etest.answer" pk="24">
+        <field name="answer_text" type="CharField">3</field>
+        <field name="question" rel="ManyToOneRel" to="etest.question">6</field>
+        <field name="correct_answer" type="BooleanField">True</field>
+    </object>
+    <object model="etest.answer" pk="25">
+        <field name="answer_text" type="CharField">4</field>
+        <field name="question" rel="ManyToOneRel" to="etest.question">6</field>
+        <field name="correct_answer" type="BooleanField">False</field>
+    </object>
+    <object model="etest.answer" pk="26">
+        <field name="answer_text" type="CharField">33</field>
+        <field name="question" rel="ManyToOneRel" to="etest.question">7</field>
+        <field name="correct_answer" type="BooleanField">True</field>
+    </object>
+    <object model="etest.answer" pk="27">
+        <field name="answer_text" type="CharField">11</field>
+        <field name="question" rel="ManyToOneRel" to="etest.question">7</field>
+        <field name="correct_answer" type="BooleanField">False</field>
+    </object>
+    <object model="etest.answer" pk="28">
+        <field name="answer_text" type="CharField">22</field>
+        <field name="question" rel="ManyToOneRel" to="etest.question">7</field>
+        <field name="correct_answer" type="BooleanField">False</field>
+    </object>
+    <object model="etest.answer" pk="29">
+        <field name="answer_text" type="CharField">44</field>
+        <field name="question" rel="ManyToOneRel" to="etest.question">7</field>
+        <field name="correct_answer" type="BooleanField">False</field>
+    </object>
+    <object model="etest.answer" pk="30">
+        <field name="answer_text" type="CharField">111</field>
+        <field name="question" rel="ManyToOneRel" to="etest.question">8</field>
+        <field name="correct_answer" type="BooleanField">False</field>
+    </object>
+    <object model="etest.answer" pk="31">
+        <field name="answer_text" type="CharField">333</field>
+        <field name="question" rel="ManyToOneRel" to="etest.question">8</field>
+        <field name="correct_answer" type="BooleanField">True</field>
+    </object>
+    <object model="etest.answer" pk="32">
+        <field name="answer_text" type="CharField">222</field>
+        <field name="question" rel="ManyToOneRel" to="etest.question">8</field>
+        <field name="correct_answer" type="BooleanField">False</field>
+    </object>
+    <object model="etest.answer" pk="33">
+        <field name="answer_text" type="CharField">444</field>
+        <field name="question" rel="ManyToOneRel" to="etest.question">8</field>
+        <field name="correct_answer" type="BooleanField">False</field>
+    </object>
+    <object model="etest.answer" pk="34">
+        <field name="answer_text" type="CharField">1111</field>
+        <field name="question" rel="ManyToOneRel" to="etest.question">9</field>
+        <field name="correct_answer" type="BooleanField">False</field>
+    </object>
+    <object model="etest.answer" pk="35">
+        <field name="answer_text" type="CharField">2222</field>
+        <field name="question" rel="ManyToOneRel" to="etest.question">9</field>
+        <field name="correct_answer" type="BooleanField">False</field>
+    </object>
+    <object model="etest.answer" pk="36">
+        <field name="answer_text" type="CharField">4444</field>
+        <field name="question" rel="ManyToOneRel" to="etest.question">9</field>
+        <field name="correct_answer" type="BooleanField">False</field>
+    </object>
+    <object model="etest.answer" pk="37">
+        <field name="answer_text" type="CharField">3333</field>
+        <field name="question" rel="ManyToOneRel" to="etest.question">9</field>
+        <field name="correct_answer" type="BooleanField">True</field>
+    </object>
+    <object model="etest.answer" pk="38">
+        <field name="answer_text" type="CharField">11111</field>
+        <field name="question" rel="ManyToOneRel" to="etest.question">10</field>
+        <field name="correct_answer" type="BooleanField">False</field>
+    </object>
+    <object model="etest.answer" pk="39">
+        <field name="answer_text" type="CharField">22222</field>
+        <field name="question" rel="ManyToOneRel" to="etest.question">10</field>
+        <field name="correct_answer" type="BooleanField">False</field>
+    </object>
+    <object model="etest.answer" pk="40">
+        <field name="answer_text" type="CharField">33333</field>
+        <field name="question" rel="ManyToOneRel" to="etest.question">10</field>
+        <field name="correct_answer" type="BooleanField">True</field>
+    </object>
+    <object model="etest.answer" pk="41">
+        <field name="answer_text" type="CharField">44444</field>
+        <field name="question" rel="ManyToOneRel" to="etest.question">10</field>
+        <field name="correct_answer" type="BooleanField">False</field>
+    </object>
+</django-objects>

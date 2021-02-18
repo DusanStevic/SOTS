@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<django-objects version="1.0">
+    <object model="etest.test" pk="3">
+        <field name="title" type="CharField">Mnozenje</field>
+        <field name="creator" rel="ManyToOneRel" to="accounts.user">2</field>
+        <field name="course" rel="ManyToOneRel" to="etest.course">1</field>
+    </object>
+    <object model="etest.question" pk="38">
+        <field name="question_text" type="TextField">Koliko je 2*1?</field>
+        <field name="test" rel="ManyToOneRel" to="etest.test">3</field>
+        <field name="problem" rel="OneToOneRel" to="etest.node">11</field>
+    </object>
+    <object model="etest.answer" pk="62">
+        <field name="answer_text" type="CharField">2</field>
+        <field name="question" rel="ManyToOneRel" to="etest.question">38</field>
+        <field name="correct_answer" type="BooleanField">True</field>
+    </object>
+    <object model="etest.answer" pk="63">
+        <field name="answer_text" type="CharField">1</field>
+        <field name="question" rel="ManyToOneRel" to="etest.question">38</field>
+        <field name="correct_answer" type="BooleanField">False</field>
+    </object>
+    <object model="etest.answer" pk="64">
+        <field name="answer_text" type="CharField">3</field>
+        <field name="question" rel="ManyToOneRel" to="etest.question">38</field>
+        <field name="correct_answer" type="BooleanField">False</field>
+    </object>
+    <object model="etest.answer" pk="65">
+        <field name="answer_text" type="CharField">4</field>
+        <field name="question" rel="ManyToOneRel" to="etest.question">38</field>
+        <field name="correct_answer" type="BooleanField">False</field>
+    </object>
+</django-objects>
