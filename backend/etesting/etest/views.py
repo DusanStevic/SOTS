@@ -182,33 +182,27 @@ class CreateTest(generics.CreateAPIView):
                 serializer.save().questions.add(question_db)
             
 
-
-def GetAnswerForQuestion(pk):
-
-    return Answer.objects.filter(question=pk)
-
-def GetQuestionForTest(pk):
-
-    questions = Question.objects.filter(test=pk)
-
-    answers = []
-
-    for answer in questions.values('id'):
-        answers.append(GetAnswerForQuestion(answer['id']))
-
-    return questions, answers
-
-
 class GetTestXmlById(generics.ListAPIView):
     permission_classes = [permissions.IsAuthenticated, IsTeacherUser]
     serializer_class = TestSerializer
+    # In order to call method from the same class, you need the self keyword.
+    # Without the self keyword, python is looking for the method in the global scope, 
+    # that is why you are getting this error (function name is undefined in python class).
+    def getAnswerForQuestion(self,pk):
+        return Answer.objects.filter(question=pk)
+
+    def getQuestionForTest(self,pk):
+        questions = Question.objects.filter(test=pk)
+        answers = []
+        for answer in questions.values('id'):
+            answers.append(self.getAnswerForQuestion(answer['id']))
+        return questions, answers
 
     def get_queryset(self):
         test = Test.objects.filter(id=self.kwargs['pk'])
-
         XMLSerializer = serializers.get_serializer("xml")
         xml_serializer = XMLSerializer()
-        questions, answers = GetQuestionForTest(self.kwargs['pk'])
+        questions, answers = self.getQuestionForTest(self.kwargs['pk'])
 
         answerss = []
         for i in range(len(answers)):
@@ -216,7 +210,7 @@ class GetTestXmlById(generics.ListAPIView):
 
         result_list = chain(test, questions, answerss)
 
-        with open("xml/Test" + str(self.kwargs['pk']) + ".xml", "w") as out:
+        with open("xml/Test-" + test[0].title + ".xml", "w") as out:
             xml_serializer.serialize(result_list, stream=out)
 
         return test

@@ -60,8 +60,6 @@ class Question(models.Model):
     def __str__(self):
         return f'{self.question_text}'
 
-    def get_queryset(self):
-        return Question(self.model, using=self._db)
 
 class Answer(models.Model):
     answer_text = models.CharField(max_length=255)
