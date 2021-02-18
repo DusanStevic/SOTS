@@ -14,6 +14,7 @@ import { TestGenesisComponent } from './test-genesis/test-genesis.component';
 import { NgxGraphModule } from '@swimlane/ngx-graph';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { TestGenesisKnowledgeSpaceViewComponent } from './test-genesis-knowledge-space-view/test-genesis-knowledge-space-view.component';
+import { ImsqtiDialogComponent } from './imsqti-dialog/imsqti-dialog.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { TestGenesisKnowledgeSpaceViewComponent } from './test-genesis-knowledge
                 TestDetailsUncompletedStudentComponent,
                 TestCompletionDialogComponent,
                 TestGenesisComponent,
-                TestGenesisKnowledgeSpaceViewComponent],
+                TestGenesisKnowledgeSpaceViewComponent,
+                ImsqtiDialogComponent],
   imports: [
     CommonModule,
     MaterialModule,
@@ -38,7 +40,7 @@ import { TestGenesisKnowledgeSpaceViewComponent } from './test-genesis-knowledge
   ],
   // This is very important for angular material dialog
   entryComponents: [
-    TestScoreDialogComponent, TestCompletionDialogComponent
+    TestScoreDialogComponent, TestCompletionDialogComponent, ImsqtiDialogComponent
   ],
   exports: [
     TestDetailsTeacherComponent,
@@ -50,7 +52,8 @@ import { TestGenesisKnowledgeSpaceViewComponent } from './test-genesis-knowledge
     TestDetailsUncompletedStudentComponent,
     TestCompletionDialogComponent,
     TestGenesisComponent,
-    TestGenesisKnowledgeSpaceViewComponent
+    TestGenesisKnowledgeSpaceViewComponent,
+    ImsqtiDialogComponent
 
   ]
 })

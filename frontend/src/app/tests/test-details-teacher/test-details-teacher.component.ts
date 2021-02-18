@@ -4,6 +4,8 @@ import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Subscription } from 'rxjs';
 import { TestService } from 'src/app/core/services/test.service';
+import { MatDialog } from '@angular/material';
+import { ImsqtiDialogComponent } from '../imsqti-dialog/imsqti-dialog.component';
 
 @Component({
   selector: 'app-test-details-teacher',
@@ -11,7 +13,7 @@ import { TestService } from 'src/app/core/services/test.service';
   styleUrls: ['./test-details-teacher.component.scss']
 })
 export class TestDetailsTeacherComponent implements OnInit {
-
+  private exportedTest: any;
   private testTeacher;
   routeSub: Subscription;
   questionNumber = 0;
@@ -20,7 +22,8 @@ export class TestDetailsTeacherComponent implements OnInit {
               private router: Router,
               private route: ActivatedRoute,
               private testService: TestService,
-              private authService: AuthService ) { }
+              private authService: AuthService,
+              public dialog: MatDialog ) { }
 
   ngOnInit() {
     this.routeSub = this.route.params.subscribe( params => {
@@ -56,6 +59,22 @@ export class TestDetailsTeacherComponent implements OnInit {
 
   onClickPrevious(): void {
     this.questionNumber--;
+  }
+
+  onClickOpenImsqtiExportDialog(id: number): void {
+    this.testService.getTestXmlById(id).subscribe(data => {
+      this.exportedTest = data;
+      const dialogRef = this.dialog.open(ImsqtiDialogComponent, {
+        width: '500px',
+        data: this.exportedTest
+      });
+      },
+      error => {
+        this.toastr.error(error);
+        this.toastr.error('There was an error while IMS-QTI export.');
+        this.router.navigate(['not-found-page']);
+      }
+    );
   }
 
 }

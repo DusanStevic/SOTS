@@ -61,6 +61,13 @@ export class TestService {
     return this.http.post(environment.apiUrlPrefix + '/api/tests/CreateTest', test);
   }
 
+  getTestXmlById(id: number): Observable<any> {
+    return this.http.get(environment.apiUrlPrefix + `/api/tests/GetTestXmlById/${id}`).pipe(
+      tap(data => {}),
+      catchError(this.handleError)
+    );
+  }
+
   private handleError(err: HttpErrorResponse) {
     const errorMessage = `Server returned code ${err.status}, error message is: ${err.message}`;
     return throwError(errorMessage);
